@@ -1,9 +1,9 @@
 package com.redhat.openshift.cr.config.tuning;
 
-import com.redhat.openshift.circe.gen.tuned_types.TunedMatch;
-import com.redhat.openshift.circe.gen.tuned_types.TunedProfile;
-import com.redhat.openshift.circe.gen.tuned_types.TunedRecommend;
-import com.redhat.openshift.circe.gen.tuned_types.TunedSpec;
+import com.redhat.openshift.circe.gen.tuned.TunedMatch;
+import com.redhat.openshift.circe.gen.tuned.TunedProfile;
+import com.redhat.openshift.circe.gen.tuned.TunedRecommend;
+import com.redhat.openshift.circe.gen.tuned.TunedSpec;
 
 import java.util.Arrays;
 import java.util.List;

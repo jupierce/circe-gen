@@ -3,6 +3,7 @@ package com.redhat.openshift.circe.gen.machineset;
 import java.util.*;
 
 public interface MachineSpec {
+	default ObjectMeta getMetadata() { return new ObjectMeta("openshift-cluster-node-tuning-operator", "default"); }
 	//json:taints
 	List<Taint> getTaints();
 	//json:providerSpec

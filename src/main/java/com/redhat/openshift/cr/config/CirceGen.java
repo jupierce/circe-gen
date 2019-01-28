@@ -2,12 +2,17 @@ package com.redhat.openshift.cr.config;
 
 import com.google.common.collect.Sets;
 import com.redhat.openshift.circe.gen.ClusterDefinition;
+import org.json.JSONObject;
 import org.reflections.Reflections;
 import picocli.CommandLine;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.Callable;
 
@@ -45,6 +50,9 @@ public class CirceGen implements Callable<Void> {
 
     @CommandLine.Option(names={"-p"}, description="Zero or more parameters to pass to the generator implementation" )
     public Map<String,String> attributes;
+
+    @CommandLine.Option(names={"-o", "--output"}, required = true)
+    public Path outputDir;
 
 
     /**
@@ -120,6 +128,24 @@ public class CirceGen implements Callable<Void> {
         ClusterDefinition cd = (ClusterDefinition)construtor.newInstance(this.targetType, this.targetEnv, this.targetName, attributes);
 
         System.out.println("Found a cluster definition: " + cd.getClass().getName());
+
+
+        outputDir.toFile().mkdirs();
+        for ( Method m : cd.getClass().getMethods() ) {
+
+            if ( m.getName().startsWith("get") && m.getDeclaringClass().getName().startsWith("java.") == false) {
+                String objName = m.getName().substring(3); // string 'get'
+                Path outputFile = outputDir.resolve(objName + ".json");
+                Object o = m.invoke(cd);
+                if ( o == null ) {
+                    continue;
+                }
+                JSONObject jo = new JSONObject(o);
+                FileWriter fw = new FileWriter(outputFile.toFile());
+                fw.write(jo.toString(4));
+                fw.close();
+            }
+        }
 
         return null;
     }
