@@ -135,7 +135,7 @@ public class CirceGen implements Callable<Void> {
 
             if ( m.getName().startsWith("get") && m.getDeclaringClass().getName().startsWith("java.") == false) {
                 String objName = m.getName().substring(3); // string 'get'
-                Path outputFile = outputDir.resolve(objName + ".org.json");
+                Path outputFile = outputDir.resolve(objName + ".json");
                 Object o = m.invoke(cd);
                 if ( o == null ) {
                     continue;
