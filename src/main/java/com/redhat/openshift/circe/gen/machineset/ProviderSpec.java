@@ -3,8 +3,8 @@ package com.redhat.openshift.circe.gen.machineset;
 import java.util.*;
 
 public interface ProviderSpec {
-	//json:value
+	//org.json:value
 	String getValue();
-	//json:valueFrom
+	//org.json:valueFrom
 	ProviderSpecSource getValueFrom();
 }

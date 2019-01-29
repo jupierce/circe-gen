@@ -12,8 +12,8 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.Callable;
 
 import static com.redhat.openshift.cr.config.ClusterCriterion.ClusterEnvironment.ANY_ENVIRONMENT;
@@ -70,7 +70,7 @@ public class CirceGen implements Callable<Void> {
         }
 
         // Find all classes annotated with @ClusterCriterion
-        Reflections reflections = new Reflections(this.getClass().getPackage().getName());
+        Reflections reflections = new Reflections(this.getClass().getPackage().getName() + ".impl.cluster");
         for ( Class c : Sets.union(reflections.getTypesAnnotatedWith(ClusterCriteria.class), reflections.getTypesAnnotatedWith(ClusterCriterion.class)) ) {
             Annotation[] info = c.getAnnotationsByType(ClusterCriterion.class);
             for ( Annotation a : info ) {
@@ -135,7 +135,7 @@ public class CirceGen implements Callable<Void> {
 
             if ( m.getName().startsWith("get") && m.getDeclaringClass().getName().startsWith("java.") == false) {
                 String objName = m.getName().substring(3); // string 'get'
-                Path outputFile = outputDir.resolve(objName + ".json");
+                Path outputFile = outputDir.resolve(objName + ".org.json");
                 Object o = m.invoke(cd);
                 if ( o == null ) {
                     continue;
@@ -157,7 +157,7 @@ public class CirceGen implements Callable<Void> {
         CommandLine.call(new CirceGen(), args);
 
         /*
-        JSONObject jo = new JSONObject(new MyClusterDefinition());
+        JSONObject jo = new JSONObject(new OnlineStarterTypeClusterDefinition());
         System.out.println(jo.toString(2));
         */
 

@@ -3,8 +3,8 @@ package com.redhat.openshift.circe.gen.tuned;
 import java.util.*;
 
 public interface TunedProfile {
-	//json:name
+	//org.json:name
 	String getName();
-	//json:data
+	//org.json:data
 	String getData();
 }

@@ -6,6 +6,6 @@ public interface Tuned {
 	default String getKind() { return "Tuned"; }
 	default String getApiVersion() { return "v1alpha1"; }
 	default ObjectMeta getMetadata() { return new ObjectMeta("", "default"); }
-	//json:spec
+	//org.json:spec
 	TunedSpec getSpec();
 }

@@ -3,12 +3,12 @@ package com.redhat.openshift.circe.gen.networkconfig;
 import java.util.*;
 
 public interface DefaultNetworkDefinition {
-	//json:type
+	//org.json:type
 	String getType();
-	//json:openshiftSDNConfig
+	//org.json:openshiftSDNConfig
 	OpenShiftSDNConfig getOpenShiftSDNConfig();
-	//json:ovnKubernetesConfig
+	//org.json:ovnKubernetesConfig
 	OVNKubernetesConfig getOVNKubernetesConfig();
-	//json:otherConfig
+	//org.json:otherConfig
 	Map<String,String> getOtherConfig();
 }

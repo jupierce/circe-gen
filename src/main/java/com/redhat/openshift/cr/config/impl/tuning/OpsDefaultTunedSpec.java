@@ -1,4 +1,4 @@
-package com.redhat.openshift.cr.config.tuning;
+package com.redhat.openshift.cr.config.impl.tuning;
 
 import com.redhat.openshift.circe.gen.tuned.TunedMatch;
 import com.redhat.openshift.circe.gen.tuned.TunedProfile;

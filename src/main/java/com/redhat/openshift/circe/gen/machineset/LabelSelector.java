@@ -3,8 +3,8 @@ package com.redhat.openshift.circe.gen.machineset;
 import java.util.*;
 
 public interface LabelSelector {
-	//json:matchLabels
+	//org.json:matchLabels
 	Map<String,String> getMatchLabels();
-	//json:matchExpressions
+	//org.json:matchExpressions
 	List<LabelSelectorRequirement> getMatchExpressions();
 }

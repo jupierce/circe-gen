@@ -3,12 +3,12 @@ package com.redhat.openshift.circe.gen.networkconfig;
 import java.util.*;
 
 public interface OpenShiftSDNConfig {
-	//json:mode
+	//org.json:mode
 	String getMode();
-	//json:vxlanPort
+	//org.json:vxlanPort
 	Long getVXLANPort();
-	//json:mtu
+	//org.json:mtu
 	Long getMTU();
-	//json:useExternalOpenvswitch
+	//org.json:useExternalOpenvswitch
 	Boolean getUseExternalOpenvswitch();
 }

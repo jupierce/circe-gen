@@ -1,6 +1,5 @@
-package com.redhat.openshift.cr.config;
+package com.redhat.openshift.cr.config.impl.cluster;
 
-import com.redhat.openshift.circe.gen.ClusterDefinition;
 import com.redhat.openshift.circe.gen.machineset.MachineSet;
 import com.redhat.openshift.circe.gen.networkconfig.NetworkConfig;
 import com.redhat.openshift.circe.gen.networkconfig.NetworkConfigSpec;
@@ -9,23 +8,19 @@ import com.redhat.openshift.circe.gen.project.ProjectSpec;
 import com.redhat.openshift.circe.gen.project.TemplateReference;
 import com.redhat.openshift.circe.gen.tuned.Tuned;
 import com.redhat.openshift.circe.gen.tuned.TunedSpec;
-import com.redhat.openshift.cr.config.network.StarterNetworkConfigSpec;
-import com.redhat.openshift.cr.config.tuning.OpsDefaultTunedSpec;
+import com.redhat.openshift.cr.config.ClusterCriterion;
+import com.redhat.openshift.cr.config.impl.network.OnlineNetworkConfig;
+import com.redhat.openshift.cr.config.impl.tuning.OpsDefaultTunedSpec;
 
 import java.util.Map;
 
-@ClusterCriterion(
-        type = ClusterCriterion.ClusterType.ONLINE_STARTER,
-        env = ClusterCriterion.ClusterEnvironment.STG,
-        name = "free-stg"
-)
-@ClusterCriterion(
-        type = ClusterCriterion.ClusterType.ONLINE_STARTER,
-        env = ClusterCriterion.ClusterEnvironment.INT
-)
-public class MyClusterDefinition implements ClusterDefinition {
+/**
+ * Base class for all online clusters (starter / pro)
+ */
+public abstract class OnlineTypeClusterDefinition extends BaseClusterDefinition{
 
-    public MyClusterDefinition(ClusterCriterion.ClusterType type, ClusterCriterion.ClusterEnvironment env, String name, Map<String, String> attributes) {
+    public OnlineTypeClusterDefinition(ClusterCriterion.ClusterType type, ClusterCriterion.ClusterEnvironment env, String name, Map<String, String> attributes) {
+        super(type, env, name, attributes);
     }
 
     @Override
@@ -43,6 +38,10 @@ public class MyClusterDefinition implements ClusterDefinition {
         return null;
     }
 
+    /**
+     * 
+     * @return
+     */
     @Override
     public Project getProject() {
         return new Project() {
@@ -70,12 +69,7 @@ public class MyClusterDefinition implements ClusterDefinition {
 
     @Override
     public NetworkConfig getNetworkConfig() {
-        return new NetworkConfig() {
-            @Override
-            public NetworkConfigSpec getSpec() {
-                return new StarterNetworkConfigSpec();
-            }
-        };
+        return new OnlineNetworkConfig();
     }
 
 }

@@ -4,12 +4,12 @@ import java.util.*;
 
 public interface MachineSpec {
 	default ObjectMeta getMetadata() { return new ObjectMeta("openshift-cluster-node-tuning-operator", "default"); }
-	//json:taints
+	//org.json:taints
 	List<Taint> getTaints();
-	//json:providerSpec
+	//org.json:providerSpec
 	ProviderSpec getProviderSpec();
-	//json:versions
+	//org.json:versions
 	MachineVersionInfo getVersions();
-	//json:configSource
+	//org.json:configSource
 	NodeConfigSource getConfigSource();
 }

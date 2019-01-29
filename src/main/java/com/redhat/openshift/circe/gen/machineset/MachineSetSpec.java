@@ -3,12 +3,12 @@ package com.redhat.openshift.circe.gen.machineset;
 import java.util.*;
 
 public interface MachineSetSpec {
-	//json:replicas
+	//org.json:replicas
 	Long getReplicas();
-	//json:minReadySeconds
+	//org.json:minReadySeconds
 	Long getMinReadySeconds();
-	//json:selector
+	//org.json:selector
 	LabelSelector getSelector();
-	//json:template
+	//org.json:template
 	MachineTemplateSpec getTemplate();
 }

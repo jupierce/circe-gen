@@ -3,16 +3,16 @@ package com.redhat.openshift.circe.gen.networkconfig;
 import java.util.*;
 
 public interface NetworkConfigSpec {
-	//json:clusterNetworks
+	//org.json:clusterNetworks
 	List<ClusterNetwork> getClusterNetworks();
-	//json:serviceNetwork
+	//org.json:serviceNetwork
 	String getServiceNetwork();
-	//json:defaultNetwork
+	//org.json:defaultNetwork
 	DefaultNetworkDefinition getDefaultNetwork();
-	//json:additionalNetworks
+	//org.json:additionalNetworks
 	List<AdditionalNetworkDefinition> getAdditionalNetworks();
-	//json:deployKubeProxy
+	//org.json:deployKubeProxy
 	Boolean getDeployKubeProxy();
-	//json:kubeProxyConfig
+	//org.json:kubeProxyConfig
 	ProxyConfig getKubeProxyConfig();
 }

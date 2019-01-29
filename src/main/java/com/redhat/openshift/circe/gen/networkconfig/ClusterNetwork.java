@@ -3,8 +3,8 @@ package com.redhat.openshift.circe.gen.networkconfig;
 import java.util.*;
 
 public interface ClusterNetwork {
-	//json:cidr
+	//org.json:cidr
 	String getCIDR();
-	//json:hostSubnetLength
+	//org.json:hostSubnetLength
 	Long getHostSubnetLength();
 }

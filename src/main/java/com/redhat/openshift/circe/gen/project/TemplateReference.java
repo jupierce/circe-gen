@@ -3,6 +3,6 @@ package com.redhat.openshift.circe.gen.project;
 import java.util.*;
 
 public interface TemplateReference {
-	//json:name
+	//org.json:name
 	String getName();
 }

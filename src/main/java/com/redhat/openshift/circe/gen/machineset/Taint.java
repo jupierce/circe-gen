@@ -3,12 +3,12 @@ package com.redhat.openshift.circe.gen.machineset;
 import java.util.*;
 
 public interface Taint {
-	//json:key
+	//org.json:key
 	String getKey();
-	//json:value
+	//org.json:value
 	String getValue();
-	//json:effect
+	//org.json:effect
 	String getEffect();
-	//json:timeAdded
+	//org.json:timeAdded
 	Time getTimeAdded();
 }

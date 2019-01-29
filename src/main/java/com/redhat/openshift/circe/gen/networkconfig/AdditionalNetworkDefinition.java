@@ -3,10 +3,10 @@ package com.redhat.openshift.circe.gen.networkconfig;
 import java.util.*;
 
 public interface AdditionalNetworkDefinition {
-	//json:type
+	//org.json:type
 	String getType();
-	//json:name
+	//org.json:name
 	String getName();
-	//json:rawCNIConfig
+	//org.json:rawCNIConfig
 	String getRawCNIConfig();
 }

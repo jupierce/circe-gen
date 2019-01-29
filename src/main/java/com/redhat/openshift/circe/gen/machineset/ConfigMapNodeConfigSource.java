@@ -3,14 +3,14 @@ package com.redhat.openshift.circe.gen.machineset;
 import java.util.*;
 
 public interface ConfigMapNodeConfigSource {
-	//json:namespace
+	//org.json:namespace
 	String getNamespace();
-	//json:name
+	//org.json:name
 	String getName();
-	//json:uid
+	//org.json:uid
 	String getUID();
-	//json:resourceVersion
+	//org.json:resourceVersion
 	String getResourceVersion();
-	//json:kubeletConfigKey
+	//org.json:kubeletConfigKey
 	String getKubeletConfigKey();
 }

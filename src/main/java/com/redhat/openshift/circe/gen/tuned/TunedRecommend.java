@@ -3,10 +3,10 @@ package com.redhat.openshift.circe.gen.tuned;
 import java.util.*;
 
 public interface TunedRecommend {
-	//json:profile
+	//org.json:profile
 	String getProfile();
-	//json:priority
+	//org.json:priority
 	Long getPriority();
-	//json:match
+	//org.json:match
 	List<TunedMatch> getMatch();
 }

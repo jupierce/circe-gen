@@ -3,10 +3,10 @@ package com.redhat.openshift.circe.gen.machineset;
 import java.util.*;
 
 public interface LabelSelectorRequirement {
-	//json:key
+	//org.json:key
 	String getKey();
-	//json:operator
+	//org.json:operator
 	String getOperator();
-	//json:values
+	//org.json:values
 	List<String> getValues();
 }
