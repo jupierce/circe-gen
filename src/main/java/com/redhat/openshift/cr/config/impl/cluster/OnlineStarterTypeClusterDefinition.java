@@ -7,7 +7,7 @@ import com.redhat.openshift.circe.gen.project.ProjectSpec;
 import com.redhat.openshift.circe.gen.project.TemplateReference;
 import com.redhat.openshift.circe.gen.tuned.Tuned;
 import com.redhat.openshift.circe.gen.tuned.TunedSpec;
-import com.redhat.openshift.cr.config.ClusterCriterion;
+import com.redhat.openshift.cr.config.core.ClusterCriterion;
 import com.redhat.openshift.cr.config.impl.network.OnlineNetworkConfig;
 import com.redhat.openshift.cr.config.impl.tuning.OpsDefaultTunedSpec;
 
@@ -36,35 +36,6 @@ public class OnlineStarterTypeClusterDefinition extends OnlineTypeClusterDefinit
     @Override
     public MachineSet getMachineSet() {
         return null;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public Project getProject() {
-        return new Project() {
-            @Override
-            public ProjectSpec getSpec() {
-                return new ProjectSpec() {
-                    @Override
-                    public String getProjectRequestMessage() {
-                        return null;
-                    }
-
-                    @Override
-                    public TemplateReference getProjectRequestTemplate() {
-                        return new TemplateReference() {
-                            @Override
-                            public String getName() {
-                                return "openshift-config/default-project-request";
-                            }
-                        };
-                    }
-                };
-            }
-        };
     }
 
     @Override

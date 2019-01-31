@@ -2,7 +2,7 @@ package com.redhat.openshift.cr.config.impl.cluster;
 
 import com.redhat.openshift.circe.gen.tuned.Tuned;
 import com.redhat.openshift.circe.gen.tuned.TunedSpec;
-import com.redhat.openshift.cr.config.ClusterCriterion;
+import com.redhat.openshift.cr.config.core.ClusterCriterion;
 import com.redhat.openshift.cr.config.impl.tuning.OpsDefaultTunedSpec;
 
 import java.util.Map;

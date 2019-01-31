@@ -4,7 +4,7 @@ import com.redhat.openshift.circe.gen.machineset.MachineSet;
 import com.redhat.openshift.circe.gen.project.Project;
 import com.redhat.openshift.circe.gen.tuned.Tuned;
 import com.redhat.openshift.circe.gen.tuned.TunedSpec;
-import com.redhat.openshift.cr.config.ClusterCriterion;
+import com.redhat.openshift.cr.config.core.ClusterCriterion;
 import com.redhat.openshift.cr.config.impl.tuning.OpsDefaultTunedSpec;
 
 import java.util.Map;
@@ -30,14 +30,6 @@ public abstract class DedicatedTypeClusterDefinition extends BaseClusterDefiniti
 
     @Override
     public MachineSet getMachineSet() {
-        return null;
-    }
-
-    @Override
-    public final Project getProject() {
-        /**
-         * There is no project level configuration for the dedicated clusters.
-         */
         return null;
     }
 

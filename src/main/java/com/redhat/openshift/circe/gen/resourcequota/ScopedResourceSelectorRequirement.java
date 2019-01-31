@@ -1,11 +1,11 @@
-package com.redhat.openshift.circe.gen.machineset;
+package com.redhat.openshift.circe.gen.resourcequota;
 
 import com.redhat.openshift.circe.gen.impl.*;
 import java.util.*;
 
-public interface LabelSelectorRequirement {
-	//json:key
-	String getKey();
+public interface ScopedResourceSelectorRequirement {
+	//json:scopeName
+	String getScopeName();
 	//json:operator
 	String getOperator();
 	//json:values

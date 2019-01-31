@@ -2,6 +2,10 @@ package com.redhat.openshift.circe.yaml;
 
 public class TestClasses {
 
+    public static interface I {
+        public String getSomeIValue();
+    }
+
     public static class Z {
 
         public int getZVal() {
@@ -17,6 +21,29 @@ public class TestClasses {
         public String getZComplexString() {
             return "   <]Z: this is a \"complex\" String\nwith multiple\nlines and\n     <]preceding space and\na line with only space and ended by newline\n   \n";
         }
+
+        public YamlProvider getFreeFormPrimitive() {
+            return new YamlProvider() {
+                @Override
+                public String toYaml() {
+                    return "5";
+                }
+            };
+        }
+
+        public YamlProvider getFreeFormList() {
+            return new YamlProvider() {
+                @Override
+                public String toYaml() {
+                    return "- 1\n- 2\n- 3\n";
+                }
+            };
+        }
+
+        public I getThisWouldBeI() {
+            return (I)YamlProvider.buildFor("somethingCompletelyDifferent: 3", I.class);
+        }
+
 
     }
 
@@ -83,6 +110,7 @@ public class TestClasses {
         public String getThisShouldBeNull() {
             throw new UnsupportedOperationException();
         }
+
     }
 
 }

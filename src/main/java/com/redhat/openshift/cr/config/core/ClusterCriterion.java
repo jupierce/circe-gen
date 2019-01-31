@@ -1,4 +1,4 @@
-package com.redhat.openshift.cr.config;
+package com.redhat.openshift.cr.config.core;
 
 import java.lang.annotation.*;
 

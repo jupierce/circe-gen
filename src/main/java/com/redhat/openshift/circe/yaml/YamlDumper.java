@@ -7,10 +7,9 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+
+import static com.sun.org.apache.xalan.internal.lib.ExsltStrings.split;
 
 /*
  Copyright (c) 2002 JSON.org
@@ -256,6 +255,15 @@ public class YamlDumper {
             return new PrimitiveValue("null");
         }
 
+        if ( object instanceof YamlProvider ) {
+            String yaml = ((YamlProvider)object).toYaml();
+            List<StringBuilder> sbs = new ArrayList<>();
+            for ( String line : yaml.split("\n") ) {
+                sbs.add(new StringBuilder(line));
+            }
+            return sbs;
+        }
+
         Class<?> klass = object.getClass();
 
         if ( object instanceof Byte
@@ -298,6 +306,26 @@ public class YamlDumper {
                 return sbs;
             }
 
+        }
+
+        if ( object instanceof Map ) {
+            Map m = (Map)object;
+            for ( Object k : m.keySet() ) {
+                String key = "" + k;
+                Object result = m.get(key);
+                if (result != null) {
+                    List<StringBuilder> val = toStrings(result);
+
+                    if ( val instanceof PrimitiveValue ) {
+                        sbs.add(new StringBuilder(key + ": " + val.get(0).toString()));
+                    } else {
+                        sbs.add(new StringBuilder(key + ": "));
+                        indent(val, indentation);
+                        sbs.addAll(val);
+                    }
+                }
+            }
+            return sbs;
         }
 
         if (object instanceof Collection) {
@@ -386,8 +414,11 @@ public class YamlDumper {
                         }
 
                     } catch (IllegalAccessException ignore) {
+                        ignore.printStackTrace(System.err);
                     } catch (IllegalArgumentException ignore) {
+                        ignore.printStackTrace(System.err);
                     } catch (InvocationTargetException ignore) {
+                        ignore.printStackTrace(System.err);
                     }
                 }
             }

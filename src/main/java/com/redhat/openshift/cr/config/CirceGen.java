@@ -2,10 +2,16 @@ package com.redhat.openshift.cr.config;
 
 import com.google.common.collect.Sets;
 import com.redhat.openshift.circe.gen.ClusterDefinition;
+import com.redhat.openshift.circe.gen.ProjectDefinition;
 import com.redhat.openshift.circe.yaml.TestClasses;
 import com.redhat.openshift.circe.yaml.YamlDumper;
-import com.redhat.openshift.circe.yaml.YamlPropertyName;
+import com.redhat.openshift.cr.config.core.AbstractDefinition;
+import com.redhat.openshift.cr.config.core.ClusterCriteria;
+import com.redhat.openshift.cr.config.core.ClusterCriterion;
+import com.redhat.openshift.cr.config.impl.cluster.BaseClusterDefinition;
+import com.redhat.openshift.cr.config.impl.project.BaseProjectDefinition;
 import org.reflections.Reflections;
+import org.reflections.util.ConfigurationBuilder;
 import picocli.CommandLine;
 
 import java.io.FileWriter;
@@ -13,12 +19,15 @@ import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
-import static com.redhat.openshift.cr.config.ClusterCriterion.ClusterEnvironment.ANY_ENVIRONMENT;
+import static com.redhat.openshift.cr.config.core.ClusterCriterion.ClusterEnvironment.ANY_ENVIRONMENT;
+import static java.awt.SystemColor.info;
 
 @CommandLine.Command(name = "CirceGen", mixinStandardHelpOptions = true, version = "1.0")
 public class CirceGen implements Callable<Void> {
@@ -34,6 +43,20 @@ public class CirceGen implements Callable<Void> {
             return ClusterCriterion.ClusterEnvironment.find(s);
         }
     }
+
+    public enum Unit {
+        project(ProjectDefinition.class),
+        cluster(ClusterDefinition.class);
+
+        Unit(Class mustImplClass) {
+            this.mustImplClass = mustImplClass;
+        }
+
+        private Class mustImplClass;
+    }
+
+    @CommandLine.Option(names={"-u", "--identity"}, required = true, description="Configuration identity to render")
+    public List<Unit> units;
 
 
     @CommandLine.Option(names={"-t", "--type"}, required = true, description="The type of the cluster (e.g. starter/dedicated/etc)",
@@ -63,89 +86,108 @@ public class CirceGen implements Callable<Void> {
     @Override
     public Void call() throws Exception {
 
-        HashMap<ClusterCriterion.ClusterType,Class<? extends ClusterDefinition>> byType = new HashMap<>();
-        HashMap<String,Class<? extends ClusterDefinition>> byEnv = new HashMap<>();
-        HashMap<String,Class<? extends ClusterDefinition>> byName = new HashMap<>();
+        HashMap<ClusterCriterion.ClusterType,Class<? extends AbstractDefinition>> byType = new HashMap<>();
+        HashMap<String,Class<? extends AbstractDefinition>> byEnv = new HashMap<>();
+        HashMap<String,Class<? extends AbstractDefinition>> byName = new HashMap<>();
 
         if ( attributes == null ) {
             attributes = new HashMap<>();
         }
 
-        // Find all classes annotated with @ClusterCriterion
-        Reflections reflections = new Reflections(this.getClass().getPackage().getName() + ".impl.cluster");
-        for ( Class c : Sets.union(reflections.getTypesAnnotatedWith(ClusterCriteria.class), reflections.getTypesAnnotatedWith(ClusterCriterion.class)) ) {
-            Annotation[] info = c.getAnnotationsByType(ClusterCriterion.class);
-            for ( Annotation a : info ) {
-                ClusterCriterion ci = (ClusterCriterion)a;
+        for ( Unit unit : units ) {
 
-                ClusterCriterion.ClusterType type = ci.type();
+            // Find all classes annotated with @ClusterCriterion
+            Reflections reflections = new Reflections();
+            for ( Class c : Sets.union(reflections.getTypesAnnotatedWith(ClusterCriteria.class), reflections.getTypesAnnotatedWith(ClusterCriterion.class)) ) {
 
-                if ( ! ci.name().equalsIgnoreCase(ClusterCriterion.MATCH_ANY_CLUSTER_NAME ) ) {
-                    Class<? extends ClusterDefinition> old = byName.put(ci.name(), (Class<? extends ClusterDefinition>)c);
-                    if ( old != null ) {
-                        throw new IOException("Invalid class hierarchy: Both " + c.getName() + " and " + old.getName() + " claim to be for cluster: " + ci.name());
-                    }
-                    // If cluster definition is registered by name, don't register it by env or type
+                System.out.println("Testing: " + c);
+
+                if ( Modifier.isAbstract(c.getModifiers()) ) {
+                    System.out.println("   ABSTRACT");
                     continue;
                 }
 
-                if ( ci.env() != ANY_ENVIRONMENT) {
-                    String qualifiedEnv = type.toString() + ":" + ci.env();
-                    Class<? extends ClusterDefinition> old = byEnv.put(qualifiedEnv, (Class<? extends ClusterDefinition>)c);
-                    if ( old != null ) {
-                        throw new IOException("Invalid class hierarchy: Both " + c.getName() + " and " + old.getName() + " claim to be for cluster environment: " + qualifiedEnv);
-                    }
-                    // If cluster definition is registered by env, don't register it by type
+                if ( unit.mustImplClass.isAssignableFrom(c) == false ) {
+                    System.out.println("   Not Assignable! " + unit.mustImplClass + " and " + c);
                     continue;
                 }
 
-                Class<? extends ClusterDefinition> old = byType.put(ci.type(), (Class<? extends ClusterDefinition>)c);
-                if ( old != null ) {
-                    throw new IOException("Invalid class hierarchy: Both " + c.getName() + " and " + old.getName() + " claim to be for cluster type: " + ci.type());
+
+                Annotation[] info = c.getAnnotationsByType(ClusterCriterion.class);
+                for ( Annotation a : info ) {
+                    ClusterCriterion ci = (ClusterCriterion)a;
+
+                    ClusterCriterion.ClusterType type = ci.type();
+
+                    if ( ! ci.name().equalsIgnoreCase(ClusterCriterion.MATCH_ANY_CLUSTER_NAME ) ) {
+                        Class<? extends AbstractDefinition> old = byName.put(ci.name(), (Class<? extends AbstractDefinition>)c);
+                        if ( old != null ) {
+                            throw new IOException("Invalid class hierarchy: Both " + c.getName() + " and " + old.getName() + " claim to be for cluster: " + ci.name());
+                        }
+                        // If cluster definition is registered by name, don't register it by env or type
+                        continue;
+                    }
+
+                    if ( ci.env() != ANY_ENVIRONMENT) {
+                        String qualifiedEnv = type.toString() + ":" + ci.env();
+                        Class<? extends AbstractDefinition> old = byEnv.put(qualifiedEnv, (Class<? extends AbstractDefinition>)c);
+                        if ( old != null ) {
+                            throw new IOException("Invalid class hierarchy: Both " + c.getName() + " and " + old.getName() + " claim to be for cluster environment: " + qualifiedEnv);
+                        }
+                        // If cluster definition is registered by env, don't register it by type
+                        continue;
+                    }
+
+                    Class<? extends AbstractDefinition> old = byType.put(ci.type(), (Class<? extends AbstractDefinition>)c);
+                    if ( old != null ) {
+                        throw new IOException("Invalid class hierarchy: Both " + c.getName() + " and " + old.getName() + " claim to be for cluster type: " + ci.type());
+                    }
+
                 }
 
             }
 
-        }
+            System.out.println("Found " + (byName.size() + byEnv.size() + byType.size()) + " definitions");
 
-        System.out.println("Found " + (byName.size() + byEnv.size() + byType.size()) + " definitions");
-
-        Class<? extends ClusterDefinition> lookup = byName.get(this.targetName);
-        if ( lookup == null ) {
-            System.err.println("No hits when looking up by name: " + this.targetName );
-            String qualifiedEnv = this.targetType + ":" + this.targetEnv;
-            lookup = byEnv.get(qualifiedEnv);
+            Class<? extends AbstractDefinition> lookup = byName.get(this.targetName);
             if ( lookup == null ) {
-                System.err.println("No hits when looking up by qualified env: " + qualifiedEnv );
-                lookup = byType.get(this.targetType);
+                System.err.println("No hits when looking up by name: " + this.targetName );
+                String qualifiedEnv = this.targetType + ":" + this.targetEnv;
+                lookup = byEnv.get(qualifiedEnv);
                 if ( lookup == null ) {
-                    System.err.println("No hits when looking up by cluster type: " + this.targetType );
-                    System.err.println("No hits at any hierarchy level! Exiting with an error.");
-                    System.exit(1);
+                    System.err.println("No hits when looking up by qualified env: " + qualifiedEnv );
+                    lookup = byType.get(this.targetType);
+                    if ( lookup == null ) {
+                        System.err.println("No hits when looking up by cluster type: " + this.targetType );
+                        System.err.println("No hits at any hierarchy level! Exiting with an error.");
+                        System.exit(1);
+                    }
                 }
             }
-        }
 
-        Constructor construtor = lookup.getConstructor(ClusterCriterion.ClusterType.class, ClusterCriterion.ClusterEnvironment.class, String.class, Map.class);
-        ClusterDefinition cd = (ClusterDefinition)construtor.newInstance(this.targetType, this.targetEnv, this.targetName, attributes);
+            Constructor constructor = lookup.getConstructor(ClusterCriterion.ClusterType.class, ClusterCriterion.ClusterEnvironment.class, String.class, Map.class);
+            AbstractDefinition def = (AbstractDefinition)constructor.newInstance(this.targetType, this.targetEnv, this.targetName, attributes);
 
-        System.out.println("Found a cluster definition: " + cd.getClass().getName());
+            System.out.println("Found a " + unit.name() + " definition: " + def.getClass().getName());
 
 
-        outputDir.toFile().mkdirs();
-        for ( Method m : cd.getClass().getMethods() ) {
+            outputDir.toFile().mkdirs();
+            for ( Method m : def.getClass().getMethods() ) {
 
-            if ( m.getName().startsWith("get") && m.getDeclaringClass().getName().startsWith("java.") == false) {
-                String objName = m.getName().substring(3); // string 'get'
-                Object o = m.invoke(cd);
-                if ( o == null ) {
-                    continue;
+                if ( m.getName().startsWith("get") && m.getDeclaringClass().getName().startsWith("java.") == false) {
+                    String objName = m.getName().substring(3); // string 'get'
+                    Object o = m.invoke(def);
+                    if ( o == null ) {
+                        continue;
+                    }
+                    Path yamlOutputFile = outputDir.resolve(objName + ".yml");
+                    FileWriter jfw = new FileWriter(yamlOutputFile.toFile());
+                    jfw.write("# Serializing result of " + def.getClass() + "." + m.getName() + "\n");
+                    jfw.write((new YamlDumper(YamlDumper.Verbosity.SHOW_VALUE_SOURCE)).toString(o));
+                    jfw.close();
                 }
-                Path yamlOutputFile = outputDir.resolve(objName + ".yml");
-                FileWriter jfw = new FileWriter(yamlOutputFile.toFile());
-                jfw.write((new YamlDumper(YamlDumper.Verbosity.SHOW_VALUE_SOURCE)).toString(o));
-                jfw.close();
             }
+
         }
 
         return null;
@@ -154,7 +196,7 @@ public class CirceGen implements Callable<Void> {
 
     public static void main(String[] args) {
 
-        //System.out.println((new YamlDumper()).toString(new TestClasses.X()));
+        System.out.println((new YamlDumper()).toString(new TestClasses.X()));
 
         // mvn install assembly:assembly
         // java -cp target/operator0-java-gen-1.0-SNAPSHOT-jar-with-dependencies.jar com.redhat.openshift.cr.config.CirceGen -e stg -n free-stg -t starter
