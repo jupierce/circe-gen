@@ -3,12 +3,12 @@ package com.redhat.openshift.circe.gen.tuned;
 import java.util.*;
 
 public interface TunedMatch {
-	//org.json:label
+	//json:label
 	String getLabel();
-	//org.json:value
+	//json:value
 	String getValue();
-	//org.json:type
+	//json:type
 	String getType();
-	//org.json:match
+	//json:match
 	List<TunedMatch> getMatch();
 }

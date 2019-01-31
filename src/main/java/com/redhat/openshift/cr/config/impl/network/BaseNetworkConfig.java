@@ -80,6 +80,12 @@ public class BaseNetworkConfig implements NetworkConfig {
             public ProxyConfig getKubeProxyConfig() {
                 return null;
             }
+
+            @Override
+            public String getSomeNewField() {
+                return null;
+            }
+
         };
     }
 }

@@ -2,7 +2,8 @@ package com.redhat.openshift.cr.config;
 
 import com.google.common.collect.Sets;
 import com.redhat.openshift.circe.gen.ClusterDefinition;
-import org.json.JSONObject;
+import com.redhat.openshift.circe.yaml.YamlDumper;
+import com.redhat.openshift.circe.yaml.YamlPropertyName;
 import org.reflections.Reflections;
 import picocli.CommandLine;
 
@@ -135,22 +136,25 @@ public class CirceGen implements Callable<Void> {
 
             if ( m.getName().startsWith("get") && m.getDeclaringClass().getName().startsWith("java.") == false) {
                 String objName = m.getName().substring(3); // string 'get'
-                Path outputFile = outputDir.resolve(objName + ".json");
                 Object o = m.invoke(cd);
                 if ( o == null ) {
                     continue;
                 }
-                JSONObject jo = new JSONObject(o);
-                FileWriter fw = new FileWriter(outputFile.toFile());
-                fw.write(jo.toString(4));
-                fw.close();
+                Path yamlOutputFile = outputDir.resolve(objName + ".yml");
+                FileWriter jfw = new FileWriter(yamlOutputFile.toFile());
+                jfw.write((new YamlDumper(YamlDumper.Verbosity.SHOW_VALUE_SOURCE)).toString(o));
+                jfw.close();
             }
         }
 
         return null;
     }
 
+
     public static void main(String[] args) {
+
+        // System.out.println((new YamlDumper()).toString(new X()));
+
         // mvn install assembly:assembly
         // java -cp target/operator0-java-gen-1.0-SNAPSHOT-jar-with-dependencies.jar com.redhat.openshift.cr.config.CirceGen -e stg -n free-stg -t starter
 

@@ -3,8 +3,8 @@ package com.redhat.openshift.circe.gen.project;
 import java.util.*;
 
 public interface ProjectSpec {
-	//org.json:projectRequestMessage
+	//json:projectRequestMessage
 	String getProjectRequestMessage();
-	//org.json:projectRequestTemplate
+	//json:projectRequestTemplate
 	TemplateReference getProjectRequestTemplate();
 }

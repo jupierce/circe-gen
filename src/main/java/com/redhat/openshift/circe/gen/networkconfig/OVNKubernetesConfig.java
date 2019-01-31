@@ -3,8 +3,8 @@ package com.redhat.openshift.circe.gen.networkconfig;
 import java.util.*;
 
 public interface OVNKubernetesConfig {
-	//org.json:genevePort
+	//json:genevePort
 	Long getGenevePort();
-	//org.json:mtu
+	//json:mtu
 	Long getMTU();
 }

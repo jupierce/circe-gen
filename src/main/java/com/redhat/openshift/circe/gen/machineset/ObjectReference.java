@@ -3,18 +3,18 @@ package com.redhat.openshift.circe.gen.machineset;
 import java.util.*;
 
 public interface ObjectReference {
-	//org.json:kind
+	//json:kind
 	String getKind();
-	//org.json:namespace
+	//json:namespace
 	String getNamespace();
-	//org.json:name
+	//json:name
 	String getName();
-	//org.json:uid
+	//json:uid
 	String getUID();
-	//org.json:apiVersion
+	//json:apiVersion
 	String getAPIVersion();
-	//org.json:resourceVersion
+	//json:resourceVersion
 	String getResourceVersion();
-	//org.json:fieldPath
+	//json:fieldPath
 	String getFieldPath();
 }
