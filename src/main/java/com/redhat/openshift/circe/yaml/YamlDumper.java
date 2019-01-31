@@ -7,13 +7,10 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
-import static javax.swing.text.html.HTML.Tag.P;
 
 /*
  Copyright (c) 2002 JSON.org
@@ -351,25 +348,27 @@ public class YamlDumper {
                     try {
                         method.setAccessible(true);
 
-                        final Object result = method.invoke(object);
+                        boolean encodeLiteralNull = (method.getDeclaredAnnotation(YamlLiteralNullValue.class) != null);
+
+                        // Don't actually invoke method if literal null is declared in annotation
+                        final Object result = encodeLiteralNull?null:method.invoke(object);
+
+                        boolean showSourceComment =
+                                this.verbosity == Verbosity.SHOW_ALL_SOURCE
+                                || ( this.verbosity == Verbosity.SHOW_VALUE_SOURCE && (result != null || encodeLiteralNull) );
 
 
-                        if ( this.verbosity != Verbosity.NONE ) {
-                            if ( this.verbosity == Verbosity.SHOW_ALL_SOURCE || result != null ) {
-                                // Comment on where this value is derived from
-                                sbs.add(new StringBuilder(""));
-                                if ( klass == method.getDeclaringClass() ) {
-                                    sbs.add(new StringBuilder("# Asked " + method.getDeclaringClass() + "." + method.getName() ));
-                                } else {
-                                    sbs.add(new StringBuilder("# Asked " + klass.getName() + " which returned value from " + method.getDeclaringClass() + "." + method.getName() ));
-                                }
-                                if ( result == null ) {
-                                    sbs.add(new StringBuilder("# " + key + ": null"));
-                                }
+                        if ( showSourceComment ) {
+                            // Comment on where this value is derived from
+                            sbs.add(new StringBuilder(""));
+                            if ( klass == method.getDeclaringClass() ) {
+                                sbs.add(new StringBuilder("# Asked " + method.getDeclaringClass() + "." + method.getName() ));
+                            } else {
+                                sbs.add(new StringBuilder("# Asked " + klass.getName() + " which returned value from " + method.getDeclaringClass() + "." + method.getName() ));
                             }
                         }
 
-                        if (result != null) {
+                        if (result != null || encodeLiteralNull) {
                             List<StringBuilder> val = toStrings(result);
 
                             if ( val instanceof PrimitiveValue ) {
@@ -379,8 +378,13 @@ public class YamlDumper {
                                 indent(val, indentation);
                                 sbs.addAll(val);
                             }
-
+                        } else {
+                            // Value should not be serialized into YAML at all. If SHOW_ALL_SOURCE, print a comment that we tried
+                            if ( showSourceComment ) {
+                                sbs.add(new StringBuilder("# " + key + ": n/a"));
+                            }
                         }
+
                     } catch (IllegalAccessException ignore) {
                     } catch (IllegalArgumentException ignore) {
                     } catch (InvocationTargetException ignore) {

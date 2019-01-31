@@ -79,6 +79,10 @@ public class TestClasses {
             return new Z[]{ new Z(), new Z() };
         }
 
+        @YamlLiteralNullValue
+        public String getThisShouldBeNull() {
+            throw new UnsupportedOperationException();
+        }
     }
 
 }

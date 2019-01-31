@@ -2,6 +2,7 @@ package com.redhat.openshift.cr.config;
 
 import com.google.common.collect.Sets;
 import com.redhat.openshift.circe.gen.ClusterDefinition;
+import com.redhat.openshift.circe.yaml.TestClasses;
 import com.redhat.openshift.circe.yaml.YamlDumper;
 import com.redhat.openshift.circe.yaml.YamlPropertyName;
 import org.reflections.Reflections;
@@ -153,7 +154,7 @@ public class CirceGen implements Callable<Void> {
 
     public static void main(String[] args) {
 
-        // System.out.println((new YamlDumper()).toString(new X()));
+        //System.out.println((new YamlDumper()).toString(new TestClasses.X()));
 
         // mvn install assembly:assembly
         // java -cp target/operator0-java-gen-1.0-SNAPSHOT-jar-with-dependencies.jar com.redhat.openshift.cr.config.CirceGen -e stg -n free-stg -t starter
