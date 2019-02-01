@@ -1,9 +1,6 @@
-package com.redhat.openshift.cr.config.core;
+package com.redhat.openshift.circe.beans;
 
-import com.redhat.openshift.circe.beans.ObjectMeta;
-import com.redhat.openshift.circe.yaml.Bean;
-
-public abstract class BaseObject implements Bean {
+public abstract class BaseObject {
 
     private final String apiVersion, kind;
     private final ObjectMeta metadata;

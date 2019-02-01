@@ -1,6 +1,6 @@
 package com.redhat.openshift.cr.config.core;
 
-import com.redhat.openshift.circe.gen.impl.ObjectMeta;
+import com.redhat.openshift.circe.beans.ObjectMeta;
 import com.redhat.openshift.circe.gen.template.Parameter;
 import com.redhat.openshift.circe.gen.template.Template;
 import com.redhat.openshift.circe.yaml.Bean;
