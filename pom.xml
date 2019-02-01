@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.redhat.openshift.circe</groupId>
-    <artifactId>circe</artifactId>
+    <artifactId>circe-render</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>

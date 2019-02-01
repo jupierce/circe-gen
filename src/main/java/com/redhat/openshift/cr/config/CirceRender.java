@@ -4,7 +4,6 @@ import com.google.common.collect.Sets;
 import com.redhat.openshift.circe.gen.AuthDefinition;
 import com.redhat.openshift.circe.gen.ClusterDefinition;
 import com.redhat.openshift.circe.gen.ProjectDefinition;
-import com.redhat.openshift.circe.yaml.TestClasses;
 import com.redhat.openshift.circe.yaml.YamlDumper;
 import com.redhat.openshift.cr.config.core.AbstractDefinition;
 import com.redhat.openshift.cr.config.core.ClusterCriteria;
@@ -25,10 +24,9 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 
 import static com.redhat.openshift.cr.config.core.ClusterCriterion.ClusterEnvironment.ANY_ENVIRONMENT;
-import static sun.awt.FontConfiguration.verbose;
 
-@CommandLine.Command(name = "CirceGen", mixinStandardHelpOptions = true, version = "1.0")
-public class CirceGen implements Callable<Void> {
+@CommandLine.Command(name = "CirceRender", mixinStandardHelpOptions = true, version = "1.0")
+public class CirceRender implements Callable<Void> {
 
     public static class ClusterTypeConverter implements CommandLine.ITypeConverter<ClusterCriterion.ClusterType> {
         public ClusterCriterion.ClusterType convert(String s) throws Exception {
@@ -213,9 +211,9 @@ public class CirceGen implements Callable<Void> {
         //System.out.println((new YamlDumper()).toString(new TestClasses.X()));
 
         // mvn install assembly:assembly
-        // java -cp target/operator0-java-gen-1.0-SNAPSHOT-jar-with-dependencies.jar com.redhat.openshift.cr.config.CirceGen -e stg -n free-stg -t starter
+        // java -cp target/operator0-java-gen-1.0-SNAPSHOT-jar-with-dependencies.jar com.redhat.openshift.cr.config.CirceRender -e stg -n free-stg -t starter
 
-        CommandLine.call(new CirceGen(), args);
+        CommandLine.call(new CirceRender(), args);
 
         /*
         JSONObject jo = new JSONObject(new OnlineStarterTypeClusterDefinition());
