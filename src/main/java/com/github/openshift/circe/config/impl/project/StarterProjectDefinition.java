@@ -2,7 +2,7 @@ package com.github.openshift.circe.config.impl.project;
 
 import com.github.openshift.circe.config.core.AbstractDefinition;
 import com.github.openshift.circe.config.core.ClusterCriterion;
-import com.github.openshift.circe.gen.ProjectDefinition;
+import com.github.openshift.circe.gen.ProjectConfigDefinition;
 import com.github.openshift.circe.gen.project.Project;
 import com.github.openshift.circe.gen.project.ProjectSpec;
 import com.github.openshift.circe.gen.project.TemplateReference;
@@ -14,7 +14,7 @@ import java.util.Map;
 
 
 @ClusterCriterion(type = ClusterCriterion.ClusterType.ONLINE_STARTER)
-public class StarterProjectDefinition extends AbstractDefinition implements ProjectDefinition {
+public class StarterProjectDefinition extends AbstractDefinition implements ProjectConfigDefinition {
 
     public StarterProjectDefinition(
             ClusterCriterion.ClusterType type,
