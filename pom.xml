@@ -25,7 +25,6 @@
 
     <build>
 
-
         <!-- include any json or yaml files included in the source tree -->
         <resources>
             <resource>
@@ -38,26 +37,37 @@
             </resource>
         </resources>
 
+        <plugins>
+            <!--
+             src/generated/java - files created by processing go pkgs by circe
+             src/support/java - library of java for circe users (e.g. Library to render yaml)
+             src/main/java - main src for cluster specific configuration implementations
+            -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>add-generated-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/support/java</source>
+                                <source>src/generated/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
         <pluginManagement>
             <plugins>
 
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>build-helper-maven-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <phase>generate-sources</phase>
-                            <goals>
-                                <goal>add-source</goal>
-                            </goals>
-                            <configuration>
-                                <sources>
-                                    <source>src/generated/java</source>
-                                </sources>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
 
 
                 <plugin>
