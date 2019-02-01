@@ -34,7 +34,7 @@ public interface YamlProvider {
                         if ( method.getName() == "toYaml" ) {
                             return yaml;
                         }
-                        throw new UnsupportedOperationException("Invalid access to YamlProvider method");
+                        throw new UnsupportedOperationException("Invalid access to YamlProvider method: " + o.getClass() + "." + method.getName());
                     }
                 }
         );

@@ -1,7 +1,7 @@
-package com.github.openshift.circe.config.impl.cluster;
+package com.github.openshift.config.impl.cluster;
 
-import com.github.openshift.circe.config.core.ClusterCriterion;
-import com.github.openshift.circe.config.impl.tuning.OpsDefaultTunedSpec;
+import com.github.openshift.config.ClusterCriterion;
+import com.github.openshift.config.impl.tuning.OpsDefaultTunedSpec;
 import com.github.openshift.circe.gen.machineset.MachineSet;
 import com.github.openshift.circe.gen.tuned.Tuned;
 import com.github.openshift.circe.gen.tuned.TunedSpec;

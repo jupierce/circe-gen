@@ -1,4 +1,6 @@
-package com.github.openshift.circe.config.core;
+package com.github.openshift.config;
+
+import com.github.openshift.config.ClusterCriteria;
 
 import java.lang.annotation.*;
 

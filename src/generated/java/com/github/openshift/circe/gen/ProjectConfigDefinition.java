@@ -5,7 +5,7 @@ import com.github.openshift.circe.gen.project.*;
 import com.github.openshift.circe.gen.template.*;
 import com.github.openshift.circe.beans.*;
 
-public interface ProjectConfigDefinition {
+public interface ProjectConfigDefinition extends ConfigUnit {
 
 	Project getProject() throws Exception;
 

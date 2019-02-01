@@ -1,4 +1,4 @@
-package com.github.openshift.circe.config.core;
+package com.github.openshift.config;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -1,8 +1,8 @@
-package com.github.openshift.circe.config.impl.cluster;
+package com.github.openshift.config.impl.cluster;
 
-import com.github.openshift.circe.config.core.AbstractDefinition;
-import com.github.openshift.circe.config.core.ClusterCriterion;
-import com.github.openshift.circe.config.impl.network.BaseNetworkConfig;
+import com.github.openshift.config.impl.AbstractDefinition;
+import com.github.openshift.config.ClusterCriterion;
+import com.github.openshift.config.impl.network.BaseNetworkConfig;
 import com.github.openshift.circe.gen.ClusterDefinition;
 import com.github.openshift.circe.gen.networkconfig.NetworkConfig;
 

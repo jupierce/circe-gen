@@ -6,7 +6,7 @@ import com.github.openshift.circe.gen.machineset.*;
 import com.github.openshift.circe.gen.networkconfig.*;
 import com.github.openshift.circe.beans.*;
 
-public interface ClusterDefinition {
+public interface ClusterDefinition extends ConfigUnit {
 
 	Tuned getTuned() throws Exception;
 

@@ -1,19 +1,15 @@
-package com.github.openshift.circe.config;
+package com.github.openshift.config;
 
-import com.github.openshift.circe.config.core.AbstractDefinition;
-import com.github.openshift.circe.config.core.ClusterCriteria;
-import com.github.openshift.circe.config.core.ClusterCriterion;
-import com.github.openshift.circe.gen.ConfigUnit;
-import com.github.openshift.circe.yaml.YamlDumper;
+import com.github.openshift.circe.Renderer;
+import com.github.openshift.config.impl.AbstractDefinition;
+import com.github.openshift.circe.gen.ConfigUnitType;
 import com.google.common.collect.Sets;
 import org.reflections.Reflections;
 import picocli.CommandLine;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -21,10 +17,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
-import static com.github.openshift.circe.config.core.ClusterCriterion.ClusterEnvironment.ANY_ENVIRONMENT;
+import static com.github.openshift.config.ClusterCriterion.ClusterEnvironment.ANY_ENVIRONMENT;
 
-@CommandLine.Command(name = "CirceRender", mixinStandardHelpOptions = true, version = "1.0")
-public class CirceRender implements Callable<Void> {
+@CommandLine.Command(name = "Render", mixinStandardHelpOptions = true, version = "1.0")
+public class Render implements Callable<Void> {
 
     public static class ClusterTypeConverter implements CommandLine.ITypeConverter<ClusterCriterion.ClusterType> {
         public ClusterCriterion.ClusterType convert(String s) throws Exception {
@@ -39,7 +35,7 @@ public class CirceRender implements Callable<Void> {
     }
 
     @CommandLine.Option(names={"-u", "--unit"}, required = true, description="Configuration unit to render")
-    protected List<ConfigUnit> units;
+    protected List<ConfigUnitType> units;
 
 
     @CommandLine.Option(names={"-t", "--type"}, required = true, description="The type of the cluster (e.g. starter/dedicated/etc)",
@@ -88,7 +84,10 @@ public class CirceRender implements Callable<Void> {
             attributes = new HashMap<>();
         }
 
-        for ( ConfigUnit unit : units ) {
+        System.out.println("Searching for unit implementation most closely matching type[" + targetType + "] env[" + targetEnv + "] name[" + targetName + "]");
+
+
+        for ( ConfigUnitType unit : units ) {
 
             // Find all classes annotated with @ClusterCriterion
             Reflections reflections = new Reflections();
@@ -163,28 +162,11 @@ public class CirceRender implements Callable<Void> {
             Constructor constructor = lookup.getConstructor(ClusterCriterion.ClusterType.class, ClusterCriterion.ClusterEnvironment.class, String.class, Map.class);
             AbstractDefinition def = (AbstractDefinition)constructor.newInstance(this.targetType, this.targetEnv, this.targetName, attributes);
 
-            System.out.println("Rendering a " + unit.name() + " definition: " + def.getClass().getName());
+            System.out.println("Matched " + unit.name() + " definition: " + def.getClass().getName());
             System.out.println("Output directory: " + outputDir.toAbsolutePath());
-
-
-            outputDir.toFile().mkdirs();
-            for ( Method m : def.getClass().getMethods() ) {
-
-                if ( m.getName().startsWith("get") && m.getDeclaringClass().getName().startsWith("java.") == false) {
-                    String objName = m.getName().substring(3); // string 'get'
-                    Object o = m.invoke(def);
-                    if ( o == null ) {
-                        continue;
-                    }
-                    Path yamlOutputFile = outputDir.resolve(objName + ".yml");
-                    FileWriter jfw = new FileWriter(yamlOutputFile.toFile());
-                    verbose("Writing " + yamlOutputFile.toAbsolutePath() );
-                    jfw.write("# Serializing result of " + def.getClass() + "." + m.getName() + "\n");
-                    jfw.write((new YamlDumper(YamlDumper.Verbosity.SHOW_VALUE_SOURCE)).toString(o));
-                    jfw.close();
-                }
-            }
-
+            System.out.print("Rendering...");
+            Renderer.toYamlDir(def, outputDir);
+            System.out.println("Done.");
         }
 
         return null;
@@ -192,18 +174,6 @@ public class CirceRender implements Callable<Void> {
 
 
     public static void main(String[] args) {
-
-        //System.out.println((new YamlDumper()).toString(new TestClasses.X()));
-
-        // mvn install assembly:assembly
-        // java -cp target/operator0-java-gen-1.0-SNAPSHOT-jar-with-dependencies.jar CirceRender -e stg -n free-stg -t starter
-
-        CommandLine.call(new CirceRender(), args);
-
-        /*
-        JSONObject jo = new JSONObject(new OnlineStarterTypeClusterDefinition());
-        System.out.println(jo.toString(2));
-        */
-
+        CommandLine.call(new Render(), args);
     }
 }

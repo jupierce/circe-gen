@@ -1,7 +1,7 @@
-package com.github.openshift.circe.config.impl.project;
+package com.github.openshift.config.impl.project;
 
-import com.github.openshift.circe.config.core.AbstractDefinition;
-import com.github.openshift.circe.config.core.ClusterCriterion;
+import com.github.openshift.config.impl.AbstractDefinition;
+import com.github.openshift.config.ClusterCriterion;
 import com.github.openshift.circe.gen.ProjectConfigDefinition;
 import com.github.openshift.circe.gen.project.Project;
 import com.github.openshift.circe.gen.project.ProjectSpec;
