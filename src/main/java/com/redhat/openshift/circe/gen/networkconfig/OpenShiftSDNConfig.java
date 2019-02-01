@@ -1,15 +1,16 @@
 package com.redhat.openshift.circe.gen.networkconfig;
 
 import com.redhat.openshift.circe.gen.impl.*;
+import com.redhat.openshift.circe.yaml.Bean;
 import java.util.*;
 
-public interface OpenShiftSDNConfig {
+public interface OpenShiftSDNConfig extends Bean {
 	//json:mode
-	String getMode();
+	String getMode() throws Exception;
 	//json:vxlanPort
-	Long getVXLANPort();
+	Long getVXLANPort() throws Exception;
 	//json:mtu
-	Long getMTU();
+	Long getMTU() throws Exception;
 	//json:useExternalOpenvswitch
-	Boolean getUseExternalOpenvswitch();
+	Boolean getUseExternalOpenvswitch() throws Exception;
 }

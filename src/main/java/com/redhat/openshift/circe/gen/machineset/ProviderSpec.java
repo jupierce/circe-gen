@@ -1,11 +1,12 @@
 package com.redhat.openshift.circe.gen.machineset;
 
 import com.redhat.openshift.circe.gen.impl.*;
+import com.redhat.openshift.circe.yaml.Bean;
 import java.util.*;
 
-public interface ProviderSpec {
+public interface ProviderSpec extends Bean {
 	//json:value
-	String getValue();
+	String getValue() throws Exception;
 	//json:valueFrom
-	ProviderSpecSource getValueFrom();
+	ProviderSpecSource getValueFrom() throws Exception;
 }

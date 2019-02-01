@@ -1,21 +1,22 @@
 package com.redhat.openshift.circe.gen.networkconfig;
 
 import com.redhat.openshift.circe.gen.impl.*;
+import com.redhat.openshift.circe.yaml.Bean;
 import java.util.*;
 
-public interface NetworkConfigSpec {
+public interface NetworkConfigSpec extends Bean {
 	//json:clusterNetworks
-	List<ClusterNetwork> getClusterNetworks();
+	List<ClusterNetwork> getClusterNetworks() throws Exception;
 	//json:serviceNetwork
-	String getServiceNetwork();
+	String getServiceNetwork() throws Exception;
 	//json:defaultNetwork
-	DefaultNetworkDefinition getDefaultNetwork();
+	DefaultNetworkDefinition getDefaultNetwork() throws Exception;
 	//json:additionalNetworks
-	List<AdditionalNetworkDefinition> getAdditionalNetworks();
+	List<AdditionalNetworkDefinition> getAdditionalNetworks() throws Exception;
 	//json:deployKubeProxy
-	Boolean getDeployKubeProxy();
+	Boolean getDeployKubeProxy() throws Exception;
 	//json:kubeProxyConfig
-	ProxyConfig getKubeProxyConfig();
+	ProxyConfig getKubeProxyConfig() throws Exception;
 	//json:someNewField
-	String getSomeNewField();
+	String getSomeNewField() throws Exception;
 }

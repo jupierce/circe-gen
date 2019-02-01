@@ -1,13 +1,14 @@
 package com.redhat.openshift.circe.gen.tuned;
 
 import com.redhat.openshift.circe.gen.impl.*;
+import com.redhat.openshift.circe.yaml.Bean;
 import java.util.*;
 
-public interface TunedRecommend {
+public interface TunedRecommend extends Bean {
 	//json:profile
-	String getProfile();
+	String getProfile() throws Exception;
 	//json:priority
-	Long getPriority();
+	Long getPriority() throws Exception;
 	//json:match
-	List<TunedMatch> getMatch();
+	List<TunedMatch> getMatch() throws Exception;
 }

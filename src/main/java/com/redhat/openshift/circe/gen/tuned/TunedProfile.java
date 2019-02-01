@@ -1,11 +1,12 @@
 package com.redhat.openshift.circe.gen.tuned;
 
 import com.redhat.openshift.circe.gen.impl.*;
+import com.redhat.openshift.circe.yaml.Bean;
 import java.util.*;
 
-public interface TunedProfile {
+public interface TunedProfile extends Bean {
 	//json:name
-	String getName();
+	String getName() throws Exception;
 	//json:data
-	String getData();
+	String getData() throws Exception;
 }

@@ -1,13 +1,14 @@
 package com.redhat.openshift.circe.gen.networkconfig;
 
 import com.redhat.openshift.circe.gen.impl.*;
+import com.redhat.openshift.circe.yaml.Bean;
 import java.util.*;
 
-public interface AdditionalNetworkDefinition {
+public interface AdditionalNetworkDefinition extends Bean {
 	//json:type
-	String getType();
+	String getType() throws Exception;
 	//json:name
-	String getName();
+	String getName() throws Exception;
 	//json:rawCNIConfig
-	String getRawCNIConfig();
+	String getRawCNIConfig() throws Exception;
 }

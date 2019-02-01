@@ -1,15 +1,16 @@
 package com.redhat.openshift.circe.gen.tuned;
 
 import com.redhat.openshift.circe.gen.impl.*;
+import com.redhat.openshift.circe.yaml.Bean;
 import java.util.*;
 
-public interface TunedMatch {
+public interface TunedMatch extends Bean {
 	//json:label
-	String getLabel();
+	String getLabel() throws Exception;
 	//json:value
-	String getValue();
+	String getValue() throws Exception;
 	//json:type
-	String getType();
+	String getType() throws Exception;
 	//json:match
-	List<TunedMatch> getMatch();
+	List<TunedMatch> getMatch() throws Exception;
 }

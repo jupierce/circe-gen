@@ -8,11 +8,11 @@ import com.redhat.openshift.circe.gen.impl.*;
 
 public interface ClusterDefinition {
 
-	Tuned getTuned();
+	Tuned getTuned() throws Exception;
 
-	MachineSet getMachineSet();
+	MachineSet getMachineSet() throws Exception;
 
-	NetworkConfig getNetworkConfig();
+	NetworkConfig getNetworkConfig() throws Exception;
 
 
 }

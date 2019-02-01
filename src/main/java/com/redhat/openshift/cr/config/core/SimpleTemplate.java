@@ -3,6 +3,7 @@ package com.redhat.openshift.cr.config.core;
 import com.redhat.openshift.circe.gen.impl.ObjectMeta;
 import com.redhat.openshift.circe.gen.template.Parameter;
 import com.redhat.openshift.circe.gen.template.Template;
+import com.redhat.openshift.circe.yaml.Bean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ public abstract class SimpleTemplate implements Template {
 
     private final String message;
     private final List<Parameter> parameters;
-    private final List<BaseObject> objects;
+    private final List<Bean> objects;
     private final Map<String,String> objectLabels;
 
     public SimpleTemplate(String message, List<Parameter> parameters, Map<String,String> objectLabels) {
@@ -35,7 +36,7 @@ public abstract class SimpleTemplate implements Template {
     }
 
     @Override
-    public List<BaseObject> getObjects() {
+    public List<Bean> getObjects() {
         return objects;
     }
 

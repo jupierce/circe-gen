@@ -1,21 +1,22 @@
 package com.redhat.openshift.circe.gen.machineset;
 
 import com.redhat.openshift.circe.gen.impl.*;
+import com.redhat.openshift.circe.yaml.Bean;
 import java.util.*;
 
-public interface ObjectReference {
+public interface ObjectReference extends Bean {
 	//json:kind
-	String getKind();
+	String getKind() throws Exception;
 	//json:namespace
-	String getNamespace();
+	String getNamespace() throws Exception;
 	//json:name
-	String getName();
+	String getName() throws Exception;
 	//json:uid
-	String getUID();
+	String getUID() throws Exception;
 	//json:apiVersion
-	String getAPIVersion();
+	String getAPIVersion() throws Exception;
 	//json:resourceVersion
-	String getResourceVersion();
+	String getResourceVersion() throws Exception;
 	//json:fieldPath
-	String getFieldPath();
+	String getFieldPath() throws Exception;
 }

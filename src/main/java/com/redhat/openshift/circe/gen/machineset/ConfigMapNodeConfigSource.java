@@ -1,17 +1,18 @@
 package com.redhat.openshift.circe.gen.machineset;
 
 import com.redhat.openshift.circe.gen.impl.*;
+import com.redhat.openshift.circe.yaml.Bean;
 import java.util.*;
 
-public interface ConfigMapNodeConfigSource {
+public interface ConfigMapNodeConfigSource extends Bean {
 	//json:namespace
-	String getNamespace();
+	String getNamespace() throws Exception;
 	//json:name
-	String getName();
+	String getName() throws Exception;
 	//json:uid
-	String getUID();
+	String getUID() throws Exception;
 	//json:resourceVersion
-	String getResourceVersion();
+	String getResourceVersion() throws Exception;
 	//json:kubeletConfigKey
-	String getKubeletConfigKey();
+	String getKubeletConfigKey() throws Exception;
 }

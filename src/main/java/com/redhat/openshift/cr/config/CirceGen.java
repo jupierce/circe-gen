@@ -1,6 +1,7 @@
 package com.redhat.openshift.cr.config;
 
 import com.google.common.collect.Sets;
+import com.redhat.openshift.circe.gen.AuthDefinition;
 import com.redhat.openshift.circe.gen.ClusterDefinition;
 import com.redhat.openshift.circe.gen.ProjectDefinition;
 import com.redhat.openshift.circe.yaml.TestClasses;
@@ -8,10 +9,7 @@ import com.redhat.openshift.circe.yaml.YamlDumper;
 import com.redhat.openshift.cr.config.core.AbstractDefinition;
 import com.redhat.openshift.cr.config.core.ClusterCriteria;
 import com.redhat.openshift.cr.config.core.ClusterCriterion;
-import com.redhat.openshift.cr.config.impl.cluster.BaseClusterDefinition;
-import com.redhat.openshift.cr.config.impl.project.BaseProjectDefinition;
 import org.reflections.Reflections;
-import org.reflections.util.ConfigurationBuilder;
 import picocli.CommandLine;
 
 import java.io.FileWriter;
@@ -27,7 +25,7 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 
 import static com.redhat.openshift.cr.config.core.ClusterCriterion.ClusterEnvironment.ANY_ENVIRONMENT;
-import static java.awt.SystemColor.info;
+import static sun.awt.FontConfiguration.verbose;
 
 @CommandLine.Command(name = "CirceGen", mixinStandardHelpOptions = true, version = "1.0")
 public class CirceGen implements Callable<Void> {
@@ -46,7 +44,9 @@ public class CirceGen implements Callable<Void> {
 
     public enum Unit {
         project(ProjectDefinition.class),
-        cluster(ClusterDefinition.class);
+        cluster(ClusterDefinition.class),
+        auth(AuthDefinition.class),
+        ;
 
         Unit(Class mustImplClass) {
             this.mustImplClass = mustImplClass;
@@ -55,30 +55,41 @@ public class CirceGen implements Callable<Void> {
         private Class mustImplClass;
     }
 
-    @CommandLine.Option(names={"-u", "--identity"}, required = true, description="Configuration identity to render")
-    public List<Unit> units;
+    @CommandLine.Option(names={"-u", "--unit"}, required = true, description="Configuration unit to render")
+    protected List<Unit> units;
 
 
     @CommandLine.Option(names={"-t", "--type"}, required = true, description="The type of the cluster (e.g. starter/dedicated/etc)",
             converter = ClusterTypeConverter.class)
-    public ClusterCriterion.ClusterType targetType;
+    protected ClusterCriterion.ClusterType targetType;
 
 
     @CommandLine.Option(names={"-e", "--environment"}, required = true, description="The environment of the cluster (int/stg/prod)",
             converter = ClusterEnvironmentConverter.class)
-    public ClusterCriterion.ClusterEnvironment targetEnv;
+    protected ClusterCriterion.ClusterEnvironment targetEnv;
 
     @CommandLine.Option(names={"-n", "--name"}, required = true, description="The name of the cluster (e.g. free-stg/starter-us-east-1)"
     )
-    public String targetName;
+    protected String targetName;
 
 
     @CommandLine.Option(names={"-p"}, description="Zero or more parameters to pass to the generator implementation" )
-    public Map<String,String> attributes;
+    protected Map<String,String> attributes;
 
     @CommandLine.Option(names={"-o", "--output"}, required = true)
-    public Path outputDir;
+    protected Path outputDir;
 
+    @CommandLine.Option(names={"-v", "--verbose"}, required = false, defaultValue = "false", description = "Enable verbose output")
+    protected boolean verbose;
+
+    @CommandLine.Option(names={"--ignore-not-found"}, required = false, defaultValue = "false", description = "If no class implementing this unit is found, don't raise an error")
+    protected boolean ignoreNotFound;
+
+    public void verbose(String msg) {
+        if (this.verbose) {
+            System.out.println(msg);
+        }
+    }
 
     /**
      * Entrypoint after CLI parsing
@@ -100,18 +111,20 @@ public class CirceGen implements Callable<Void> {
             Reflections reflections = new Reflections();
             for ( Class c : Sets.union(reflections.getTypesAnnotatedWith(ClusterCriteria.class), reflections.getTypesAnnotatedWith(ClusterCriterion.class)) ) {
 
-                System.out.println("Testing: " + c);
+                verbose("Assessing candidate: " + c);
 
                 if ( Modifier.isAbstract(c.getModifiers()) ) {
-                    System.out.println("   ABSTRACT");
+                    verbose("   Skipping candidate because it is abstract class");
                     continue;
                 }
 
                 if ( unit.mustImplClass.isAssignableFrom(c) == false ) {
-                    System.out.println("   Not Assignable! " + unit.mustImplClass + " and " + c);
+                    verbose("   Skipping candidate because it does not implement unit interface: " + unit.mustImplClass);
                     continue;
                 }
 
+
+                verbose("   Registering candidate: " + c);
 
                 Annotation[] info = c.getAnnotationsByType(ClusterCriterion.class);
                 for ( Annotation a : info ) {
@@ -147,20 +160,19 @@ public class CirceGen implements Callable<Void> {
 
             }
 
-            System.out.println("Found " + (byName.size() + byEnv.size() + byType.size()) + " definitions");
+            verbose("Found " + (byName.size() + byEnv.size() + byType.size()) + " candidate unit implementations");
 
             Class<? extends AbstractDefinition> lookup = byName.get(this.targetName);
             if ( lookup == null ) {
-                System.err.println("No hits when looking up by name: " + this.targetName );
+                verbose("No hits when looking up by name: " + this.targetName );
                 String qualifiedEnv = this.targetType + ":" + this.targetEnv;
                 lookup = byEnv.get(qualifiedEnv);
                 if ( lookup == null ) {
-                    System.err.println("No hits when looking up by qualified env: " + qualifiedEnv );
+                    verbose("No hits when looking up by qualified env: " + qualifiedEnv );
                     lookup = byType.get(this.targetType);
                     if ( lookup == null ) {
-                        System.err.println("No hits when looking up by cluster type: " + this.targetType );
-                        System.err.println("No hits at any hierarchy level! Exiting with an error.");
-                        System.exit(1);
+                        verbose("No hits when looking up by cluster type: " + this.targetType );
+                        System.exit(ignoreNotFound?0:1);
                     }
                 }
             }
@@ -168,7 +180,8 @@ public class CirceGen implements Callable<Void> {
             Constructor constructor = lookup.getConstructor(ClusterCriterion.ClusterType.class, ClusterCriterion.ClusterEnvironment.class, String.class, Map.class);
             AbstractDefinition def = (AbstractDefinition)constructor.newInstance(this.targetType, this.targetEnv, this.targetName, attributes);
 
-            System.out.println("Found a " + unit.name() + " definition: " + def.getClass().getName());
+            System.out.println("Rendering a " + unit.name() + " definition: " + def.getClass().getName());
+            System.out.println("Output directory: " + outputDir.toAbsolutePath());
 
 
             outputDir.toFile().mkdirs();
@@ -182,6 +195,7 @@ public class CirceGen implements Callable<Void> {
                     }
                     Path yamlOutputFile = outputDir.resolve(objName + ".yml");
                     FileWriter jfw = new FileWriter(yamlOutputFile.toFile());
+                    verbose("Writing " + yamlOutputFile.toAbsolutePath() );
                     jfw.write("# Serializing result of " + def.getClass() + "." + m.getName() + "\n");
                     jfw.write((new YamlDumper(YamlDumper.Verbosity.SHOW_VALUE_SOURCE)).toString(o));
                     jfw.close();
@@ -196,7 +210,7 @@ public class CirceGen implements Callable<Void> {
 
     public static void main(String[] args) {
 
-        System.out.println((new YamlDumper()).toString(new TestClasses.X()));
+        //System.out.println((new YamlDumper()).toString(new TestClasses.X()));
 
         // mvn install assembly:assembly
         // java -cp target/operator0-java-gen-1.0-SNAPSHOT-jar-with-dependencies.jar com.redhat.openshift.cr.config.CirceGen -e stg -n free-stg -t starter

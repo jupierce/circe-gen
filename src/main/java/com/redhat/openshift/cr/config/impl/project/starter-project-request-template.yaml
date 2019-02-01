@@ -1,0 +1,187 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+
+metadata:
+  name: project-request
+  namespace: openshift-config
+
+objects:
+
+- apiVersion: v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/description: ${PROJECT_DESCRIPTION}
+      openshift.io/display-name: ${PROJECT_DISPLAYNAME}
+      openshift.io/requester: ${PROJECT_REQUESTING_USER}
+    labels:
+      openshift.io/hibernate-include: "true"
+    name: ${PROJECT_NAME}
+  spec: {}
+  status: {}
+
+- apiVersion: v1
+  kind: RoleBindingRestriction
+  metadata:
+    creationTimestamp: null
+    name: match-project-admin-user
+    namespace: ${PROJECT_NAME}
+  spec:
+    userrestriction:
+      users:
+      - ${PROJECT_ADMIN_USER}
+
+- apiVersion: v1
+  kind: RoleBindingRestriction
+  metadata:
+    creationTimestamp: null
+    name: match-own-service-account-group
+    namespace: ${PROJECT_NAME}
+  spec:
+    grouprestriction:
+      groups:
+      - system:serviceaccounts:${PROJECT_NAME}
+
+- apiVersion: v1
+  kind: RoleBindingRestriction
+  metadata:
+    creationTimestamp: null
+    name: match-own-service-accounts
+    namespace: ${PROJECT_NAME}
+  spec:
+    serviceaccountrestriction:
+      namespaces:
+      - ${PROJECT_NAME}
+
+- apiVersion: v1
+  kind: ResourceQuota
+  metadata:
+    name: object-counts
+  spec:
+    hard:
+      persistentvolumeclaims: "2"
+      replicationcontrollers: "20"
+      secrets: "20"
+      services: "5"
+
+- apiVersion: v1
+  kind: ResourceQuota
+  metadata:
+    name: compute-resources
+  spec:
+    hard:
+      limits.cpu: "4"
+      limits.memory: 2Gi
+    scopes:
+    - NotTerminating
+
+- apiVersion: v1
+  kind: ResourceQuota
+  metadata:
+    name: compute-resources-timebound
+  spec:
+    hard:
+      limits.cpu: "4"
+      limits.memory: 2Gi
+    scopes:
+    - Terminating
+
+- apiVersion: v1
+  kind: LimitRange
+  metadata:
+    creationTimestamp: null
+    name: resource-limits
+  spec:
+    limits:
+    - max:
+        cpu: "2"
+        memory: 1Gi
+      min:
+        cpu: 7m
+        memory: 100Mi
+      type: Pod
+    - default:
+        cpu: "1"
+        memory: 512Mi
+      defaultRequest:
+        cpu: 20m
+        memory: 256Mi
+      max:
+        cpu: "2"
+        memory: 1Gi
+      min:
+        cpu: 7m
+        memory: 100Mi
+      type: Container
+    - max:
+        storage: 1Gi
+      min:
+        storage: 1Gi
+      type: PersistentVolumeClaim
+
+- apiVersion: v1
+  groupNames: null
+  kind: RoleBinding
+  metadata:
+    creationTimestamp: null
+    name: admin
+    namespace: ${PROJECT_NAME}
+  roleRef:
+    name: admin
+  subjects:
+  - kind: User
+    name: ${PROJECT_ADMIN_USER}
+  userNames:
+  - ${PROJECT_ADMIN_USER}
+
+- apiVersion: v1
+  groupNames:
+  - system:serviceaccounts:${PROJECT_NAME}
+  kind: RoleBinding
+  metadata:
+    creationTimestamp: null
+    name: system:image-pullers
+    namespace: ${PROJECT_NAME}
+  roleRef:
+    name: system:image-puller
+  subjects:
+  - kind: SystemGroup
+    name: system:serviceaccounts:${PROJECT_NAME}
+  userNames: null
+
+- apiVersion: v1
+  groupNames: null
+  kind: RoleBinding
+  metadata:
+    creationTimestamp: null
+    name: system:image-builders
+    namespace: ${PROJECT_NAME}
+  roleRef:
+    name: system:image-builder
+  subjects:
+  - kind: ServiceAccount
+    name: builder
+  userNames:
+  - system:serviceaccount:${PROJECT_NAME}:builder
+
+- apiVersion: v1
+  groupNames: null
+  kind: RoleBinding
+  metadata:
+    creationTimestamp: null
+    name: system:deployers
+    namespace: ${PROJECT_NAME}
+  roleRef:
+    name: system:deployer
+  subjects:
+  - kind: ServiceAccount
+    name: deployer
+  userNames:
+  - system:serviceaccount:${PROJECT_NAME}:deployer
+
+parameters:
+- name: PROJECT_NAME
+- name: PROJECT_DISPLAYNAME
+- name: PROJECT_DESCRIPTION
+- name: PROJECT_ADMIN_USER
+- name: PROJECT_REQUESTING_USER

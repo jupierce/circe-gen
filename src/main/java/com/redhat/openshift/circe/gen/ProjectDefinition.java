@@ -6,14 +6,13 @@ import com.redhat.openshift.circe.gen.machineset.*;
 import com.redhat.openshift.circe.gen.networkconfig.*;
 import com.redhat.openshift.circe.gen.project.*;
 import com.redhat.openshift.circe.gen.template.*;
-import com.redhat.openshift.circe.gen.resourcequota.*;
 import com.redhat.openshift.circe.gen.impl.*;
 
 public interface ProjectDefinition {
 
-	Project getProject();
+	Project getProject() throws Exception;
 
-	Template getTemplate();
+	Template getTemplate() throws Exception;
 
 
 }

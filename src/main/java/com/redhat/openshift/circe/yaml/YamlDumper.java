@@ -9,8 +9,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.*;
 
-import static com.sun.org.apache.xalan.internal.lib.ExsltStrings.split;
-
 /*
  Copyright (c) 2002 JSON.org
 
@@ -258,6 +256,9 @@ public class YamlDumper {
         if ( object instanceof YamlProvider ) {
             String yaml = ((YamlProvider)object).toYaml();
             List<StringBuilder> sbs = new ArrayList<>();
+            if ( verbosity == Verbosity.SHOW_VALUE_SOURCE ) {
+                sbs.add(new StringBuilder("# Outputting literal content provided by a " + YamlProvider.class.getName() + " implementation"));
+            }
             for ( String line : yaml.split("\n") ) {
                 sbs.add(new StringBuilder(line));
             }
@@ -429,7 +430,6 @@ public class YamlDumper {
 
     public String toString(Object object, int initialIndent) {
         List<StringBuilder> sbs = new ArrayList<>();
-
         sbs.add(new StringBuilder("# Serializing: " + object.getClass()));
 
         sbs.addAll(toStrings(object));
