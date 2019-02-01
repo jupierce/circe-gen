@@ -1,7 +1,5 @@
 package com.github.openshift.config;
 
-import com.github.openshift.config.ClusterCriteria;
-
 import java.lang.annotation.*;
 
 @Retention(RetentionPolicy.RUNTIME)
@@ -12,25 +10,25 @@ public @interface ClusterCriterion {
     String MATCH_ANY_CLUSTER_NAME = "*";
 
     ClusterType type();
-    ClusterEnvironment env() default ClusterEnvironment.ANY_ENVIRONMENT;
+    ClusterEnvironment env() default ClusterEnvironment.ANY;
     String name() default MATCH_ANY_CLUSTER_NAME;
 
 
     enum ClusterEnvironment {
-        ANY_ENVIRONMENT("*"),
+        ANY("*"),
         INT("int"),
         STG("stg"),
         PROD("prod");
 
-        private final String match;
+        public final String shortname;
 
-        ClusterEnvironment(String match) {
-            this.match = match;
+        ClusterEnvironment(String shortname) {
+            this.shortname = shortname;
         }
 
         public static ClusterEnvironment find(String name) throws IllegalArgumentException {
             for ( ClusterEnvironment e : ClusterEnvironment.values() ) {
-                if ( e.match.equalsIgnoreCase(name.trim()) ) {
+                if ( e.shortname.equalsIgnoreCase(name.trim()) ) {
                     return e;
                 }
             }
@@ -44,15 +42,15 @@ public @interface ClusterCriterion {
         DEDICATED("dedicated"),
         TEST("test");
 
-        private final String match;
+        public final String shortname;
 
-        ClusterType(String match) {
-            this.match = match;
+        ClusterType(String shortname) {
+            this.shortname = shortname;
         }
 
         public static ClusterType find(String name) throws IllegalArgumentException {
             for ( ClusterType e : ClusterType.values() ) {
-                if ( e.match.equalsIgnoreCase(name.trim()) ) {
+                if ( e.shortname.equalsIgnoreCase(name.trim()) ) {
                     return e;
                 }
             }

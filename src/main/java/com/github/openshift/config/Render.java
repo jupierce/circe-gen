@@ -12,39 +12,52 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.Callable;
 
-import static com.github.openshift.config.ClusterCriterion.ClusterEnvironment.ANY_ENVIRONMENT;
+import static com.github.openshift.config.ClusterCriterion.ClusterEnvironment.ANY;
 
 @CommandLine.Command(name = "Render", mixinStandardHelpOptions = true, version = "1.0")
 public class Render implements Callable<Void> {
 
-    public static class ClusterTypeConverter implements CommandLine.ITypeConverter<ClusterCriterion.ClusterType> {
+    public static class ClusterTypeConverter extends ArrayList<String> implements CommandLine.ITypeConverter<ClusterCriterion.ClusterType> {
+        public ClusterTypeConverter() {
+            for ( ClusterCriterion.ClusterType ct : ClusterCriterion.ClusterType.values() ) {
+                add(ct.shortname);
+            }
+        }
         public ClusterCriterion.ClusterType convert(String s) throws Exception {
             return ClusterCriterion.ClusterType.find(s);
         }
     }
 
-    public static class ClusterEnvironmentConverter implements CommandLine.ITypeConverter<ClusterCriterion.ClusterEnvironment> {
+    public static class ClusterEnvironmentConverter extends ArrayList<String> implements CommandLine.ITypeConverter<ClusterCriterion.ClusterEnvironment> {
+        public ClusterEnvironmentConverter() {
+            for ( ClusterCriterion.ClusterEnvironment ct : ClusterCriterion.ClusterEnvironment.values() ) {
+                if ( ct == ANY ) { // user must specify an environment
+                    continue;
+                }
+                add(ct.shortname);
+            }
+        }
         public ClusterCriterion.ClusterEnvironment convert(String s) throws Exception {
             return ClusterCriterion.ClusterEnvironment.find(s);
         }
     }
 
-    @CommandLine.Option(names={"-u", "--unit"}, required = true, description="Configuration unit to render")
+    @CommandLine.Option(names={"-u", "--unit"}, required = true, description="Configuration unit to render (${COMPLETION-CANDIDATES})")
     protected List<ConfigUnitType> units;
 
 
-    @CommandLine.Option(names={"-t", "--type"}, required = true, description="The type of the cluster (e.g. starter/dedicated/etc)",
-            converter = ClusterTypeConverter.class)
+    @CommandLine.Option(names={"-t", "--type"}, required = true, description="The type of the cluster (e.g. ${COMPLETION-CANDIDATES})",
+            converter = ClusterTypeConverter.class,
+            completionCandidates = ClusterTypeConverter.class)
     protected ClusterCriterion.ClusterType targetType;
 
 
-    @CommandLine.Option(names={"-e", "--environment"}, required = true, description="The environment of the cluster (int/stg/prod)",
-            converter = ClusterEnvironmentConverter.class)
+    @CommandLine.Option(names={"-e", "--environment"}, required = true, description="The environment of the cluster (${COMPLETION-CANDIDATES})",
+            converter = ClusterEnvironmentConverter.class,
+            completionCandidates = ClusterEnvironmentConverter.class)
     protected ClusterCriterion.ClusterEnvironment targetEnv;
 
     @CommandLine.Option(names={"-n", "--name"}, required = true, description="The name of the cluster (e.g. free-stg/starter-us-east-1)"
@@ -123,7 +136,7 @@ public class Render implements Callable<Void> {
                         continue;
                     }
 
-                    if ( ci.env() != ANY_ENVIRONMENT) {
+                    if ( ci.env() != ANY) {
                         String qualifiedEnv = type.toString() + ":" + ci.env();
                         Class<? extends AbstractDefinition> old = byEnv.put(qualifiedEnv, (Class<? extends AbstractDefinition>)c);
                         if ( old != null ) {
