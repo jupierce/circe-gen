@@ -178,7 +178,7 @@ public class Render implements Callable<Void> {
             System.out.println("Matched " + unit.name() + " definition: " + def.getClass().getName());
             System.out.println("Output directory: " + outputDir.toAbsolutePath());
             System.out.print("Rendering...");
-            Renderer.toYamlDir(def, outputDir);
+            Renderer.toYamlDir(unit, def, outputDir);
             System.out.println("Done.");
         }
 

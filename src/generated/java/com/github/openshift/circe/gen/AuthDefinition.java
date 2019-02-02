@@ -7,8 +7,10 @@ import com.github.openshift.circe.beans.*;
 
 public interface AuthDefinition extends ConfigUnit {
 
+	@RendererOrder(value ="0001")
 	Authentication getAuthentication() throws Exception;
 
+	@RendererOrder(value ="0002")
 	OAuth getOAuth() throws Exception;
 
 

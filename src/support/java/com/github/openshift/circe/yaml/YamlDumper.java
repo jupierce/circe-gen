@@ -72,7 +72,7 @@ public class YamlDumper {
      * @return the {@link Annotation} if the annotation exists on the current method
      *         or one of it's super class definitions
      */
-    private static <A extends Annotation> A getAnnotation(final Method m, final Class<A> annotationClass) {
+    public static <A extends Annotation> A getAnnotation(final Method m, final Class<A> annotationClass) {
         // if we have invalid data the result is null
         if (m == null || annotationClass == null) {
             return null;
