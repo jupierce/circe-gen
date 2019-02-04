@@ -116,6 +116,27 @@ public class YamlDumper {
             object = actualObjects;
         }
 
+        if ( object instanceof MapBean) {
+            /**
+             * A MapBean is actually a representation of a YAML map. Each 'get' method
+             * represents an entry in the map.
+             * This allows you to use the power of object hierarchy to create/inherit/override
+             * elements of a list.
+             */
+            Map<String, Object> actualObjects = new LinkedHashMap<String, Object>();
+
+            BeanAnalyzer analyzer = new BeanAnalyzer(object);
+            analyzer.forEachMethod(new BeanAnalyzer.BeanMethodHandler() {
+                @Override
+                public void onMethod(Method m, String key, Object result) {
+                    actualObjects.put(key, result);
+                }
+            }, false);
+
+            object = actualObjects;
+        }
+
+
         Class<?> klass = object.getClass();
 
         if ( object instanceof Byte

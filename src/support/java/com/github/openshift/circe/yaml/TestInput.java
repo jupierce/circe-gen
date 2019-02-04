@@ -1,6 +1,9 @@
 package com.github.openshift.circe.yaml;
 
-public class TestClasses {
+import java.util.HashMap;
+import java.util.Map;
+
+public class TestInput {
 
     public static interface I {
         public String getSomeIValue();
@@ -102,6 +105,33 @@ public class TestClasses {
 
     public static class X extends Z {
 
+        public Map<String, Integer> getSimpleMap() {
+            HashMap<String, Integer> sm = new HashMap<>();
+            sm.put("this_is_1", 1);
+            sm.put("this_is_2", 2);
+            sm.put("this_is_3", 3);
+            return sm;
+        }
+
+        public MapBean<Integer> getMapBean() {
+            return new MapBean<Integer>() {
+
+                @RenderOrder(value="bbb")
+                @YamlPropertyName("this_is_1")
+                public Integer getSomeValue1() {
+                    return 1;
+                }
+
+                @RenderOrder(value="aaa")
+                @YamlPropertyName("this_is_2")
+                public Integer getSomeValue2() {
+                    return 2;
+                }
+
+            };
+        }
+
+
         public int getVal() {
             return 5;
         }
@@ -151,7 +181,7 @@ public class TestClasses {
     }
 
     public static void main(String[] args ) {
-        System.out.println((new YamlDumper(YamlDumper.Verbosity.SHOW_ALL_SOURCE)).toString(new TestClasses.X()));
+        System.out.println((new YamlDumper(YamlDumper.Verbosity.SHOW_ALL_SOURCE)).toString(new TestInput.X()));
     }
 
 }

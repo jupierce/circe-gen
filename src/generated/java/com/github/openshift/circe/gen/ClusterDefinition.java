@@ -1,7 +1,6 @@
 package com.github.openshift.circe.gen;
 
 import java.util.*;
-import com.github.openshift.circe.yaml.*;
 import com.github.openshift.circe.gen.tuned.*;
 import com.github.openshift.circe.gen.machineset.*;
 import com.github.openshift.circe.gen.networkconfig.*;
