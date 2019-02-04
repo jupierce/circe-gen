@@ -1,5 +1,6 @@
 package com.github.openshift.config.impl.cluster;
 
+import com.github.openshift.circe.beans.BeanList;
 import com.github.openshift.config.ClusterCriterion;
 import com.github.openshift.config.impl.network.OnlineNetworkConfig;
 import com.github.openshift.config.impl.tuning.OpsDefaultTunedSpec;
@@ -31,7 +32,7 @@ public class OnlineStarterTypeClusterDefinition extends OnlineTypeClusterDefinit
     }
 
     @Override
-    public MachineSet getMachineSet() {
+    public BeanList<MachineSet> getMachineSet() {
         return null;
     }
 

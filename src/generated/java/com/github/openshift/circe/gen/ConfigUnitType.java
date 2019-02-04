@@ -6,6 +6,7 @@ public enum ConfigUnitType {
 	cluster(ClusterDefinition.class),
 	project(ProjectConfigDefinition.class),
 	auth(AuthDefinition.class),
+	build(BuildConfigDefinition.class),
 	;
 
 	public Class<?> mustImplementClass;

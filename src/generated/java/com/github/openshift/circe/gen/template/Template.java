@@ -1,13 +1,17 @@
 package com.github.openshift.circe.gen.template;
 
 import com.github.openshift.circe.beans.*;
-import com.github.openshift.circe.yaml.Bean;
+import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Template extends Bean {
 	default String getKind() { return "Template"; }
 	default String getApiVersion() { return "template.openshift.io/v1"; }
-	default ObjectMeta getMetadata() throws Exception { return new ObjectMeta("openshift-config", "project-request-template"); }
+	@YamlPropertyIgnore
+	default String _getGeneratorNamespaceHint() { return "openshift-config"; }
+	@YamlPropertyIgnore
+	default String _getGeneratorNameHit() { return "project-request-template"; }
+	default ObjectMeta getMetadata() throws Exception { return new ObjectMeta(_getGeneratorNamespaceHint(), _getGeneratorNameHit()); }
 	//json:message
 	String getMessage() throws Exception;
 	//json:parameters

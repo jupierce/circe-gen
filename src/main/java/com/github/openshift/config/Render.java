@@ -45,7 +45,7 @@ public class Render implements Callable<Void> {
         }
     }
 
-    @CommandLine.Option(names={"-u", "--unit"}, required = true, description="Configuration unit to render (${COMPLETION-CANDIDATES})")
+    @CommandLine.Option(names={"-u", "--unit"}, required = true, description="Configuration unit to render (${COMPLETION-CANDIDATES})", split="," )
     protected List<ConfigUnitType> units;
 
 
@@ -89,18 +89,18 @@ public class Render implements Callable<Void> {
     @Override
     public Void call() throws Exception {
 
-        HashMap<ClusterCriterion.ClusterType,Class<? extends AbstractDefinition>> byType = new HashMap<>();
-        HashMap<String,Class<? extends AbstractDefinition>> byEnv = new HashMap<>();
-        HashMap<String,Class<? extends AbstractDefinition>> byName = new HashMap<>();
 
         if ( attributes == null ) {
             attributes = new HashMap<>();
         }
 
-        System.out.println("Searching for unit implementation most closely matching type[" + targetType + "] env[" + targetEnv + "] name[" + targetName + "]");
-
-
         for ( ConfigUnitType unit : units ) {
+
+            System.out.println("Searching for " + unit + " implementation most closely matching type[" + targetType + "] env[" + targetEnv + "] name[" + targetName + "]");
+
+            HashMap<ClusterCriterion.ClusterType,Class<? extends AbstractDefinition>> byType = new HashMap<>();
+            HashMap<String,Class<? extends AbstractDefinition>> byEnv = new HashMap<>();
+            HashMap<String,Class<? extends AbstractDefinition>> byName = new HashMap<>();
 
             // Find all classes annotated with @ClusterCriterion
             Reflections reflections = new Reflections();
@@ -117,7 +117,6 @@ public class Render implements Callable<Void> {
                     verbose("   Skipping candidate because it does not implement unit interface: " + unit.mustImplementClass);
                     continue;
                 }
-
 
                 verbose("   Registering candidate: " + c);
 
@@ -167,6 +166,7 @@ public class Render implements Callable<Void> {
                     lookup = byType.get(this.targetType);
                     if ( lookup == null ) {
                         verbose("No hits when looking up by cluster type: " + this.targetType );
+                        System.out.println("No matching implementations found!");
                         System.exit(ignoreNotFound?0:1);
                     }
                 }

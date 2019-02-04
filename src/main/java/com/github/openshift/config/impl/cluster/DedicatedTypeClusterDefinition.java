@@ -1,5 +1,6 @@
 package com.github.openshift.config.impl.cluster;
 
+import com.github.openshift.circe.beans.BeanList;
 import com.github.openshift.config.ClusterCriterion;
 import com.github.openshift.config.impl.tuning.OpsDefaultTunedSpec;
 import com.github.openshift.circe.gen.machineset.MachineSet;
@@ -28,7 +29,7 @@ public abstract class DedicatedTypeClusterDefinition extends BaseClusterDefiniti
     }
 
     @Override
-    public MachineSet getMachineSet() {
+    public BeanList<MachineSet> getMachineSet() {
         return null;
     }
 

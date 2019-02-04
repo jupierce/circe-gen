@@ -12,7 +12,7 @@ public interface ClusterDefinition extends ConfigUnit {
 	Tuned getTuned() throws Exception;
 
 	@RendererOrder(value ="0002")
-	MachineSet getMachineSet() throws Exception;
+	BeanList<MachineSet> getMachineSet() throws Exception;
 
 	@RendererOrder(value ="0003")
 	NetworkConfig getNetworkConfig() throws Exception;

@@ -1,7 +1,7 @@
 package com.github.openshift.circe.gen.oauth;
 
 import com.github.openshift.circe.beans.*;
-import com.github.openshift.circe.yaml.Bean;
+import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface OpenIDClaims extends Bean {
