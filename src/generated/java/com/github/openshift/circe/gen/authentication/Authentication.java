@@ -10,8 +10,8 @@ public interface Authentication extends Bean {
 	@YamlPropertyIgnore
 	default String _getGeneratorNamespaceHint() { return ""; }
 	@YamlPropertyIgnore
-	default String _getGeneratorNameHit() { return "cluster"; }
-	default ObjectMeta getMetadata() throws Exception { return new ObjectMeta(_getGeneratorNamespaceHint(), _getGeneratorNameHit()); }
+	default String _getGeneratorNameHint() { return "cluster"; }
+	default ObjectMeta getMetadata() throws Exception { return new ObjectMeta(_getGeneratorNamespaceHint(), _getGeneratorNameHint()); }
 	//json:spec
 	AuthenticationSpec getSpec() throws Exception;
 }

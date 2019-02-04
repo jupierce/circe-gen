@@ -8,7 +8,7 @@ public interface MachineTemplateSpec extends Bean {
 	@YamlPropertyIgnore
 	default String _getGeneratorNamespaceHint() { return "openshift-cluster-api"; }
 	@YamlPropertyIgnore
-	default String _getGeneratorNameHit() { return "default"; }
+	default String _getGeneratorNameHint() { return "default"; }
 	ObjectMeta getMetadata() throws Exception;
 	//json:spec
 	MachineSpec getSpec() throws Exception;

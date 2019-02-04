@@ -6,6 +6,34 @@ public class TestClasses {
         public String getSomeIValue();
     }
 
+    public static class L implements ListBean<Integer> {
+        public Integer getListEntry1() {
+            return 1;
+        }
+        public Integer getListEntry2() {
+            return 2;
+        }
+        public Integer getListEntry3() {
+            return 3;
+        }
+    }
+
+    // M overrides a couple of elements of L and adds another
+    public static class M extends L {
+
+        public Integer getListEntry1() {
+            return 6;
+        }
+        public Integer getListEntry2() {
+            return 7;
+        }
+        @RenderOrder(value="aaaaaa") // make sure this entry is at the top
+        public Integer getListEntry4() {
+            return 4;
+        }
+    }
+
+
     public static class Z {
 
         public int getZVal() {
@@ -111,6 +139,19 @@ public class TestClasses {
             throw new UnsupportedOperationException();
         }
 
+        public L getLList() {
+            return new L();
+        }
+
+        public M getMList() {
+            return new M();
+        }
+
+
+    }
+
+    public static void main(String[] args ) {
+        System.out.println((new YamlDumper(YamlDumper.Verbosity.SHOW_ALL_SOURCE)).toString(new TestClasses.X()));
     }
 
 }

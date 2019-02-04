@@ -1,9 +1,10 @@
 package com.github.openshift.circe;
 
 import com.github.openshift.circe.beans.ConfigUnit;
-import com.github.openshift.circe.beans.RendererOrder;
+import com.github.openshift.circe.yaml.RenderOrder;
 import com.github.openshift.circe.gen.ConfigUnitType;
 import com.github.openshift.circe.yaml.YamlDumper;
+import com.github.openshift.circe.yaml.BeanAnalyzer;
 import com.github.openshift.circe.yaml.YamlPropertyIgnore;
 
 import java.io.FileWriter;
@@ -35,7 +36,7 @@ public class Renderer {
 
                 String filename = "";
 
-                RendererOrder rfp = YamlDumper.getAnnotation(m, RendererOrder.class);
+                RenderOrder rfp = BeanAnalyzer.getAnnotation(m, RenderOrder.class);
                 if ( rfp != null ) {
                     filename += rfp.value() + "_";
                 }

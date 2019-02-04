@@ -10,8 +10,8 @@ public interface Tuned extends Bean {
 	@YamlPropertyIgnore
 	default String _getGeneratorNamespaceHint() { return ""; }
 	@YamlPropertyIgnore
-	default String _getGeneratorNameHit() { return "default"; }
-	default ObjectMeta getMetadata() throws Exception { return new ObjectMeta(_getGeneratorNamespaceHint(), _getGeneratorNameHit()); }
+	default String _getGeneratorNameHint() { return "default"; }
+	default ObjectMeta getMetadata() throws Exception { return new ObjectMeta(_getGeneratorNamespaceHint(), _getGeneratorNameHint()); }
 	//json:spec
 	TunedSpec getSpec() throws Exception;
 }

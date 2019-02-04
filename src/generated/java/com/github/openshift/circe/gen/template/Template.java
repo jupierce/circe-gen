@@ -10,8 +10,8 @@ public interface Template extends Bean {
 	@YamlPropertyIgnore
 	default String _getGeneratorNamespaceHint() { return "openshift-config"; }
 	@YamlPropertyIgnore
-	default String _getGeneratorNameHit() { return "project-request-template"; }
-	default ObjectMeta getMetadata() throws Exception { return new ObjectMeta(_getGeneratorNamespaceHint(), _getGeneratorNameHit()); }
+	default String _getGeneratorNameHint() { return "project-request-template"; }
+	default ObjectMeta getMetadata() throws Exception { return new ObjectMeta(_getGeneratorNamespaceHint(), _getGeneratorNameHint()); }
 	//json:message
 	String getMessage() throws Exception;
 	//json:parameters

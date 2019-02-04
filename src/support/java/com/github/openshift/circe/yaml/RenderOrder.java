@@ -1,4 +1,4 @@
-package com.github.openshift.circe.beans;
+package com.github.openshift.circe.yaml;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -10,6 +10,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 @Retention(RUNTIME)
 @Target({ElementType.METHOD})
-public @interface RendererOrder {
+public @interface RenderOrder {
     String value();
 }

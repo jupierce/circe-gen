@@ -1,6 +1,7 @@
 package com.github.openshift.circe.gen;
 
 import java.util.*;
+import com.github.openshift.circe.yaml.*;
 import com.github.openshift.circe.gen.tuned.*;
 import com.github.openshift.circe.gen.machineset.*;
 import com.github.openshift.circe.gen.networkconfig.*;
@@ -8,13 +9,13 @@ import com.github.openshift.circe.beans.*;
 
 public interface ClusterDefinition extends ConfigUnit {
 
-	@RendererOrder(value ="0001")
+	@RenderOrder(value ="0001")
 	Tuned getTuned() throws Exception;
 
-	@RendererOrder(value ="0002")
-	BeanList<MachineSet> getMachineSet() throws Exception;
+	@RenderOrder(value ="0002")
+	KubeList<MachineSet> getMachineSetList() throws Exception;
 
-	@RendererOrder(value ="0003")
+	@RenderOrder(value ="0003")
 	NetworkConfig getNetworkConfig() throws Exception;
 
 
