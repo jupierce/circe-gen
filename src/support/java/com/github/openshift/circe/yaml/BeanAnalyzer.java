@@ -4,8 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 public class BeanAnalyzer {
     private final Class<?> klass;
@@ -20,7 +19,7 @@ public class BeanAnalyzer {
         void onMethod(Method m, String key, Object result);
     }
 
-    private boolean isValidMethodName(String name) {
+    private static boolean isValidMethodName(String name) {
         return !"getClass".equals(name) && !"getDeclaringClass".equals(name);
     }
 
@@ -259,4 +258,53 @@ public class BeanAnalyzer {
             }
         }
     }
+
+    /**
+     * A map can be created by passing a Bean to this method.
+     * Each getter in the object will be invoked and non-null values
+     * will be added to the map. A getter like 'getValue' will be
+     * added to the map with the lower camelcase 'value'.
+     * @YamlPropertyName can be used to control the key name.
+     * @RenderOrder can be used to control the order of the map.
+     * @param bean The object to transform into a Map.
+     * @return A map
+     */
+    public static Map<String,Object> beanToMap(Object bean) {
+        Map<String, Object> actualMap = new LinkedHashMap<String, Object>();
+
+        BeanAnalyzer analyzer = new BeanAnalyzer(bean);
+        analyzer.forEachMethod(new BeanAnalyzer.BeanMethodHandler() {
+            @Override
+            public void onMethod(Method m, String key, Object result) {
+                actualMap.put(key, result);
+            }
+        }, false);
+
+        return actualMap;
+    }
+
+    /**
+     * A list can be created by passing a Bean to this method. Each
+     * getter in the object will be invoked and non-null values
+     * will be added to this list.
+     * The name of the methods in the bean will not be reflected in
+     * the list.
+     * @param bean The object to transform into a List
+     * @return A list
+     */
+    public static List<Object> beanToList(Object bean) {
+        List<Object> actualList = new ArrayList<Object>();
+
+        BeanAnalyzer analyzer = new BeanAnalyzer(bean);
+        analyzer.forEachMethod(new BeanAnalyzer.BeanMethodHandler() {
+            @Override
+            public void onMethod(Method m, String key, Object result) {
+                actualList.add(result);
+            }
+        }, false);
+
+        return actualList;
+    }
+
+
 }

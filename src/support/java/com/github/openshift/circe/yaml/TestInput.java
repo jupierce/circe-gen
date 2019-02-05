@@ -3,39 +3,40 @@ package com.github.openshift.circe.yaml;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.github.openshift.circe.beans.Quantity.Unit.M;
+
 public class TestInput {
 
     public static interface I {
         public String getSomeIValue();
     }
 
-    public static class L implements ListBean<Integer> {
-        public Integer getListEntry1() {
-            return 1;
-        }
-        public Integer getListEntry2() {
-            return 2;
-        }
-        public Integer getListEntry3() {
-            return 3;
-        }
+    public static class MB1 extends MapBean<Integer> {
+        public Integer getEntry1() { return 1; }
+        public Integer getEntry2() { return 2; }
+        public Integer getEntry3() { return 3; }
     }
 
-    // M overrides a couple of elements of L and adds another
-    public static class M extends L {
-
-        public Integer getListEntry1() {
-            return 6;
-        }
-        public Integer getListEntry2() {
-            return 7;
-        }
-        @RenderOrder(value="aaaaaa") // make sure this entry is at the top
-        public Integer getListEntry4() {
-            return 4;
-        }
+    public static class MB2 extends MB1 {
+        public Integer getEntry4() { return 4; }
+        public Integer getEntry5() { return 5; }
+        @RenderOrder("aaa") // make this the first in the rendered map
+        public Integer getEntry3() { return 300; }
     }
 
+
+    public static class LB1 extends ListBean<Integer> {
+        public Integer getEntry1() { return 1; }
+        public Integer getEntry2() { return 2; }
+        public Integer getEntry3() { return 3; }
+    }
+
+    public static class LB2 extends LB1 {
+        public Integer getEntry4() { return 4; }
+        public Integer getEntry5() { return 5; }
+        @RenderOrder("aaa") // make this the first in the rendered list
+        public Integer getEntry3() { return 300; }
+    }
 
     public static class Z {
 
@@ -113,23 +114,13 @@ public class TestInput {
             return sm;
         }
 
-        public MapBean<Integer> getMapBean() {
-            return new MapBean<Integer>() {
+        public ListBean<Integer> getLb1() { return new LB1(); }
 
-                @RenderOrder(value="bbb")
-                @YamlPropertyName("this_is_1")
-                public Integer getSomeValue1() {
-                    return 1;
-                }
+        public ListBean<Integer> getLb2() { return new LB2(); }
 
-                @RenderOrder(value="aaa")
-                @YamlPropertyName("this_is_2")
-                public Integer getSomeValue2() {
-                    return 2;
-                }
+        public MapBean<Integer> getMb1() { return new MB1(); }
 
-            };
-        }
+        public MapBean<Integer> getMb2() { return new MB2(); }
 
 
         public int getVal() {
@@ -168,15 +159,6 @@ public class TestInput {
         public String getThisShouldBeNull() {
             throw new UnsupportedOperationException();
         }
-
-        public L getLList() {
-            return new L();
-        }
-
-        public M getMList() {
-            return new M();
-        }
-
 
     }
 

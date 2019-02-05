@@ -1,12 +1,11 @@
 package com.github.openshift.config.impl.cluster;
 
 import com.github.openshift.circe.beans.KubeList;
-import com.github.openshift.circe.yaml.ListBean;
-import com.github.openshift.config.ClusterCriterion;
-import com.github.openshift.config.impl.tuning.OpsDefaultTunedSpec;
 import com.github.openshift.circe.gen.machineset.MachineSet;
 import com.github.openshift.circe.gen.tuned.Tuned;
 import com.github.openshift.circe.gen.tuned.TunedSpec;
+import com.github.openshift.config.ClusterCriterion;
+import com.github.openshift.config.impl.tuning.OpsDefaultTunedSpec;
 
 import java.util.Map;
 

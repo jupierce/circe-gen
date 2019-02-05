@@ -1,6 +1,8 @@
 package com.github.openshift.circe.beans;
 
-public abstract class BaseObject {
+import com.github.openshift.circe.yaml.Bean;
+
+public abstract class BaseObject implements Bean {
 
     private final String apiVersion, kind;
     private final ObjectMeta metadata;

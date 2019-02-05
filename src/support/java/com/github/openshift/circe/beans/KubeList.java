@@ -1,20 +1,20 @@
 package com.github.openshift.circe.beans;
 
 import com.github.openshift.circe.yaml.Bean;
-import com.github.openshift.circe.yaml.ListBean;
 
-/**
- * A list of Beans will be rendered into a Kubernetes list object.
- * Each bean is registered with an 'id'. This identifier is never
- * rendered. It is intended to allow runtime access & overriding of
- * fields by subclasses.
- */
-public abstract class KubeList<T extends Bean> extends BaseObject {
+import java.util.List;
 
-    public KubeList() {
+public class KubeList<T extends Bean> extends BaseObject {
+
+    private final List<T> list;
+
+    public KubeList(List<T>  list) {
         super("v1", "List", null);
+        this.list = list;
     }
 
-    public abstract ListBean<T> getItems();
+    public List<T> getItems() {
+        return list;
+    }
 
 }

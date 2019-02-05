@@ -1,6 +1,7 @@
 package com.github.openshift.circe.gen;
 
 import java.util.*;
+import com.github.openshift.circe.yaml.*;
 import com.github.openshift.circe.gen.build.*;
 import com.github.openshift.circe.beans.*;
 

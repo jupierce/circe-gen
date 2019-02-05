@@ -95,48 +95,6 @@ public class YamlDumper {
             return sbs;
         }
 
-        if ( object instanceof ListBean) {
-            /**
-             * A ListBean is actually a representation of a YAML list. Each 'get' method
-             * represents an element of the list. The actual name of the method will not
-             * be reflected in the resulting YAML (except possibly in comments).
-             * This allows you to use the power of object hierarchy to create/inherit/override
-             * elements of a list.
-             */
-            List<Object> actualObjects = new ArrayList<Object>();
-
-            BeanAnalyzer analyzer = new BeanAnalyzer(object);
-            analyzer.forEachMethod(new BeanAnalyzer.BeanMethodHandler() {
-                @Override
-                public void onMethod(Method m, String key, Object result) {
-                    actualObjects.add(result);
-                }
-            }, false);
-
-            object = actualObjects;
-        }
-
-        if ( object instanceof MapBean) {
-            /**
-             * A MapBean is actually a representation of a YAML map. Each 'get' method
-             * represents an entry in the map.
-             * This allows you to use the power of object hierarchy to create/inherit/override
-             * elements of a list.
-             */
-            Map<String, Object> actualObjects = new LinkedHashMap<String, Object>();
-
-            BeanAnalyzer analyzer = new BeanAnalyzer(object);
-            analyzer.forEachMethod(new BeanAnalyzer.BeanMethodHandler() {
-                @Override
-                public void onMethod(Method m, String key, Object result) {
-                    actualObjects.put(key, result);
-                }
-            }, false);
-
-            object = actualObjects;
-        }
-
-
         Class<?> klass = object.getClass();
 
         if ( object instanceof Byte
