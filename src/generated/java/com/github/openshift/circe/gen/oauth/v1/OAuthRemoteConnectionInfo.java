@@ -1,16 +1,19 @@
 package com.github.openshift.circe.gen.oauth.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface OAuthRemoteConnectionInfo extends Bean {
-	//json:url
+	@YamlPropertyName(value="url")
 	String getURL() throws Exception;
-	//json:ca
+
+	@YamlPropertyName(value="ca")
 	ConfigMapNameReference getCA() throws Exception;
-	//json:tlsClientCert
+
+	@YamlPropertyName(value="tlsClientCert")
 	SecretNameReference getTLSClientCert() throws Exception;
-	//json:tlsClientKey
+
+	@YamlPropertyName(value="tlsClientKey")
 	SecretNameReference getTLSClientKey() throws Exception;
+
 }

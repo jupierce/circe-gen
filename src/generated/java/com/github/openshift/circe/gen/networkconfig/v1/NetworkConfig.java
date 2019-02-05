@@ -11,6 +11,7 @@ public interface NetworkConfig extends Bean {
 	@YamlPropertyIgnore
 	default String _getGeneratorNameHint() { return "default"; }
 	default ObjectMeta getMetadata() throws Exception { return new ObjectMeta(_getGeneratorNamespaceHint(), _getGeneratorNameHint()); }
-	//json:spec
+	@YamlPropertyName(value="spec")
 	NetworkConfigSpec getSpec() throws Exception;
+
 }

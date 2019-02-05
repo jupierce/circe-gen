@@ -1,14 +1,16 @@
 package com.github.openshift.circe.gen.build.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface ProxySpec extends Bean {
-	//json:httpProxy
+	@YamlPropertyName(value="httpProxy")
 	String getHTTPProxy() throws Exception;
-	//json:httpsProxy
+
+	@YamlPropertyName(value="httpsProxy")
 	String getHTTPSProxy() throws Exception;
-	//json:noProxy
+
+	@YamlPropertyName(value="noProxy")
 	String getNoProxy() throws Exception;
+
 }

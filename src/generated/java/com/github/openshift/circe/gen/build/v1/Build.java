@@ -11,6 +11,7 @@ public interface Build extends Bean {
 	@YamlPropertyIgnore
 	default String _getGeneratorNameHint() { return "cluster"; }
 	default ObjectMeta getMetadata() throws Exception { return new ObjectMeta(_getGeneratorNamespaceHint(), _getGeneratorNameHint()); }
-	//json:spec
+	@YamlPropertyName(value="spec")
 	BuildSpec getSpec() throws Exception;
+
 }

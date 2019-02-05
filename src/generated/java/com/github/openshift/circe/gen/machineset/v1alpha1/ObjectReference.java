@@ -1,22 +1,28 @@
 package com.github.openshift.circe.gen.machineset.v1alpha1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface ObjectReference extends Bean {
-	//json:kind
+	@YamlPropertyName(value="kind")
 	String getKind() throws Exception;
-	//json:namespace
+
+	@YamlPropertyName(value="namespace")
 	String getNamespace() throws Exception;
-	//json:name
+
+	@YamlPropertyName(value="name")
 	String getName() throws Exception;
-	//json:uid
+
+	@YamlPropertyName(value="uid")
 	String getUID() throws Exception;
-	//json:apiVersion
+
+	@YamlPropertyName(value="apiVersion")
 	String getAPIVersion() throws Exception;
-	//json:resourceVersion
+
+	@YamlPropertyName(value="resourceVersion")
 	String getResourceVersion() throws Exception;
-	//json:fieldPath
+
+	@YamlPropertyName(value="fieldPath")
 	String getFieldPath() throws Exception;
+
 }

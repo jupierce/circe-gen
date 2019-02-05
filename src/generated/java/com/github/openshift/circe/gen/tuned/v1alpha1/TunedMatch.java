@@ -1,16 +1,19 @@
 package com.github.openshift.circe.gen.tuned.v1alpha1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface TunedMatch extends Bean {
-	//json:label
+	@YamlPropertyName(value="label")
 	String getLabel() throws Exception;
-	//json:value
+
+	@YamlPropertyName(value="value")
 	String getValue() throws Exception;
-	//json:type
+
+	@YamlPropertyName(value="type")
 	String getType() throws Exception;
-	//json:match
+
+	@YamlPropertyName(value="match")
 	List<TunedMatch> getMatch() throws Exception;
+
 }

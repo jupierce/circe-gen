@@ -9,6 +9,8 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.*;
 
+import static com.github.openshift.circe.beans.Quantity.Unit.m;
+
 /*
  Copyright (c) 2002 JSON.org
 
@@ -209,14 +211,22 @@ public class YamlDumper {
                     }
                 }
 
+                boolean inline = (BeanAnalyzer.getAnnotation(method, YamlPropertyInline.class) != null);
+
                 if (result != Void.TYPE) {
                     List<StringBuilder> val = toStrings(result);
 
                     if ( val instanceof PrimitiveValue ) {
-                        sbs.add(new StringBuilder(key + ": " + val.get(0).toString()));
+                        if ( inline ) {
+                            sbs.add(new StringBuilder(val.get(0).toString()));
+                        } else {
+                            sbs.add(new StringBuilder(key + ": " + val.get(0).toString()));
+                        }
                     } else {
-                        sbs.add(new StringBuilder(key + ": "));
-                        indent(val, indentation);
+                        if ( !inline ) {
+                            sbs.add(new StringBuilder(key + ": "));
+                            indent(val, indentation);
+                        }
                         sbs.addAll(val);
                     }
                 } else {

@@ -1,14 +1,16 @@
 package com.github.openshift.circe.gen.authentication.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface AuthenticationSpec extends Bean {
-	//json:type
+	@YamlPropertyName(value="type")
 	String getType() throws Exception;
-	//json:oauthMetadata
+
+	@YamlPropertyName(value="oauthMetadata")
 	ConfigMapNameReference getOAuthMetadata() throws Exception;
-	//json:webhookTokenAuthenticators
+
+	@YamlPropertyName(value="webhookTokenAuthenticators")
 	List<WebhookTokenAuthenticator> getWebhookTokenAuthenticators() throws Exception;
+
 }

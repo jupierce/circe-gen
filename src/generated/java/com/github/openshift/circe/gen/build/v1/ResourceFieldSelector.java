@@ -1,14 +1,16 @@
 package com.github.openshift.circe.gen.build.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface ResourceFieldSelector extends Bean {
-	//json:containerName
+	@YamlPropertyName(value="containerName")
 	String getContainerName() throws Exception;
-	//json:resource
+
+	@YamlPropertyName(value="resource")
 	String getResource() throws Exception;
-	//json:divisor
+
+	@YamlPropertyName(value="divisor")
 	Quantity getDivisor() throws Exception;
+
 }

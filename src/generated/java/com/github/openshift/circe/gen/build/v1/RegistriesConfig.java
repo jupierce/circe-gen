@@ -1,16 +1,19 @@
 package com.github.openshift.circe.gen.build.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface RegistriesConfig extends Bean {
-	//json:searchRegistries
+	@YamlPropertyName(value="searchRegistries")
 	List<String> getSearchRegistries() throws Exception;
-	//json:insecureRegistries
+
+	@YamlPropertyName(value="insecureRegistries")
 	List<String> getInsecureRegistries() throws Exception;
-	//json:blockedRegistries
+
+	@YamlPropertyName(value="blockedRegistries")
 	List<String> getBlockedRegistries() throws Exception;
-	//json:allowedRegistries
+
+	@YamlPropertyName(value="allowedRegistries")
 	List<String> getAllowedRegistries() throws Exception;
+
 }

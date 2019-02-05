@@ -1,24 +1,31 @@
 package com.github.openshift.circe.gen.oauth.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface RequestHeaderIdentityProvider extends Bean {
-	//json:loginURL
+	@YamlPropertyName(value="loginURL")
 	String getLoginURL() throws Exception;
-	//json:challengeURL
+
+	@YamlPropertyName(value="challengeURL")
 	String getChallengeURL() throws Exception;
-	//json:ca
+
+	@YamlPropertyName(value="ca")
 	ConfigMapNameReference getClientCA() throws Exception;
-	//json:clientCommonNames
+
+	@YamlPropertyName(value="clientCommonNames")
 	List<String> getClientCommonNames() throws Exception;
-	//json:headers
+
+	@YamlPropertyName(value="headers")
 	List<String> getHeaders() throws Exception;
-	//json:preferredUsernameHeaders
+
+	@YamlPropertyName(value="preferredUsernameHeaders")
 	List<String> getPreferredUsernameHeaders() throws Exception;
-	//json:nameHeaders
+
+	@YamlPropertyName(value="nameHeaders")
 	List<String> getNameHeaders() throws Exception;
-	//json:emailHeaders
+
+	@YamlPropertyName(value="emailHeaders")
 	List<String> getEmailHeaders() throws Exception;
+
 }

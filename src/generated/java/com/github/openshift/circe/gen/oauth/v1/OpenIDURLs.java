@@ -1,14 +1,16 @@
 package com.github.openshift.circe.gen.oauth.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface OpenIDURLs extends Bean {
-	//json:authorize
+	@YamlPropertyName(value="authorize")
 	String getAuthorize() throws Exception;
-	//json:token
+
+	@YamlPropertyName(value="token")
 	String getToken() throws Exception;
-	//json:userInfo
+
+	@YamlPropertyName(value="userInfo")
 	String getUserInfo() throws Exception;
+
 }

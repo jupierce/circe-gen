@@ -1,18 +1,23 @@
 package com.github.openshift.circe.gen.oauth.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface IdentityProvider extends Bean {
-	//json:name
+	@YamlPropertyName(value="name")
 	String getName() throws Exception;
-	//json:challenge
+
+	@YamlPropertyName(value="challenge")
 	Boolean getUseAsChallenger() throws Exception;
-	//json:login
+
+	@YamlPropertyName(value="login")
 	Boolean getUseAsLogin() throws Exception;
-	//json:mappingMethod
+
+	@YamlPropertyName(value="mappingMethod")
 	String getMappingMethod() throws Exception;
-	//json:identityProviderConfig
+
+	@YamlPropertyName(value="identityProviderConfig")
+	@YamlPropertyInline
 	IdentityProviderConfig getIdentityProviderConfig() throws Exception;
+
 }

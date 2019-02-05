@@ -1,12 +1,13 @@
 package com.github.openshift.circe.gen.machineset.v1alpha1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface LabelSelector extends Bean {
-	//json:matchLabels
+	@YamlPropertyName(value="matchLabels")
 	Map<String,String> getMatchLabels() throws Exception;
-	//json:matchExpressions
+
+	@YamlPropertyName(value="matchExpressions")
 	List<LabelSelectorRequirement> getMatchExpressions() throws Exception;
+
 }

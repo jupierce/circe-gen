@@ -1,16 +1,19 @@
 package com.github.openshift.circe.gen.networkconfig.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface DefaultNetworkDefinition extends Bean {
-	//json:type
+	@YamlPropertyName(value="type")
 	String getType() throws Exception;
-	//json:openshiftSDNConfig
+
+	@YamlPropertyName(value="openshiftSDNConfig")
 	OpenShiftSDNConfig getOpenShiftSDNConfig() throws Exception;
-	//json:ovnKubernetesConfig
+
+	@YamlPropertyName(value="ovnKubernetesConfig")
 	OVNKubernetesConfig getOVNKubernetesConfig() throws Exception;
-	//json:otherConfig
+
+	@YamlPropertyName(value="otherConfig")
 	Map<String,String> getOtherConfig() throws Exception;
+
 }

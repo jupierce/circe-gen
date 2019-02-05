@@ -1,16 +1,19 @@
 package com.github.openshift.circe.gen.oauth.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface LDAPAttributeMapping extends Bean {
-	//json:id
+	@YamlPropertyName(value="id")
 	List<String> getID() throws Exception;
-	//json:preferredUsername
+
+	@YamlPropertyName(value="preferredUsername")
 	List<String> getPreferredUsername() throws Exception;
-	//json:name
+
+	@YamlPropertyName(value="name")
 	List<String> getName() throws Exception;
-	//json:email
+
+	@YamlPropertyName(value="email")
 	List<String> getEmail() throws Exception;
+
 }

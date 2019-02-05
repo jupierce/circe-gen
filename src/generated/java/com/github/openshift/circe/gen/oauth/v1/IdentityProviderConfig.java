@@ -1,28 +1,37 @@
 package com.github.openshift.circe.gen.oauth.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface IdentityProviderConfig extends Bean {
-	//json:type
+	@YamlPropertyName(value="type")
 	String getType() throws Exception;
-	//json:basicAuth
+
+	@YamlPropertyName(value="basicAuth")
 	BasicAuthIdentityProvider getBasicAuth() throws Exception;
-	//json:github
+
+	@YamlPropertyName(value="github")
 	GitHubIdentityProvider getGitHub() throws Exception;
-	//json:gitlab
+
+	@YamlPropertyName(value="gitlab")
 	GitLabIdentityProvider getGitLab() throws Exception;
-	//json:google
+
+	@YamlPropertyName(value="google")
 	GoogleIdentityProvider getGoogle() throws Exception;
-	//json:htpasswd
+
+	@YamlPropertyName(value="htpasswd")
 	HTPasswdIdentityProvider getHTPasswd() throws Exception;
-	//json:keystone
+
+	@YamlPropertyName(value="keystone")
 	KeystoneIdentityProvider getKeystone() throws Exception;
-	//json:ldap
+
+	@YamlPropertyName(value="ldap")
 	LDAPIdentityProvider getLDAP() throws Exception;
-	//json:openID
+
+	@YamlPropertyName(value="openID")
 	OpenIDIdentityProvider getOpenID() throws Exception;
-	//json:requestHeader
+
+	@YamlPropertyName(value="requestHeader")
 	RequestHeaderIdentityProvider getRequestHeader() throws Exception;
+
 }

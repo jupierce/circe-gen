@@ -1,20 +1,25 @@
 package com.github.openshift.circe.gen.oauth.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface GitHubIdentityProvider extends Bean {
-	//json:clientID
+	@YamlPropertyName(value="clientID")
 	String getClientID() throws Exception;
-	//json:clientSecret
+
+	@YamlPropertyName(value="clientSecret")
 	SecretNameReference getClientSecret() throws Exception;
-	//json:organizations
+
+	@YamlPropertyName(value="organizations")
 	List<String> getOrganizations() throws Exception;
-	//json:teams
+
+	@YamlPropertyName(value="teams")
 	List<String> getTeams() throws Exception;
-	//json:hostname
+
+	@YamlPropertyName(value="hostname")
 	String getHostname() throws Exception;
-	//json:ca
+
+	@YamlPropertyName(value="ca")
 	ConfigMapNameReference getCA() throws Exception;
+
 }

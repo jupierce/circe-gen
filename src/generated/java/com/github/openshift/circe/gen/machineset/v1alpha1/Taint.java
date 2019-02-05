@@ -1,16 +1,19 @@
 package com.github.openshift.circe.gen.machineset.v1alpha1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Taint extends Bean {
-	//json:key
+	@YamlPropertyName(value="key")
 	String getKey() throws Exception;
-	//json:value
+
+	@YamlPropertyName(value="value")
 	String getValue() throws Exception;
-	//json:effect
+
+	@YamlPropertyName(value="effect")
 	String getEffect() throws Exception;
-	//json:timeAdded
+
+	@YamlPropertyName(value="timeAdded")
 	Time getTimeAdded() throws Exception;
+
 }

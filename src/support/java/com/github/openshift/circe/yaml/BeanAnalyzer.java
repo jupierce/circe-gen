@@ -175,12 +175,34 @@ public class BeanAnalyzer {
                 toggle = false;
             }
             if ( toggle && Character.isUpperCase(c) ) {
-                // If "TLSVerify", we want tlsVerify, so look ahead unless we are at the end
-                if ( i == 0 || key.length() == i+1 || !Character.isLowerCase(key.charAt(i+1)) ) {
-                    sb.append( Character.toLowerCase(c) );
-                } else {
-                    sb.append(c);
+                boolean makeLowerCase = false;
+
+                makeLowerCase |= (i == 0); // first char should always be lowercase
+
+                // The following conversions are tricky..
+                // TLSVerify -> tlsVerify
+                // URLs -> urls
+
+                if ( i < key.length() - 1 ) {
+                    Character nextLetter = key.charAt(i+1);
+
+                    // Is the next character at the end of the string and lowercase?  (e.g. "URLs")
+                    if ( i + 2 == key.length() ) {
+                        makeLowerCase = true;
+                    }
+
+                    // In TLSVerify, if we are looking at 'V', nextLetter is 'e'.
+                    if ( Character.isUpperCase(nextLetter) ) {
+                        makeLowerCase = true;
+                    }
+
                 }
+
+                if ( makeLowerCase ) {
+                    c = Character.toLowerCase(c);
+                }
+
+                sb.append(c);
             } else {
                 sb.append(c);
             }

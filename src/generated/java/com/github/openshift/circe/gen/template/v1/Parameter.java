@@ -1,22 +1,28 @@
 package com.github.openshift.circe.gen.template.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Parameter extends Bean {
-	//json:name
+	@YamlPropertyName(value="name")
 	String getName() throws Exception;
-	//json:displayName
+
+	@YamlPropertyName(value="displayName")
 	String getDisplayName() throws Exception;
-	//json:description
+
+	@YamlPropertyName(value="description")
 	String getDescription() throws Exception;
-	//json:value
+
+	@YamlPropertyName(value="value")
 	String getValue() throws Exception;
-	//json:generate
+
+	@YamlPropertyName(value="generate")
 	String getGenerate() throws Exception;
-	//json:from
+
+	@YamlPropertyName(value="from")
 	String getFrom() throws Exception;
-	//json:required
+
+	@YamlPropertyName(value="required")
 	Boolean getRequired() throws Exception;
+
 }

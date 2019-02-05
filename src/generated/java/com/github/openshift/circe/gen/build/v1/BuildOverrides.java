@@ -1,14 +1,16 @@
 package com.github.openshift.circe.gen.build.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface BuildOverrides extends Bean {
-	//json:imageLabels
+	@YamlPropertyName(value="imageLabels")
 	List<ImageLabel> getImageLabels() throws Exception;
-	//json:nodeSelector
+
+	@YamlPropertyName(value="nodeSelector")
 	Map<String,String> getNodeSelector() throws Exception;
-	//json:tolerations
+
+	@YamlPropertyName(value="tolerations")
 	List<Toleration> getTolerations() throws Exception;
+
 }

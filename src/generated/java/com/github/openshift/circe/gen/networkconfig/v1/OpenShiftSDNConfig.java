@@ -1,16 +1,19 @@
 package com.github.openshift.circe.gen.networkconfig.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface OpenShiftSDNConfig extends Bean {
-	//json:mode
+	@YamlPropertyName(value="mode")
 	String getMode() throws Exception;
-	//json:vxlanPort
+
+	@YamlPropertyName(value="vxlanPort")
 	Long getVXLANPort() throws Exception;
-	//json:mtu
+
+	@YamlPropertyName(value="mtu")
 	Long getMTU() throws Exception;
-	//json:useExternalOpenvswitch
+
+	@YamlPropertyName(value="useExternalOpenvswitch")
 	Boolean getUseExternalOpenvswitch() throws Exception;
+
 }

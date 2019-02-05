@@ -11,6 +11,7 @@ public interface MachineSet extends Bean {
 	@YamlPropertyIgnore
 	default String _getGeneratorNameHint() { return "default"; }
 	ObjectMeta getMetadata() throws Exception;
-	//json:spec
+	@YamlPropertyName(value="spec")
 	MachineSetSpec getSpec() throws Exception;
+
 }

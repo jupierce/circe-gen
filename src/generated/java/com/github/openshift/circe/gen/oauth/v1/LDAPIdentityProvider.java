@@ -1,20 +1,25 @@
 package com.github.openshift.circe.gen.oauth.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface LDAPIdentityProvider extends Bean {
-	//json:url
+	@YamlPropertyName(value="url")
 	String getURL() throws Exception;
-	//json:bindDN
+
+	@YamlPropertyName(value="bindDN")
 	String getBindDN() throws Exception;
-	//json:bindPassword
+
+	@YamlPropertyName(value="bindPassword")
 	SecretNameReference getBindPassword() throws Exception;
-	//json:insecure
+
+	@YamlPropertyName(value="insecure")
 	Boolean getInsecure() throws Exception;
-	//json:ca
+
+	@YamlPropertyName(value="ca")
 	ConfigMapNameReference getCA() throws Exception;
-	//json:attributes
+
+	@YamlPropertyName(value="attributes")
 	LDAPAttributeMapping getAttributes() throws Exception;
+
 }

@@ -1,22 +1,28 @@
 package com.github.openshift.circe.gen.networkconfig.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface NetworkConfigSpec extends Bean {
-	//json:clusterNetworks
+	@YamlPropertyName(value="clusterNetworks")
 	List<ClusterNetwork> getClusterNetworks() throws Exception;
-	//json:serviceNetwork
+
+	@YamlPropertyName(value="serviceNetwork")
 	String getServiceNetwork() throws Exception;
-	//json:defaultNetwork
+
+	@YamlPropertyName(value="defaultNetwork")
 	DefaultNetworkDefinition getDefaultNetwork() throws Exception;
-	//json:additionalNetworks
+
+	@YamlPropertyName(value="additionalNetworks")
 	List<AdditionalNetworkDefinition> getAdditionalNetworks() throws Exception;
-	//json:deployKubeProxy
+
+	@YamlPropertyName(value="deployKubeProxy")
 	Boolean getDeployKubeProxy() throws Exception;
-	//json:kubeProxyConfig
+
+	@YamlPropertyName(value="kubeProxyConfig")
 	ProxyConfig getKubeProxyConfig() throws Exception;
-	//json:someNewField
+
+	@YamlPropertyName(value="someNewField")
 	String getSomeNewField() throws Exception;
+
 }

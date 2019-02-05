@@ -11,11 +11,14 @@ public interface Template extends Bean {
 	@YamlPropertyIgnore
 	default String _getGeneratorNameHint() { return "project-request-template"; }
 	default ObjectMeta getMetadata() throws Exception { return new ObjectMeta(_getGeneratorNamespaceHint(), _getGeneratorNameHint()); }
-	//json:message
+	@YamlPropertyName(value="message")
 	String getMessage() throws Exception;
-	//json:parameters
+
+	@YamlPropertyName(value="parameters")
 	List<Parameter> getParameters() throws Exception;
+
 	List<Bean> getObjects() throws Exception;
-	//json:objectLabels
+	@YamlPropertyName(value="objectLabels")
 	Map<String,String> getObjectLabels() throws Exception;
+
 }

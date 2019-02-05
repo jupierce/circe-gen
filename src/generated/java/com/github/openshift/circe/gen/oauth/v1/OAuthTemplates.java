@@ -1,14 +1,16 @@
 package com.github.openshift.circe.gen.oauth.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface OAuthTemplates extends Bean {
-	//json:login
+	@YamlPropertyName(value="login")
 	SecretNameReference getLogin() throws Exception;
-	//json:providerSelection
+
+	@YamlPropertyName(value="providerSelection")
 	SecretNameReference getProviderSelection() throws Exception;
-	//json:error
+
+	@YamlPropertyName(value="error")
 	SecretNameReference getError() throws Exception;
+
 }

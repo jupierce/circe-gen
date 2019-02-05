@@ -1,20 +1,25 @@
 package com.github.openshift.circe.gen.build.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface BuildDefaults extends Bean {
-	//json:defaultProxy
+	@YamlPropertyName(value="defaultProxy")
 	ProxySpec getDefaultProxy() throws Exception;
-	//json:gitProxy
+
+	@YamlPropertyName(value="gitProxy")
 	ProxySpec getGitProxy() throws Exception;
-	//json:env
+
+	@YamlPropertyName(value="env")
 	List<EnvVar> getEnv() throws Exception;
-	//json:imageLabels
+
+	@YamlPropertyName(value="imageLabels")
 	List<ImageLabel> getImageLabels() throws Exception;
-	//json:resources
+
+	@YamlPropertyName(value="resources")
 	ResourceRequirements getResources() throws Exception;
-	//json:registriesConfig
+
+	@YamlPropertyName(value="registriesConfig")
 	RegistriesConfig getRegistriesConfig() throws Exception;
+
 }

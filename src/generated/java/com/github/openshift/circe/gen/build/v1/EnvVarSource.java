@@ -1,16 +1,19 @@
 package com.github.openshift.circe.gen.build.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface EnvVarSource extends Bean {
-	//json:fieldRef
+	@YamlPropertyName(value="fieldRef")
 	ObjectFieldSelector getFieldRef() throws Exception;
-	//json:resourceFieldRef
+
+	@YamlPropertyName(value="resourceFieldRef")
 	ResourceFieldSelector getResourceFieldRef() throws Exception;
-	//json:configMapKeyRef
+
+	@YamlPropertyName(value="configMapKeyRef")
 	ConfigMapKeySelector getConfigMapKeyRef() throws Exception;
-	//json:secretKeyRef
+
+	@YamlPropertyName(value="secretKeyRef")
 	SecretKeySelector getSecretKeyRef() throws Exception;
+
 }

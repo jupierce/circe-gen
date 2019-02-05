@@ -1,26 +1,21 @@
 apiVersion: template.openshift.io/v1
 kind: Template
-
 metadata:
   name: project-request
   namespace: openshift-config
-
 objects:
-
-- apiVersion: v1
+- apiVersion: project.openshift.io/v1
   kind: Project
   metadata:
     annotations:
       openshift.io/description: ${PROJECT_DESCRIPTION}
       openshift.io/display-name: ${PROJECT_DISPLAYNAME}
       openshift.io/requester: ${PROJECT_REQUESTING_USER}
-    labels:
-      openshift.io/hibernate-include: "true"
+    creationTimestamp: null
     name: ${PROJECT_NAME}
   spec: {}
   status: {}
-
-- apiVersion: v1
+- apiVersion: authorization.openshift.io/v1
   kind: RoleBindingRestriction
   metadata:
     creationTimestamp: null
@@ -30,8 +25,7 @@ objects:
     userrestriction:
       users:
       - ${PROJECT_ADMIN_USER}
-
-- apiVersion: v1
+- apiVersion: authorization.openshift.io/v1
   kind: RoleBindingRestriction
   metadata:
     creationTimestamp: null
@@ -41,8 +35,7 @@ objects:
     grouprestriction:
       groups:
       - system:serviceaccounts:${PROJECT_NAME}
-
-- apiVersion: v1
+- apiVersion: authorization.openshift.io/v1
   kind: RoleBindingRestriction
   metadata:
     creationTimestamp: null
@@ -52,7 +45,6 @@ objects:
     serviceaccountrestriction:
       namespaces:
       - ${PROJECT_NAME}
-
 - apiVersion: v1
   kind: ResourceQuota
   metadata:
@@ -63,7 +55,6 @@ objects:
       replicationcontrollers: "20"
       secrets: "20"
       services: "5"
-
 - apiVersion: v1
   kind: ResourceQuota
   metadata:
@@ -74,7 +65,6 @@ objects:
       limits.memory: 2Gi
     scopes:
     - NotTerminating
-
 - apiVersion: v1
   kind: ResourceQuota
   metadata:
@@ -85,7 +75,6 @@ objects:
       limits.memory: 2Gi
     scopes:
     - Terminating
-
 - apiVersion: v1
   kind: LimitRange
   metadata:
@@ -118,67 +107,92 @@ objects:
       min:
         storage: 1Gi
       type: PersistentVolumeClaim
-
-- apiVersion: v1
-  groupNames: null
+- apiVersion: rbac.authorization.k8s.io/v1
   kind: RoleBinding
   metadata:
     creationTimestamp: null
     name: admin
     namespace: ${PROJECT_NAME}
   roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
     name: admin
   subjects:
-  - kind: User
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
     name: ${PROJECT_ADMIN_USER}
-  userNames:
-  - ${PROJECT_ADMIN_USER}
-
-- apiVersion: v1
-  groupNames:
-  - system:serviceaccounts:${PROJECT_NAME}
+- apiVersion: rbac.authorization.k8s.io/v1
   kind: RoleBinding
   metadata:
+    annotations:
+      openshift.io/description: Allows all pods in this namespace to pull images from
+        this namespace.  It is auto-managed by a controller; remove subjects to disable.
     creationTimestamp: null
     name: system:image-pullers
     namespace: ${PROJECT_NAME}
   roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
     name: system:image-puller
   subjects:
-  - kind: SystemGroup
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
     name: system:serviceaccounts:${PROJECT_NAME}
-  userNames: null
-
-- apiVersion: v1
-  groupNames: null
+- apiVersion: rbac.authorization.k8s.io/v1
   kind: RoleBinding
   metadata:
+    annotations:
+      openshift.io/description: Allows builds in this namespace to push images to
+        this namespace.  It is auto-managed by a controller; remove subjects to disable.
     creationTimestamp: null
     name: system:image-builders
     namespace: ${PROJECT_NAME}
   roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
     name: system:image-builder
   subjects:
   - kind: ServiceAccount
     name: builder
-  userNames:
-  - system:serviceaccount:${PROJECT_NAME}:builder
-
-- apiVersion: v1
-  groupNames: null
+    namespace: ${PROJECT_NAME}
+- apiVersion: rbac.authorization.k8s.io/v1
   kind: RoleBinding
   metadata:
+    annotations:
+      openshift.io/description: Allows deploymentconfigs in this namespace to rollout
+        pods in this namespace.  It is auto-managed by a controller; remove subjects
+        to disable.
     creationTimestamp: null
     name: system:deployers
     namespace: ${PROJECT_NAME}
   roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
     name: system:deployer
   subjects:
   - kind: ServiceAccount
     name: deployer
-  userNames:
-  - system:serviceaccount:${PROJECT_NAME}:deployer
-
+    namespace: ${PROJECT_NAME}
+- apiVersion: networking.k8s.io/v1
+  kind: NetworkPolicy
+  metadata:
+    name: allow-from-same-namespace
+  spec:
+    podSelector:
+    ingress:
+    - from:
+      - podSelector: {}
+- apiVersion: networking.k8s.io/v1
+  kind: NetworkPolicy
+  metadata:
+    name: allow-from-default-namespace
+  spec:
+    podSelector:
+    ingress:
+    - from:
+      - namespaceSelector:
+          matchLabels:
+            name: default
 parameters:
 - name: PROJECT_NAME
 - name: PROJECT_DISPLAYNAME

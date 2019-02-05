@@ -1,14 +1,16 @@
 package com.github.openshift.circe.gen.machineset.v1alpha1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface LabelSelectorRequirement extends Bean {
-	//json:key
+	@YamlPropertyName(value="key")
 	String getKey() throws Exception;
-	//json:operator
+
+	@YamlPropertyName(value="operator")
 	String getOperator() throws Exception;
-	//json:values
+
+	@YamlPropertyName(value="values")
 	List<String> getValues() throws Exception;
+
 }

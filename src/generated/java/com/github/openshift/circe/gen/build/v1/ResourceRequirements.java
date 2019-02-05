@@ -1,12 +1,13 @@
 package com.github.openshift.circe.gen.build.v1;
-
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface ResourceRequirements extends Bean {
-	//json:limits
+	@YamlPropertyName(value="limits")
 	Quantity getLimits() throws Exception;
-	//json:requests
+
+	@YamlPropertyName(value="requests")
 	Quantity getRequests() throws Exception;
+
 }
