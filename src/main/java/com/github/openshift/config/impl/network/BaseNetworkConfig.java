@@ -1,8 +1,6 @@
 package com.github.openshift.config.impl.network;
 
-
-
-import com.github.openshift.circe.gen.networkconfig.*;
+import com.github.openshift.circe.gen.networkconfig.v1.*;
 
 import java.util.List;
 import java.util.Map;

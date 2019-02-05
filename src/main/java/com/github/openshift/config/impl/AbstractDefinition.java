@@ -1,6 +1,6 @@
 package com.github.openshift.config.impl;
 
-import com.github.openshift.circe.beans.ConfigUnit;
+import com.github.openshift.circe.beans.Definition;
 import com.github.openshift.config.ClusterCriterion;
 
 import java.io.ByteArrayOutputStream;
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
-public abstract class AbstractDefinition implements ConfigUnit {
+public abstract class AbstractDefinition implements Definition {
 
     // Stores the ClusterType being rendered
     protected final ClusterCriterion.ClusterType clusterType;

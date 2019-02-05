@@ -2,7 +2,7 @@ package com.github.openshift.config;
 
 import com.github.openshift.circe.Renderer;
 import com.github.openshift.config.impl.AbstractDefinition;
-import com.github.openshift.circe.gen.ConfigUnitType;
+import com.github.openshift.circe.gen.DefinitionType;
 import com.google.common.collect.Sets;
 import org.reflections.Reflections;
 import picocli.CommandLine;
@@ -45,8 +45,8 @@ public class Render implements Callable<Void> {
         }
     }
 
-    @CommandLine.Option(names={"-u", "--unit"}, required = true, description="Configuration unit to render (${COMPLETION-CANDIDATES})", split="," )
-    protected List<ConfigUnitType> units;
+    @CommandLine.Option(names={"-d", "--define"}, required = true, description="Definition to render (${COMPLETION-CANDIDATES})", split="," )
+    protected List<DefinitionType> units;
 
 
     @CommandLine.Option(names={"-t", "--type"}, required = true, description="The type of the cluster (e.g. ${COMPLETION-CANDIDATES})",
@@ -94,7 +94,7 @@ public class Render implements Callable<Void> {
             attributes = new HashMap<>();
         }
 
-        for ( ConfigUnitType unit : units ) {
+        for ( DefinitionType unit : units ) {
 
             System.out.println("Searching for " + unit + " implementation most closely matching type[" + targetType + "] env[" + targetEnv + "] name[" + targetName + "]");
 

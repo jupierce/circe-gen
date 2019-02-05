@@ -1,13 +1,13 @@
 package com.github.openshift.config.impl.project;
 
-import com.github.openshift.config.impl.AbstractDefinition;
-import com.github.openshift.config.ClusterCriterion;
-import com.github.openshift.circe.gen.ProjectConfigDefinition;
-import com.github.openshift.circe.gen.project.Project;
-import com.github.openshift.circe.gen.project.ProjectSpec;
-import com.github.openshift.circe.gen.project.TemplateReference;
-import com.github.openshift.circe.gen.template.Template;
+import com.github.openshift.circe.gen.def.v4_0.ProjectConfigDefinition;
+import com.github.openshift.circe.gen.project.v1.Project;
+import com.github.openshift.circe.gen.project.v1.ProjectSpec;
+import com.github.openshift.circe.gen.project.v1.TemplateReference;
+import com.github.openshift.circe.gen.template.v1.Template;
 import com.github.openshift.circe.yaml.YamlProvider;
+import com.github.openshift.config.ClusterCriterion;
+import com.github.openshift.config.impl.AbstractDefinition;
 
 import java.io.IOException;
 import java.util.Map;

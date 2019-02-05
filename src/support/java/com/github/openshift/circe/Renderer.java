@@ -1,8 +1,8 @@
 package com.github.openshift.circe;
 
-import com.github.openshift.circe.beans.ConfigUnit;
+import com.github.openshift.circe.beans.Definition;
 import com.github.openshift.circe.yaml.RenderOrder;
-import com.github.openshift.circe.gen.ConfigUnitType;
+import com.github.openshift.circe.gen.DefinitionType;
 import com.github.openshift.circe.yaml.YamlDumper;
 import com.github.openshift.circe.yaml.BeanAnalyzer;
 import com.github.openshift.circe.yaml.YamlPropertyIgnore;
@@ -16,7 +16,7 @@ import java.nio.file.Path;
 
 public class Renderer {
 
-    public static void toYamlDir(ConfigUnitType unit,  ConfigUnit def, Path outputDir) throws InvocationTargetException, IllegalAccessException, IOException {
+    public static void toYamlDir(DefinitionType unit, Definition def, Path outputDir) throws InvocationTargetException, IllegalAccessException, IOException {
         outputDir.toFile().mkdirs();
         for ( Method m : def.getClass().getMethods() ) {
 

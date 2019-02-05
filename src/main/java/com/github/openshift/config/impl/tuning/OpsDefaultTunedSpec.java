@@ -1,10 +1,9 @@
 package com.github.openshift.config.impl.tuning;
 
-
-import com.github.openshift.circe.gen.tuned.TunedMatch;
-import com.github.openshift.circe.gen.tuned.TunedProfile;
-import com.github.openshift.circe.gen.tuned.TunedRecommend;
-import com.github.openshift.circe.gen.tuned.TunedSpec;
+import com.github.openshift.circe.gen.tuned.v1alpha1.TunedMatch;
+import com.github.openshift.circe.gen.tuned.v1alpha1.TunedProfile;
+import com.github.openshift.circe.gen.tuned.v1alpha1.TunedRecommend;
+import com.github.openshift.circe.gen.tuned.v1alpha1.TunedSpec;
 
 import java.util.Arrays;
 import java.util.List;

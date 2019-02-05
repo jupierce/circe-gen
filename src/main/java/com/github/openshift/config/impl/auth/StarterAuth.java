@@ -2,9 +2,9 @@ package com.github.openshift.config.impl.auth;
 
 import com.github.openshift.circe.beans.KubeList;
 import com.github.openshift.circe.beans.Secret;
-import com.github.openshift.circe.gen.AuthDefinition;
-import com.github.openshift.circe.gen.authentication.Authentication;
-import com.github.openshift.circe.gen.oauth.OAuth;
+import com.github.openshift.circe.gen.authentication.v1.Authentication;
+import com.github.openshift.circe.gen.def.v4_0.AuthDefinition;
+import com.github.openshift.circe.gen.oauth.v1.OAuth;
 import com.github.openshift.config.ClusterCriterion;
 import com.github.openshift.config.impl.AbstractDefinition;
 
