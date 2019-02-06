@@ -64,12 +64,14 @@ public class Render implements Callable<Void> {
     )
     protected String targetName;
 
+    @CommandLine.Option(names={"--to-dir"}, required = false, description = "Output to files the specified directory; note that secretes will not be written without --store-secrets")
+    protected Path outputDir;
+
+    @CommandLine.Option(names={"--store-secrets"}, required = false, description="Unless this flag is specified, secrets will not be written --to-dir")
+    protected boolean allowSecretsToDisk;
 
     @CommandLine.Option(names={"-p"}, description="Zero or more parameters to pass to the generator implementation" )
     protected Map<String,String> attributes;
-
-    @CommandLine.Option(names={"-o", "--output"}, required = true)
-    protected Path outputDir;
 
     @CommandLine.Option(names={"-v", "--verbose"}, required = false, defaultValue = "false", description = "Enable verbose output")
     protected boolean verbose;
@@ -79,7 +81,7 @@ public class Render implements Callable<Void> {
 
     public void verbose(String msg) {
         if (this.verbose) {
-            System.out.println(msg);
+            System.err.println(msg);
         }
     }
 
@@ -96,7 +98,7 @@ public class Render implements Callable<Void> {
 
         for ( DefinitionType unit : units ) {
 
-            System.out.println("Searching for " + unit + " implementation most closely matching type[" + targetType + "] env[" + targetEnv + "] name[" + targetName + "]");
+            System.err.println("Searching for " + unit + " implementation most closely matching type[" + targetType + "] env[" + targetEnv + "] name[" + targetName + "]");
 
             HashMap<ClusterCriterion.ClusterType,Class<? extends AbstractDefinition>> byType = new HashMap<>();
             HashMap<String,Class<? extends AbstractDefinition>> byEnv = new HashMap<>();
@@ -166,7 +168,7 @@ public class Render implements Callable<Void> {
                     lookup = byType.get(this.targetType);
                     if ( lookup == null ) {
                         verbose("No hits when looking up by cluster type: " + this.targetType );
-                        System.out.println("No matching implementations found!");
+                        System.err.println("No matching implementations found!");
                         System.exit(ignoreNotFound?0:1);
                     }
                 }
@@ -175,11 +177,13 @@ public class Render implements Callable<Void> {
             Constructor constructor = lookup.getConstructor(ClusterCriterion.ClusterType.class, ClusterCriterion.ClusterEnvironment.class, String.class, Map.class);
             AbstractDefinition def = (AbstractDefinition)constructor.newInstance(this.targetType, this.targetEnv, this.targetName, attributes);
 
-            System.out.println("Matched " + unit.name() + " definition: " + def.getClass().getName());
-            System.out.println("Output directory: " + outputDir.toAbsolutePath());
-            System.out.print("Rendering...");
-            Renderer.toYamlDir(unit, def, outputDir);
-            System.out.println("Done.");
+            System.err.println("Matched " + unit.name() + " definition: " + def.getClass().getName());
+            System.err.print("Rendering...\n");
+            if ( outputDir != null ) {
+                Renderer.toYamlDir(unit, def, outputDir, allowSecretsToDisk);
+            } else {
+                System.out.println(Renderer.toKubeListString(unit, def));
+            }
         }
 
         return null;
