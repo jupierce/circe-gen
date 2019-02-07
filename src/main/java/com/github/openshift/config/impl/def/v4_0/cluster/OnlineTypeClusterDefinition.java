@@ -1,19 +1,17 @@
-package com.github.openshift.config.impl.def.cluster;
+package com.github.openshift.config.impl.def.v4_0.cluster;
 
 import com.github.openshift.circe.beans.KubeList;
 import com.github.openshift.circe.gen.machineset.v1alpha1.MachineSet;
 import com.github.openshift.circe.gen.networkconfig.v1.NetworkConfig;
 import com.github.openshift.circe.gen.tuned.v1alpha1.Tuned;
 import com.github.openshift.circe.gen.tuned.v1alpha1.TunedSpec;
-import com.github.openshift.config.ClusterCriterion;
-import com.github.openshift.config.impl.network.OnlineNetworkConfig;
-import com.github.openshift.config.impl.tuning.OpsDefaultTunedSpec;
+import com.github.openshift.config.impl.networkconfig.v1.OnlineNetworkConfig;
+import com.github.openshift.config.impl.tuned.v1alpha1.OpsDefaultTunedSpec;
 
 /**
- * Base class for all "starter" type clusters.
+ * Base class for all online clusters (starter / pro)
  */
-@ClusterCriterion(type = ClusterCriterion.ClusterType.ONLINE_STARTER)
-public class OnlineStarterTypeClusterDefinition extends OnlineTypeClusterDefinition {
+public abstract class OnlineTypeClusterDefinition extends BaseClusterDefinition{
 
     @Override
     public Tuned getTuned() {
@@ -31,7 +29,7 @@ public class OnlineStarterTypeClusterDefinition extends OnlineTypeClusterDefinit
     }
 
     @Override
-    public final NetworkConfig getNetworkConfig() {
+    public NetworkConfig getNetworkConfig() {
         return new OnlineNetworkConfig();
     }
 

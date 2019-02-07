@@ -1,4 +1,4 @@
-package com.github.openshift.config.impl.project;
+package com.github.openshift.config.impl.project.v1;
 
 import com.github.openshift.circe.gen.def.v4_0.ProjectConfigDefinition;
 import com.github.openshift.circe.gen.project.v1.Project;

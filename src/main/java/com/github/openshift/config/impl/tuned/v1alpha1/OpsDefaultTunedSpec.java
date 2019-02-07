@@ -1,4 +1,4 @@
-package com.github.openshift.config.impl.tuning;
+package com.github.openshift.config.impl.tuned.v1alpha1;
 
 import com.github.openshift.circe.gen.tuned.v1alpha1.TunedMatch;
 import com.github.openshift.circe.gen.tuned.v1alpha1.TunedProfile;

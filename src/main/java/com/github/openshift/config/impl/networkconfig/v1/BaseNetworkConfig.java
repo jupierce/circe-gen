@@ -1,4 +1,4 @@
-package com.github.openshift.config.impl.network;
+package com.github.openshift.config.impl.networkconfig.v1;
 
 import com.github.openshift.circe.gen.networkconfig.v1.*;
 

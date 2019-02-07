@@ -1,4 +1,4 @@
-package com.github.openshift.config.impl.def.auth;
+package com.github.openshift.config.impl.def.v4_0.auth;
 
 import com.github.openshift.circe.beans.KubeList;
 import com.github.openshift.circe.beans.Secret;

@@ -1,9 +1,9 @@
-package com.github.openshift.config.impl.def.cluster;
+package com.github.openshift.config.impl.def.v4_0.cluster;
 
 import com.github.openshift.circe.gen.def.v4_0.ClusterDefinition;
 import com.github.openshift.circe.gen.networkconfig.v1.NetworkConfig;
 import com.github.openshift.config.impl.AbstractDefinition;
-import com.github.openshift.config.impl.network.BaseNetworkConfig;
+import com.github.openshift.config.impl.networkconfig.v1.BaseNetworkConfig;
 
 /**
  * Superclass for all operation's clusters.

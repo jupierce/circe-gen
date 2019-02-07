@@ -1,10 +1,10 @@
-package com.github.openshift.config.impl.def.cluster;
+package com.github.openshift.config.impl.def.v4_0.cluster;
 
 import com.github.openshift.circe.beans.KubeList;
 import com.github.openshift.circe.gen.machineset.v1alpha1.MachineSet;
 import com.github.openshift.circe.gen.tuned.v1alpha1.Tuned;
 import com.github.openshift.circe.gen.tuned.v1alpha1.TunedSpec;
-import com.github.openshift.config.impl.tuning.OpsDefaultTunedSpec;
+import com.github.openshift.config.impl.tuned.v1alpha1.OpsDefaultTunedSpec;
 
 /**
  * Base class for all online clusters (starter / pro)

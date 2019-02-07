@@ -1,4 +1,4 @@
-package com.github.openshift.config.impl.def.machineconfig;
+package com.github.openshift.config.impl.def.v4_0.machineconfig;
 
 import com.github.openshift.circe.beans.KubeList;
 import com.github.openshift.circe.beans.ObjectMeta;
