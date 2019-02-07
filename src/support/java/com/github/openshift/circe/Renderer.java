@@ -98,7 +98,17 @@ public class Renderer {
                 if ( info.bean == null ) {
                     return;
                 }
-                beans.add(info);
+                if ( info.bean instanceof KubeList ) {
+                    int count = 1;
+                    for ( Bean b : ((KubeList<Bean>)info.bean).getItems() ) {
+                        beans.add(new BeanInfo(
+                                unit, def, info.fromMethod, info.objName + "Entry", b, info.renderOrderHint + String.format("_%04d", count)
+                        ));
+                        count++;
+                    }
+                } else {
+                    beans.add(info);
+                }
             }
         });
 

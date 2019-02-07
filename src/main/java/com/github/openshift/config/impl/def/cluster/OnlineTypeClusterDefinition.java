@@ -1,4 +1,4 @@
-package com.github.openshift.config.impl.cluster;
+package com.github.openshift.config.impl.def.cluster;
 
 import com.github.openshift.circe.beans.KubeList;
 import com.github.openshift.circe.gen.machineset.v1alpha1.MachineSet;

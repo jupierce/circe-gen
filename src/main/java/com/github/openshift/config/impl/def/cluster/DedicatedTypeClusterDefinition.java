@@ -1,17 +1,15 @@
-package com.github.openshift.config.impl.cluster;
+package com.github.openshift.config.impl.def.cluster;
 
 import com.github.openshift.circe.beans.KubeList;
 import com.github.openshift.circe.gen.machineset.v1alpha1.MachineSet;
 import com.github.openshift.circe.gen.tuned.v1alpha1.Tuned;
 import com.github.openshift.circe.gen.tuned.v1alpha1.TunedSpec;
-import com.github.openshift.config.ClusterCriterion;
 import com.github.openshift.config.impl.tuning.OpsDefaultTunedSpec;
 
 /**
- * Base class for all "starter" type clusters.
+ * Base class for all online clusters (starter / pro)
  */
-@ClusterCriterion(type = ClusterCriterion.ClusterType.ONLINE_STARTER, env = ClusterCriterion.ClusterEnvironment.INT, name="free-int")
-public class FreeIntClusterDefinition extends OnlineStarterTypeClusterDefinition {
+public abstract class DedicatedTypeClusterDefinition extends BaseClusterDefinition{
 
     @Override
     public Tuned getTuned() {
@@ -27,4 +25,5 @@ public class FreeIntClusterDefinition extends OnlineStarterTypeClusterDefinition
     public KubeList<MachineSet> getMachineSetList() {
         return null;
     }
+
 }

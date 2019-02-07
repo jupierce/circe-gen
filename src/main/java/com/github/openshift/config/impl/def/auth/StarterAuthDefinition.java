@@ -1,4 +1,4 @@
-package com.github.openshift.config.impl.auth;
+package com.github.openshift.config.impl.def.auth;
 
 import com.github.openshift.circe.beans.KubeList;
 import com.github.openshift.circe.beans.Secret;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @ClusterCriterion(type=ClusterCriterion.ClusterType.ONLINE_STARTER)
-public class StarterAuth extends AbstractDefinition implements AuthDefinition {
+public class StarterAuthDefinition extends AbstractDefinition implements AuthDefinition {
 
     @Override
     public Authentication getAuthentication() throws Exception {

@@ -1,4 +1,4 @@
-package com.github.openshift.config.impl.cluster;
+package com.github.openshift.config.impl.def.cluster;
 
 import com.github.openshift.circe.gen.def.v4_0.ClusterDefinition;
 import com.github.openshift.circe.gen.networkconfig.v1.NetworkConfig;
