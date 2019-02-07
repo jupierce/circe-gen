@@ -64,7 +64,7 @@ public class Render implements Callable<Void> {
     )
     protected String targetName;
 
-    @CommandLine.Option(names={"--to-dir"}, required = false, description = "Output to files the specified directory; note that secretes will not be written without --store-secrets")
+    @CommandLine.Option(names={"--to-dir"}, required = true, description = "Output to files the specified directory; note that secretes will not be written without --store-secrets")
     protected Path outputDir;
 
     @CommandLine.Option(names={"--store-secrets"}, required = false, description="Unless this flag is specified, secrets will not be written --to-dir")
@@ -179,11 +179,7 @@ public class Render implements Callable<Void> {
 
             System.err.println("Matched " + unit.name() + " definition: " + def.getClass().getName());
             System.err.print("Rendering...\n");
-            if ( outputDir != null ) {
-                Renderer.toYamlDir(unit, def, outputDir, allowSecretsToDisk);
-            } else {
-                System.out.println(Renderer.toKubeListString(unit, def));
-            }
+            Renderer.toYamlDir(unit, def, outputDir, allowSecretsToDisk);
         }
 
         return null;
