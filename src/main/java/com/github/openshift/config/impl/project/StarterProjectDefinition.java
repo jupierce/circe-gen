@@ -10,19 +10,10 @@ import com.github.openshift.config.ClusterCriterion;
 import com.github.openshift.config.impl.AbstractDefinition;
 
 import java.io.IOException;
-import java.util.Map;
 
 
 @ClusterCriterion(type = ClusterCriterion.ClusterType.ONLINE_STARTER)
 public class StarterProjectDefinition extends AbstractDefinition implements ProjectConfigDefinition {
-
-    public StarterProjectDefinition(
-            ClusterCriterion.ClusterType type,
-            ClusterCriterion.ClusterEnvironment env,
-            String name,
-            Map<String, String> attributes) {
-        super(type, env, name, attributes);
-    }
 
     @Override
     public Project getProject() {

@@ -1,33 +1,19 @@
 package com.github.openshift.config.impl;
 
 import com.github.openshift.circe.beans.Definition;
-import com.github.openshift.config.ClusterCriterion;
+import com.github.openshift.config.RenderContext;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
 
 public abstract class AbstractDefinition implements Definition {
 
-    // Stores the ClusterType being rendered
-    protected final ClusterCriterion.ClusterType clusterType;
-    // Stores the ClusterEnvironment being rendered
-    protected final ClusterCriterion.ClusterEnvironment clusterEnvironment;
-    // Stores the cluster name being rendered
-    protected final String clusterName;
-    // Stores the map of attributes passed in from the command line
-    protected final Map<String, String> evalAttributes;
+    public AbstractDefinition() {
+    }
 
-    public AbstractDefinition(
-            ClusterCriterion.ClusterType type,
-            ClusterCriterion.ClusterEnvironment env,
-            String name,
-            Map<String, String> attributes) {
-        this.clusterType = type;
-        this.clusterEnvironment = env;
-        this.clusterName = name;
-        this.evalAttributes = attributes;
+    public RenderContext getRenderContext() {
+        return RenderContext.getRenderContext();
     }
 
     /**

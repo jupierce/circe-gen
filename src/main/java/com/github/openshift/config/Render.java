@@ -70,7 +70,7 @@ public class Render implements Callable<Void> {
     @CommandLine.Option(names={"--store-secrets"}, required = false, description="Unless this flag is specified, secrets will not be written --to-dir")
     protected boolean allowSecretsToDisk;
 
-    @CommandLine.Option(names={"-p"}, description="Zero or more parameters to pass to the generator implementation" )
+    @CommandLine.Option(names={"-p"}, description="Zero or more render parameters to pass to the definition implementation" )
     protected Map<String,String> attributes;
 
     @CommandLine.Option(names={"-v", "--verbose"}, required = false, defaultValue = "false", description = "Enable verbose output")
@@ -95,6 +95,10 @@ public class Render implements Callable<Void> {
         if ( attributes == null ) {
             attributes = new HashMap<>();
         }
+
+        // Each definition may access the render context to determine information about the cluster being rendered.
+        RenderContext rc = new RenderContext(this.targetType, this.targetEnv, this.targetName, attributes);
+        RenderContext.setCurrent(rc);
 
         for ( DefinitionType unit : units ) {
 
@@ -174,9 +178,8 @@ public class Render implements Callable<Void> {
                 }
             }
 
-            Constructor constructor = lookup.getConstructor(ClusterCriterion.ClusterType.class, ClusterCriterion.ClusterEnvironment.class, String.class, Map.class);
-            AbstractDefinition def = (AbstractDefinition)constructor.newInstance(this.targetType, this.targetEnv, this.targetName, attributes);
 
+            AbstractDefinition def = (AbstractDefinition)lookup.newInstance();
             System.err.println("Matched " + unit.name() + " definition: " + def.getClass().getName());
             System.err.print("Rendering...\n");
             Renderer.toYamlDir(unit, def, outputDir, allowSecretsToDisk);

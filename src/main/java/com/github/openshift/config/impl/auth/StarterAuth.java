@@ -19,10 +19,6 @@ import java.util.Map;
 @ClusterCriterion(type=ClusterCriterion.ClusterType.ONLINE_STARTER)
 public class StarterAuth extends AbstractDefinition implements AuthDefinition {
 
-    public StarterAuth(ClusterCriterion.ClusterType type, ClusterCriterion.ClusterEnvironment env, String name, Map<String, String> attributes) {
-        super(type, env, name, attributes);
-    }
-
     @Override
     public Authentication getAuthentication() throws Exception {
         return new Authentication() {

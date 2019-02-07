@@ -9,17 +9,11 @@ import com.github.openshift.config.ClusterCriterion;
 import com.github.openshift.config.impl.network.OnlineNetworkConfig;
 import com.github.openshift.config.impl.tuning.OpsDefaultTunedSpec;
 
-import java.util.Map;
-
 /**
  * Base class for all "starter" type clusters.
  */
 @ClusterCriterion(type = ClusterCriterion.ClusterType.ONLINE_STARTER)
 public class OnlineStarterTypeClusterDefinition extends OnlineTypeClusterDefinition {
-
-    public OnlineStarterTypeClusterDefinition(ClusterCriterion.ClusterType type, ClusterCriterion.ClusterEnvironment env, String name, Map<String, String> attributes) {
-        super(type, env, name, attributes);
-    }
 
     @Override
     public Tuned getTuned() {
