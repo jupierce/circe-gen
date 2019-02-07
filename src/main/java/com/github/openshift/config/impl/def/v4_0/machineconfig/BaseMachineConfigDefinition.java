@@ -25,6 +25,23 @@ public class BaseMachineConfigDefinition extends AbstractDefinition implements M
         return new KubeList<>(new MachineConfigList());
     }
 
+
+    public class MachineConfigList extends ListBean<MachineConfig> {
+
+        public MachineConfig getWorkSshKeys() {
+            return new ManagedSshKeysMachineConfig("worker");
+        }
+
+        public MachineConfig getMasterSshKeys() {
+            return new ManagedSshKeysMachineConfig("master");
+        }
+
+        public MachineConfig getInfraSshKeys() {
+            return new ManagedSshKeysMachineConfig("infra");
+        }
+
+    }
+
     protected List<String> buildSSHKeyList() {
         ArrayList<String> keys = new ArrayList<>();
         keys.add("ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7GW7qcnemBaZMw+8UNfgqwTvv6pPKftQtBZowfXfPRq5TWivRMnW/5SlW5eiLWrYsgAfnC/bREuBnE6lRmxeH2rKXb/WW1aLqNAe5XvC2xYaH9kXpQoaQWD6hbWL0mHfHowj1sWOrN25YETLbVJ3Wh4rLugIPIDKteB91HoZlv5N5Tao4yZO7YxMMScqDEo//Asdua+jCzCEuNZmSyqYZjuO8Ub20FP76Di2avR4qtrxgakIi2SxpwtCZLJndJCYI7COTSuF1WCv+uMjafLTaCeEtLw5GnoLCpb7nPqocgBFWKcJ58RkxX76JPOpdGLCLasvxS7/6pmDMyB/eO3vH");
@@ -57,7 +74,7 @@ public class BaseMachineConfigDefinition extends AbstractDefinition implements M
 
             @Override
             public String getName() throws Exception {
-                return null;
+                return "core";
             }
 
             @Override
@@ -109,73 +126,69 @@ public class BaseMachineConfigDefinition extends AbstractDefinition implements M
         return users;
     }
 
-    public class MachineConfigList extends ListBean<MachineConfig> {
+    public class ManagedSshKeysMachineConfig implements MachineConfig {
 
-        public MachineConfig getStandardSshKeys() {
-            MachineConfig keys = new MachineConfig() {
+        private final String role;
+
+        public ManagedSshKeysMachineConfig(String role) {
+            this.role = role;
+        }
+
+        public ObjectMeta getMetadata() throws Exception {
+            ObjectMeta meta = new ObjectMeta(_getGeneratorNamespaceHint(), "managed-ssh-keys-" + role);
+            meta.addLabel("machineconfiguration.openshift.io/role", role);
+            return meta;
+        }
+
+        public MachineConfigSpec getSpec() throws Exception {
+            return new MachineConfigSpec() {
                 @Override
-                public ObjectMeta getMetadata() throws Exception {
-                    ObjectMeta meta = new ObjectMeta(_getGeneratorNamespaceHint(), "standard-ssh-keys");
-                    meta.addLabel("machineconfiguration.openshift.io/role", "worker");
-                    return meta;
+                public String getOSImageURL() throws Exception {
+                    return null;
                 }
 
                 @Override
-                public MachineConfigSpec getSpec() throws Exception {
-                    return new MachineConfigSpec() {
+                public Config getConfig() throws Exception {
+                    return new Config() {
+
                         @Override
-                        public String getOSImageURL() throws Exception {
+                        public Ignition getIgnition() throws Exception {
                             return null;
                         }
 
                         @Override
-                        public Config getConfig() throws Exception {
-                            return new Config() {
+                        public Networkd getNetworkd() throws Exception {
+                            return null;
+                        }
 
+                        @Override
+                        public Passwd getPasswd() throws Exception {
+                            return new Passwd() {
                                 @Override
-                                public Ignition getIgnition() throws Exception {
+                                public List<PasswdGroup> getGroups() throws Exception {
                                     return null;
                                 }
 
                                 @Override
-                                public Networkd getNetworkd() throws Exception {
-                                    return null;
-                                }
-
-                                @Override
-                                public Passwd getPasswd() throws Exception {
-                                    return new Passwd() {
-                                        @Override
-                                        public List<PasswdGroup> getGroups() throws Exception {
-                                            return null;
-                                        }
-
-                                        @Override
-                                        public List<PasswdUser> getUsers() throws Exception {
-                                            return buildUserList();
-                                        }
-                                    };
-                                }
-
-                                @Override
-                                public Storage getStorage() throws Exception {
-                                    return null;
-                                }
-
-                                @Override
-                                public Systemd getSystemd() throws Exception {
-                                    return null;
+                                public List<PasswdUser> getUsers() throws Exception {
+                                    return buildUserList();
                                 }
                             };
+                        }
+
+                        @Override
+                        public Storage getStorage() throws Exception {
+                            return null;
+                        }
+
+                        @Override
+                        public Systemd getSystemd() throws Exception {
+                            return null;
                         }
                     };
                 }
             };
-
-            return keys;
         }
-
     }
-
 
 }
