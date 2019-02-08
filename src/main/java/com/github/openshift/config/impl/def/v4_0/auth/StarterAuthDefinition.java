@@ -8,6 +8,7 @@ import com.github.openshift.circe.gen.authentication.v1.ConfigMapNameReference;
 import com.github.openshift.circe.gen.authentication.v1.WebhookTokenAuthenticator;
 import com.github.openshift.circe.gen.def.v4_0.AuthDefinition;
 import com.github.openshift.circe.gen.oauth.v1.*;
+import com.github.openshift.circe.yaml.Bean;
 import com.github.openshift.config.ClusterCriterion;
 import com.github.openshift.config.impl.AbstractDefinition;
 
@@ -247,6 +248,16 @@ public class StarterAuthDefinition extends AbstractDefinition implements AuthDef
         ArrayList<Secret> secrets = new ArrayList<>();
 
         Secret.SimpleSecret s = new Secret.SimpleSecret("openshift-config", "keycloak", Secret.SecretType.Opaque);
+        s.add("clientSecret", "some secret value");
+        secrets.add(s);
+
+        return new KubeList<>(secrets);
+    }
+
+    public KubeList<Bean> getPreMisc() {
+        ArrayList<Secret> secrets = new ArrayList<>();
+
+        Secret.SimpleSecret s = new Secret.SimpleSecret("openshift-config", "anothersecret", Secret.SecretType.Opaque);
         s.add("clientSecret", "some secret value");
         secrets.add(s);
 
