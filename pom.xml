@@ -25,23 +25,11 @@
 
     <build>
 
-        <!-- include any json or yaml files included in the source tree -->
-        <resources>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.yaml</include>
-                    <include>**/*.yml</include>
-                    <include>**/*.json</include>
-                </includes>
-            </resource>
-        </resources>
 
         <plugins>
             <!--
              src/generated/java - files created by processing go pkgs by circe
-             src/support/java - library of java for circe users (e.g. Library to render yaml)
-             src/main/java - main src for cluster specific configuration implementations
+             src/main/java - library of java for circe users (e.g. Library to render yaml)
             -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -56,7 +44,6 @@
                         </goals>
                         <configuration>
                             <sources>
-                                <source>src/support/java</source>
                                 <source>src/generated/java</source>
                             </sources>
                         </configuration>
@@ -67,9 +54,6 @@
 
         <pluginManagement>
             <plugins>
-
-
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
