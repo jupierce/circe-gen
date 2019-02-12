@@ -2,16 +2,20 @@ package com.github.openshift.circe.gen.def.v4_0;
 
 import java.util.*;
 import com.github.openshift.circe.yaml.*;
+import com.github.openshift.circe.gen.kubeapiserverconfig.v1.*;
 import com.github.openshift.circe.gen.kubeapiserver.v1.*;
 import com.github.openshift.circe.gen.openshiftapiserver.v1.*;
 import com.github.openshift.circe.beans.*;
 
-public interface ApiServerConfigDefinition extends Definition {
+public interface ControlPlaneConfigDefinition extends Definition {
 
 	@RenderOrder(value ="0001")
-	KubeAPIServer getKubeAPIServer() throws Exception;
+	KubeAPIServerConfig getKubeAPIServerConfig() throws Exception;
 
 	@RenderOrder(value ="0002")
+	KubeAPIServer getKubeAPIServer() throws Exception;
+
+	@RenderOrder(value ="0003")
 	OpenShiftAPIServer getOpenShiftAPIServer() throws Exception;
 
 
