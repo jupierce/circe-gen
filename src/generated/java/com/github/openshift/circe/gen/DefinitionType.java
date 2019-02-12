@@ -8,6 +8,7 @@ public enum DefinitionType {
 	v4_0_build(com.github.openshift.circe.gen.def.v4_0.BuildConfigDefinition.class, "v4.0-build"),
 	v4_0_auth(com.github.openshift.circe.gen.def.v4_0.AuthDefinition.class, "v4.0-auth"),
 	v4_0_machineconfig(com.github.openshift.circe.gen.def.v4_0.MachineConfigDefinition.class, "v4.0-machineconfig"),
+	v4_0_apis(com.github.openshift.circe.gen.def.v4_0.ApiServerConfigDefinition.class, "v4.0-apis"),
 	;
 
 	public Class<?> mustImplementClass;
