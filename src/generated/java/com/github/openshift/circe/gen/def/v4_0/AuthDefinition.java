@@ -9,13 +9,13 @@ import com.github.openshift.circe.beans.*;
 public interface AuthDefinition extends Definition {
 
 	@RenderOrder(value ="0001")
-	Authentication getAuthentication() throws Exception;
+	KubeList<Secret> getSecretList() throws Exception;
 
 	@RenderOrder(value ="0002")
-	OAuth getOAuth() throws Exception;
+	Authentication getAuthentication() throws Exception;
 
 	@RenderOrder(value ="0003")
-	KubeList<Secret> getSecretList() throws Exception;
+	OAuth getOAuth() throws Exception;
 
 
 }
