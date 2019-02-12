@@ -2,3 +2,6 @@
 circe-render.iml
 out/
 target/
+.classpath
+.project
+.settings/
