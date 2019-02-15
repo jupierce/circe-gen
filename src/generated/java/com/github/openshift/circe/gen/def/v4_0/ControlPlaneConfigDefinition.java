@@ -5,6 +5,7 @@ import com.github.openshift.circe.yaml.*;
 import com.github.openshift.circe.gen.kubeapiserverconfig.v1.*;
 import com.github.openshift.circe.gen.kubeapiserver.v1.*;
 import com.github.openshift.circe.gen.openshiftapiserver.v1.*;
+import com.github.openshift.circe.gen.openshiftapiserverconfig.v1.*;
 import com.github.openshift.circe.beans.*;
 
 public interface ControlPlaneConfigDefinition extends Definition {
@@ -17,6 +18,9 @@ public interface ControlPlaneConfigDefinition extends Definition {
 
 	@RenderOrder(value ="0003")
 	OpenShiftAPIServer getOpenShiftAPIServer() throws Exception;
+
+	@RenderOrder(value ="0004")
+	OpenShiftAPIServerConfig getOpenShiftAPIServerConfig() throws Exception;
 
 
 }
