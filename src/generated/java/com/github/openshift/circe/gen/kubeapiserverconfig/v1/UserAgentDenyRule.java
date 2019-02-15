@@ -4,11 +4,20 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface UserAgentDenyRule extends Bean {
+
 	@YamlPropertyName(value="userAgentMatchRule")
 	@YamlPropertyInline
 	UserAgentMatchRule getUserAgentMatchRule() throws Exception;
 
 	@YamlPropertyName(value="rejectionMessage")
 	String getRejectionMessage() throws Exception;
+
+	interface EZ extends UserAgentDenyRule {
+
+		default UserAgentMatchRule getUserAgentMatchRule() throws Exception { return null; }
+
+		default String getRejectionMessage() throws Exception { return null; }
+
+	}
 
 }

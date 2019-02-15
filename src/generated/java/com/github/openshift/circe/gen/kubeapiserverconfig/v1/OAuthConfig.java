@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface OAuthConfig extends Bean {
+
 	@YamlPropertyName(value="masterCA")
 	String getMasterCA() throws Exception;
 
@@ -33,5 +34,29 @@ public interface OAuthConfig extends Bean {
 
 	@YamlPropertyName(value="templates")
 	OAuthTemplates getTemplates() throws Exception;
+
+	interface EZ extends OAuthConfig {
+
+		default String getMasterCA() throws Exception { return null; }
+
+		default String getMasterURL() throws Exception { return null; }
+
+		default String getMasterPublicURL() throws Exception { return null; }
+
+		default String getAssetPublicURL() throws Exception { return null; }
+
+		default Boolean getAlwaysShowProviderSelection() throws Exception { return null; }
+
+		default List<IdentityProvider> getIdentityProviders() throws Exception { return null; }
+
+		default GrantConfig getGrantConfig() throws Exception { return null; }
+
+		default SessionConfig getSessionConfig() throws Exception { return null; }
+
+		default TokenConfig getTokenConfig() throws Exception { return null; }
+
+		default OAuthTemplates getTemplates() throws Exception { return null; }
+
+	}
 
 }

@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface EnvVar extends Bean {
+
 	@YamlPropertyName(value="name")
 	String getName() throws Exception;
 
@@ -12,5 +13,15 @@ public interface EnvVar extends Bean {
 
 	@YamlPropertyName(value="valueFrom")
 	EnvVarSource getValueFrom() throws Exception;
+
+	interface EZ extends EnvVar {
+
+		default String getName() throws Exception { return null; }
+
+		default String getValue() throws Exception { return null; }
+
+		default EnvVarSource getValueFrom() throws Exception { return null; }
+
+	}
 
 }

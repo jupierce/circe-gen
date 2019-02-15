@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface OAuthRemoteConnectionInfo extends Bean {
+
 	@YamlPropertyName(value="url")
 	String getURL() throws Exception;
 
@@ -15,5 +16,17 @@ public interface OAuthRemoteConnectionInfo extends Bean {
 
 	@YamlPropertyName(value="tlsClientKey")
 	SecretNameReference getTLSClientKey() throws Exception;
+
+	interface EZ extends OAuthRemoteConnectionInfo {
+
+		default String getURL() throws Exception { return null; }
+
+		default ConfigMapNameReference getCA() throws Exception { return null; }
+
+		default SecretNameReference getTLSClientCert() throws Exception { return null; }
+
+		default SecretNameReference getTLSClientKey() throws Exception { return null; }
+
+	}
 
 }

@@ -4,10 +4,19 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface NodeUser extends Bean {
+
 	@YamlPropertyName(value="id")
 	Long getID() throws Exception;
 
 	@YamlPropertyName(value="name")
 	String getName() throws Exception;
+
+	interface EZ extends NodeUser {
+
+		default Long getID() throws Exception { return null; }
+
+		default String getName() throws Exception { return null; }
+
+	}
 
 }

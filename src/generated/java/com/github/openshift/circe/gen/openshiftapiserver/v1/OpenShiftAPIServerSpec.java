@@ -4,8 +4,15 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface OpenShiftAPIServerSpec extends Bean {
+
 	@YamlPropertyName(value="operatorSpec")
 	@YamlPropertyInline
 	OperatorSpec getOperatorSpec() throws Exception;
+
+	interface EZ extends OpenShiftAPIServerSpec {
+
+		default OperatorSpec getOperatorSpec() throws Exception { return null; }
+
+	}
 
 }

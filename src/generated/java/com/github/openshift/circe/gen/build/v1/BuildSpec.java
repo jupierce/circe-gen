@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface BuildSpec extends Bean {
+
 	@YamlPropertyName(value="additionalTrustedCA")
 	ConfigMapNameReference getAdditionalTrustedCA() throws Exception;
 
@@ -12,5 +13,15 @@ public interface BuildSpec extends Bean {
 
 	@YamlPropertyName(value="buildOverrides")
 	BuildOverrides getBuildOverrides() throws Exception;
+
+	interface EZ extends BuildSpec {
+
+		default ConfigMapNameReference getAdditionalTrustedCA() throws Exception { return null; }
+
+		default BuildDefaults getBuildDefaults() throws Exception { return null; }
+
+		default BuildOverrides getBuildOverrides() throws Exception { return null; }
+
+	}
 
 }

@@ -4,7 +4,14 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface HTPasswdIdentityProvider extends Bean {
+
 	@YamlPropertyName(value="fileData")
 	SecretNameReference getFileData() throws Exception;
+
+	interface EZ extends HTPasswdIdentityProvider {
+
+		default SecretNameReference getFileData() throws Exception { return null; }
+
+	}
 
 }

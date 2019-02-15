@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface SecurityAllocator extends Bean {
+
 	@YamlPropertyName(value="uidAllocatorRange")
 	String getUIDAllocatorRange() throws Exception;
 
@@ -12,5 +13,15 @@ public interface SecurityAllocator extends Bean {
 
 	@YamlPropertyName(value="mcsLabelsPerProject")
 	Long getMCSLabelsPerProject() throws Exception;
+
+	interface EZ extends SecurityAllocator {
+
+		default String getUIDAllocatorRange() throws Exception { return null; }
+
+		default String getMCSAllocatorRange() throws Exception { return null; }
+
+		default Long getMCSLabelsPerProject() throws Exception { return null; }
+
+	}
 
 }

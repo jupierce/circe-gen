@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Directory extends Bean {
+
 	@YamlPropertyName(value="node")
 	@YamlPropertyInline
 	Node getNode() throws Exception;
@@ -11,5 +12,13 @@ public interface Directory extends Bean {
 	@YamlPropertyName(value="directoryEmbedded1")
 	@YamlPropertyInline
 	DirectoryEmbedded1 getDirectoryEmbedded1() throws Exception;
+
+	interface EZ extends Directory {
+
+		default Node getNode() throws Exception { return null; }
+
+		default DirectoryEmbedded1 getDirectoryEmbedded1() throws Exception { return null; }
+
+	}
 
 }

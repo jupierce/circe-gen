@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Usercreate extends Bean {
+
 	@YamlPropertyName(value="gecos")
 	String getGecos() throws Exception;
 
@@ -33,5 +34,29 @@ public interface Usercreate extends Bean {
 
 	@YamlPropertyName(value="uid")
 	Long getUID() throws Exception;
+
+	interface EZ extends Usercreate {
+
+		default String getGecos() throws Exception { return null; }
+
+		default List<String> getGroups() throws Exception { return null; }
+
+		default String getHomeDir() throws Exception { return null; }
+
+		default Boolean getNoCreateHome() throws Exception { return null; }
+
+		default Boolean getNoLogInit() throws Exception { return null; }
+
+		default Boolean getNoUserGroup() throws Exception { return null; }
+
+		default String getPrimaryGroup() throws Exception { return null; }
+
+		default String getShell() throws Exception { return null; }
+
+		default Boolean getSystem() throws Exception { return null; }
+
+		default Long getUID() throws Exception { return null; }
+
+	}
 
 }

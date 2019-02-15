@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Ignition extends Bean {
+
 	@YamlPropertyName(value="config")
 	IgnitionConfig getConfig() throws Exception;
 
@@ -15,5 +16,17 @@ public interface Ignition extends Bean {
 
 	@YamlPropertyName(value="version")
 	String getVersion() throws Exception;
+
+	interface EZ extends Ignition {
+
+		default IgnitionConfig getConfig() throws Exception { return null; }
+
+		default Security getSecurity() throws Exception { return null; }
+
+		default Timeouts getTimeouts() throws Exception { return null; }
+
+		default String getVersion() throws Exception { return null; }
+
+	}
 
 }

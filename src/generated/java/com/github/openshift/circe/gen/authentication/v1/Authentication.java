@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Authentication extends Bean {
+
 	default String getKind() { return "Authentication"; }
 	default String getApiVersion() { return "config.openshift.io/v1"; }
 	@YamlPropertyIgnore
@@ -13,5 +14,11 @@ public interface Authentication extends Bean {
 	default ObjectMeta getMetadata() throws Exception { return new ObjectMeta(_getGeneratorNamespaceHint(), _getGeneratorNameHint()); }
 	@YamlPropertyName(value="spec")
 	AuthenticationSpec getSpec() throws Exception;
+
+	interface EZ extends Authentication {
+
+		default AuthenticationSpec getSpec() throws Exception { return null; }
+
+	}
 
 }

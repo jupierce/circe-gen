@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface KubeletConnectionInfo extends Bean {
+
 	@YamlPropertyName(value="port")
 	Long getPort() throws Exception;
 
@@ -13,5 +14,15 @@ public interface KubeletConnectionInfo extends Bean {
 	@YamlPropertyName(value="certInfo")
 	@YamlPropertyInline
 	CertInfo getCertInfo() throws Exception;
+
+	interface EZ extends KubeletConnectionInfo {
+
+		default Long getPort() throws Exception { return null; }
+
+		default String getCA() throws Exception { return null; }
+
+		default CertInfo getCertInfo() throws Exception { return null; }
+
+	}
 
 }

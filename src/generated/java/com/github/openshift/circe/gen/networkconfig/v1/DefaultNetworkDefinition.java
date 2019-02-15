@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface DefaultNetworkDefinition extends Bean {
+
 	@YamlPropertyName(value="type")
 	String getType() throws Exception;
 
@@ -15,5 +16,17 @@ public interface DefaultNetworkDefinition extends Bean {
 
 	@YamlPropertyName(value="otherConfig")
 	Map<String,String> getOtherConfig() throws Exception;
+
+	interface EZ extends DefaultNetworkDefinition {
+
+		default String getType() throws Exception { return null; }
+
+		default OpenShiftSDNConfig getOpenShiftSDNConfig() throws Exception { return null; }
+
+		default OVNKubernetesConfig getOVNKubernetesConfig() throws Exception { return null; }
+
+		default Map<String,String> getOtherConfig() throws Exception { return null; }
+
+	}
 
 }

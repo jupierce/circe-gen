@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface OpenShiftAPIServerConfig extends Bean {
+
 	default String getKind() { return "OpenShiftAPIServerConfig"; }
 	default String getApiVersion() { return "openshiftcontrolplane.config.openshift.io/v1"; }
 	@YamlPropertyName(value="genericAPIServerConfig")
@@ -36,5 +37,29 @@ public interface OpenShiftAPIServerConfig extends Bean {
 
 	@YamlPropertyName(value="apiServerArguments")
 	Map<String,List<String>> getAPIServerArguments() throws Exception;
+
+	interface EZ extends OpenShiftAPIServerConfig {
+
+		default GenericAPIServerConfig getGenericAPIServerConfig() throws Exception { return null; }
+
+		default FrontProxyConfig getAggregatorConfig() throws Exception { return null; }
+
+		default ImagePolicyConfig getImagePolicyConfig() throws Exception { return null; }
+
+		default ProjectConfig getProjectConfig() throws Exception { return null; }
+
+		default RoutingConfig getRoutingConfig() throws Exception { return null; }
+
+		default String getServiceAccountOAuthGrantMethod() throws Exception { return null; }
+
+		default JenkinsPipelineConfig getJenkinsPipelineConfig() throws Exception { return null; }
+
+		default String getCloudProviderFile() throws Exception { return null; }
+
+		default Boolean getEnableOAPI() throws Exception { return null; }
+
+		default Map<String,List<String>> getAPIServerArguments() throws Exception { return null; }
+
+	}
 
 }

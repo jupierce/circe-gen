@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface LDAPIdentityProvider extends Bean {
+
 	@YamlPropertyName(value="url")
 	String getURL() throws Exception;
 
@@ -21,5 +22,21 @@ public interface LDAPIdentityProvider extends Bean {
 
 	@YamlPropertyName(value="attributes")
 	LDAPAttributeMapping getAttributes() throws Exception;
+
+	interface EZ extends LDAPIdentityProvider {
+
+		default String getURL() throws Exception { return null; }
+
+		default String getBindDN() throws Exception { return null; }
+
+		default SecretNameReference getBindPassword() throws Exception { return null; }
+
+		default Boolean getInsecure() throws Exception { return null; }
+
+		default ConfigMapNameReference getCA() throws Exception { return null; }
+
+		default LDAPAttributeMapping getAttributes() throws Exception { return null; }
+
+	}
 
 }

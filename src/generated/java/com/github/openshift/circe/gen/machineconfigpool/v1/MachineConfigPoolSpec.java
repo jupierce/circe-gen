@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface MachineConfigPoolSpec extends Bean {
+
 	@YamlPropertyName(value="machineConfigSelector")
 	LabelSelector getMachineConfigSelector() throws Exception;
 
@@ -15,5 +16,17 @@ public interface MachineConfigPoolSpec extends Bean {
 
 	@YamlPropertyName(value="maxUnavailable")
 	IntOrString getMaxUnavailable() throws Exception;
+
+	interface EZ extends MachineConfigPoolSpec {
+
+		default LabelSelector getMachineConfigSelector() throws Exception { return null; }
+
+		default LabelSelector getMachineSelector() throws Exception { return null; }
+
+		default Boolean getPaused() throws Exception { return null; }
+
+		default IntOrString getMaxUnavailable() throws Exception { return null; }
+
+	}
 
 }

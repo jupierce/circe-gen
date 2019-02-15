@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Filesystem extends Bean {
+
 	@YamlPropertyName(value="mount")
 	Mount getMount() throws Exception;
 
@@ -12,5 +13,15 @@ public interface Filesystem extends Bean {
 
 	@YamlPropertyName(value="path")
 	String getPath() throws Exception;
+
+	interface EZ extends Filesystem {
+
+		default Mount getMount() throws Exception { return null; }
+
+		default String getName() throws Exception { return null; }
+
+		default String getPath() throws Exception { return null; }
+
+	}
 
 }

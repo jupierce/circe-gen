@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface RegistriesConfig extends Bean {
+
 	@YamlPropertyName(value="searchRegistries")
 	List<String> getSearchRegistries() throws Exception;
 
@@ -15,5 +16,17 @@ public interface RegistriesConfig extends Bean {
 
 	@YamlPropertyName(value="allowedRegistries")
 	List<String> getAllowedRegistries() throws Exception;
+
+	interface EZ extends RegistriesConfig {
+
+		default List<String> getSearchRegistries() throws Exception { return null; }
+
+		default List<String> getInsecureRegistries() throws Exception { return null; }
+
+		default List<String> getBlockedRegistries() throws Exception { return null; }
+
+		default List<String> getAllowedRegistries() throws Exception { return null; }
+
+	}
 
 }

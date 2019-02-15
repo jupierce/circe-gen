@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface MachineConfig extends Bean {
+
 	default String getKind() { return "MachineConfig"; }
 	default String getApiVersion() { return "machineconfiguration.openshift.io/v1"; }
 	@YamlPropertyIgnore
@@ -13,5 +14,11 @@ public interface MachineConfig extends Bean {
 	ObjectMeta getMetadata() throws Exception;
 	@YamlPropertyName(value="spec")
 	MachineConfigSpec getSpec() throws Exception;
+
+	interface EZ extends MachineConfig {
+
+		default MachineConfigSpec getSpec() throws Exception { return null; }
+
+	}
 
 }

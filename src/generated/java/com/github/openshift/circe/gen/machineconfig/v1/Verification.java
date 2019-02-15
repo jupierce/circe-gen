@@ -4,7 +4,14 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Verification extends Bean {
+
 	@YamlPropertyName(value="hash")
 	String getHash() throws Exception;
+
+	interface EZ extends Verification {
+
+		default String getHash() throws Exception { return null; }
+
+	}
 
 }

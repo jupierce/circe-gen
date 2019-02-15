@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Taint extends Bean {
+
 	@YamlPropertyName(value="key")
 	String getKey() throws Exception;
 
@@ -15,5 +16,17 @@ public interface Taint extends Bean {
 
 	@YamlPropertyName(value="timeAdded")
 	Time getTimeAdded() throws Exception;
+
+	interface EZ extends Taint {
+
+		default String getKey() throws Exception { return null; }
+
+		default String getValue() throws Exception { return null; }
+
+		default String getEffect() throws Exception { return null; }
+
+		default Time getTimeAdded() throws Exception { return null; }
+
+	}
 
 }

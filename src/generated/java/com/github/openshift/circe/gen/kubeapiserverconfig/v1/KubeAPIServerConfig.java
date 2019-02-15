@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface KubeAPIServerConfig extends Bean {
+
 	default String getKind() { return "KubeAPIServerConfig"; }
 	default String getApiVersion() { return "kubecontrolplane.config.openshift.io/v1"; }
 	@YamlPropertyName(value="genericAPIServerConfig")
@@ -45,5 +46,35 @@ public interface KubeAPIServerConfig extends Bean {
 
 	@YamlPropertyName(value="apiServerArguments")
 	Map<String,List<String>> getAPIServerArguments() throws Exception;
+
+	interface EZ extends KubeAPIServerConfig {
+
+		default GenericAPIServerConfig getGenericAPIServerConfig() throws Exception { return null; }
+
+		default MasterAuthConfig getAuthConfig() throws Exception { return null; }
+
+		default AggregatorConfig getAggregatorConfig() throws Exception { return null; }
+
+		default KubeletConnectionInfo getKubeletClientInfo() throws Exception { return null; }
+
+		default String getServicesSubnet() throws Exception { return null; }
+
+		default String getServicesNodePortRange() throws Exception { return null; }
+
+		default String getConsolePublicURL() throws Exception { return null; }
+
+		default UserAgentMatchingConfig getUserAgentMatchingConfig() throws Exception { return null; }
+
+		default KubeAPIServerImagePolicyConfig getImagePolicyConfig() throws Exception { return null; }
+
+		default KubeAPIServerProjectConfig getProjectConfig() throws Exception { return null; }
+
+		default List<String> getServiceAccountPublicKeyFiles() throws Exception { return null; }
+
+		default OAuthConfig getOAuthConfig() throws Exception { return null; }
+
+		default Map<String,List<String>> getAPIServerArguments() throws Exception { return null; }
+
+	}
 
 }

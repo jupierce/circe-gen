@@ -4,7 +4,14 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface IngressControllerConfig extends Bean {
+
 	@YamlPropertyName(value="ingressIPNetworkCIDR")
 	String getIngressIPNetworkCIDR() throws Exception;
+
+	interface EZ extends IngressControllerConfig {
+
+		default String getIngressIPNetworkCIDR() throws Exception { return null; }
+
+	}
 
 }

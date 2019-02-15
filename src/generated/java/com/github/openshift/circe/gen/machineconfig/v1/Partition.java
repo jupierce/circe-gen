@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Partition extends Bean {
+
 	@YamlPropertyName(value="guid")
 	String getGUID() throws Exception;
 
@@ -21,5 +22,21 @@ public interface Partition extends Bean {
 
 	@YamlPropertyName(value="typeGuid")
 	String getTypeGUID() throws Exception;
+
+	interface EZ extends Partition {
+
+		default String getGUID() throws Exception { return null; }
+
+		default String getLabel() throws Exception { return null; }
+
+		default Long getNumber() throws Exception { return null; }
+
+		default Long getSize() throws Exception { return null; }
+
+		default Long getStart() throws Exception { return null; }
+
+		default String getTypeGUID() throws Exception { return null; }
+
+	}
 
 }

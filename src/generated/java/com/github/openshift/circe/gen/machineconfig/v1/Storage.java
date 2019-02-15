@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Storage extends Bean {
+
 	@YamlPropertyName(value="directories")
 	List<Directory> getDirectories() throws Exception;
 
@@ -21,5 +22,21 @@ public interface Storage extends Bean {
 
 	@YamlPropertyName(value="raid")
 	List<Raid> getRaid() throws Exception;
+
+	interface EZ extends Storage {
+
+		default List<Directory> getDirectories() throws Exception { return null; }
+
+		default List<Disk> getDisks() throws Exception { return null; }
+
+		default List<File> getFiles() throws Exception { return null; }
+
+		default List<Filesystem> getFilesystems() throws Exception { return null; }
+
+		default List<Link> getLinks() throws Exception { return null; }
+
+		default List<Raid> getRaid() throws Exception { return null; }
+
+	}
 
 }

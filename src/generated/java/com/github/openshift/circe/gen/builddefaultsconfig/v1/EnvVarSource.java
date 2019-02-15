@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface EnvVarSource extends Bean {
+
 	@YamlPropertyName(value="fieldRef")
 	ObjectFieldSelector getFieldRef() throws Exception;
 
@@ -15,5 +16,17 @@ public interface EnvVarSource extends Bean {
 
 	@YamlPropertyName(value="secretKeyRef")
 	SecretKeySelector getSecretKeyRef() throws Exception;
+
+	interface EZ extends EnvVarSource {
+
+		default ObjectFieldSelector getFieldRef() throws Exception { return null; }
+
+		default ResourceFieldSelector getResourceFieldRef() throws Exception { return null; }
+
+		default ConfigMapKeySelector getConfigMapKeyRef() throws Exception { return null; }
+
+		default SecretKeySelector getSecretKeyRef() throws Exception { return null; }
+
+	}
 
 }

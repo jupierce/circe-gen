@@ -17,5 +17,15 @@ public interface AuthDefinition extends Definition {
 	@RenderOrder(value ="0003")
 	OAuth getOAuth() throws Exception;
 
+	interface EZ extends AuthDefinition {
+
+		default KubeList<Secret> getSecretList() throws Exception { return null; }
+
+		default Authentication getAuthentication() throws Exception { return null; }
+
+		default OAuth getOAuth() throws Exception { return null; }
+
+	}
+
 
 }

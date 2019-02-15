@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface GitHubIdentityProvider extends Bean {
+
 	@YamlPropertyName(value="clientID")
 	String getClientID() throws Exception;
 
@@ -21,5 +22,21 @@ public interface GitHubIdentityProvider extends Bean {
 
 	@YamlPropertyName(value="ca")
 	ConfigMapNameReference getCA() throws Exception;
+
+	interface EZ extends GitHubIdentityProvider {
+
+		default String getClientID() throws Exception { return null; }
+
+		default SecretNameReference getClientSecret() throws Exception { return null; }
+
+		default List<String> getOrganizations() throws Exception { return null; }
+
+		default List<String> getTeams() throws Exception { return null; }
+
+		default String getHostname() throws Exception { return null; }
+
+		default ConfigMapNameReference getCA() throws Exception { return null; }
+
+	}
 
 }

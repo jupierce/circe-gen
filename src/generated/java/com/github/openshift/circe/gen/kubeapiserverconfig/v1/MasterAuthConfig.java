@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface MasterAuthConfig extends Bean {
+
 	@YamlPropertyName(value="requestHeader")
 	RequestHeaderAuthenticationOptions getRequestHeader() throws Exception;
 
@@ -12,5 +13,15 @@ public interface MasterAuthConfig extends Bean {
 
 	@YamlPropertyName(value="oauthMetadataFile")
 	String getOAuthMetadataFile() throws Exception;
+
+	interface EZ extends MasterAuthConfig {
+
+		default RequestHeaderAuthenticationOptions getRequestHeader() throws Exception { return null; }
+
+		default List<WebhookTokenAuthenticator> getWebhookTokenAuthenticators() throws Exception { return null; }
+
+		default String getOAuthMetadataFile() throws Exception { return null; }
+
+	}
 
 }

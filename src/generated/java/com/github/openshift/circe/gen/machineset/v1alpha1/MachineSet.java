@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface MachineSet extends Bean {
+
 	default String getKind() { return "MachineSet"; }
 	default String getApiVersion() { return "v1alpha1"; }
 	@YamlPropertyIgnore
@@ -13,5 +14,11 @@ public interface MachineSet extends Bean {
 	ObjectMeta getMetadata() throws Exception;
 	@YamlPropertyName(value="spec")
 	MachineSetSpec getSpec() throws Exception;
+
+	interface EZ extends MachineSet {
+
+		default MachineSetSpec getSpec() throws Exception { return null; }
+
+	}
 
 }

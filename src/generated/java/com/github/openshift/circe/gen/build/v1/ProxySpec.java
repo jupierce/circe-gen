@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface ProxySpec extends Bean {
+
 	@YamlPropertyName(value="httpProxy")
 	String getHTTPProxy() throws Exception;
 
@@ -12,5 +13,15 @@ public interface ProxySpec extends Bean {
 
 	@YamlPropertyName(value="noProxy")
 	String getNoProxy() throws Exception;
+
+	interface EZ extends ProxySpec {
+
+		default String getHTTPProxy() throws Exception { return null; }
+
+		default String getHTTPSProxy() throws Exception { return null; }
+
+		default String getNoProxy() throws Exception { return null; }
+
+	}
 
 }

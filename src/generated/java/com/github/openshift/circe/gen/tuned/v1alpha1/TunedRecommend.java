@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface TunedRecommend extends Bean {
+
 	@YamlPropertyName(value="profile")
 	String getProfile() throws Exception;
 
@@ -12,5 +13,15 @@ public interface TunedRecommend extends Bean {
 
 	@YamlPropertyName(value="match")
 	List<TunedMatch> getMatch() throws Exception;
+
+	interface EZ extends TunedRecommend {
+
+		default String getProfile() throws Exception { return null; }
+
+		default Long getPriority() throws Exception { return null; }
+
+		default List<TunedMatch> getMatch() throws Exception { return null; }
+
+	}
 
 }

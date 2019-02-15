@@ -4,10 +4,19 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Create extends Bean {
+
 	@YamlPropertyName(value="force")
 	Boolean getForce() throws Exception;
 
 	@YamlPropertyName(value="options")
 	List<String> getOptions() throws Exception;
+
+	interface EZ extends Create {
+
+		default Boolean getForce() throws Exception { return null; }
+
+		default List<String> getOptions() throws Exception { return null; }
+
+	}
 
 }

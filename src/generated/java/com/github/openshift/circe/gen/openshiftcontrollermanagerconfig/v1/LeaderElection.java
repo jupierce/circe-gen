@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface LeaderElection extends Bean {
+
 	@YamlPropertyName(value="disable")
 	Boolean getDisable() throws Exception;
 
@@ -21,5 +22,21 @@ public interface LeaderElection extends Bean {
 
 	@YamlPropertyName(value="retryPeriod")
 	Duration getRetryPeriod() throws Exception;
+
+	interface EZ extends LeaderElection {
+
+		default Boolean getDisable() throws Exception { return null; }
+
+		default String getNamespace() throws Exception { return null; }
+
+		default String getName() throws Exception { return null; }
+
+		default Duration getLeaseDuration() throws Exception { return null; }
+
+		default Duration getRenewDeadline() throws Exception { return null; }
+
+		default Duration getRetryPeriod() throws Exception { return null; }
+
+	}
 
 }

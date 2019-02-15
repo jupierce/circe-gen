@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface BuildOverridesConfig extends Bean {
+
 	default String getKind() { return "BuildOverridesConfig"; }
 	default String getApiVersion() { return "openshiftcontrolplane.config.openshift.io/v1"; }
 	@YamlPropertyName(value="forcePull")
@@ -20,5 +21,19 @@ public interface BuildOverridesConfig extends Bean {
 
 	@YamlPropertyName(value="tolerations")
 	List<Toleration> getTolerations() throws Exception;
+
+	interface EZ extends BuildOverridesConfig {
+
+		default Boolean getForcePull() throws Exception { return null; }
+
+		default List<ImageLabel> getImageLabels() throws Exception { return null; }
+
+		default Map<String,String> getNodeSelector() throws Exception { return null; }
+
+		default Map<String,String> getAnnotations() throws Exception { return null; }
+
+		default List<Toleration> getTolerations() throws Exception { return null; }
+
+	}
 
 }

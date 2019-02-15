@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface RequestHeaderIdentityProvider extends Bean {
+
 	@YamlPropertyName(value="loginURL")
 	String getLoginURL() throws Exception;
 
@@ -27,5 +28,25 @@ public interface RequestHeaderIdentityProvider extends Bean {
 
 	@YamlPropertyName(value="emailHeaders")
 	List<String> getEmailHeaders() throws Exception;
+
+	interface EZ extends RequestHeaderIdentityProvider {
+
+		default String getLoginURL() throws Exception { return null; }
+
+		default String getChallengeURL() throws Exception { return null; }
+
+		default ConfigMapNameReference getClientCA() throws Exception { return null; }
+
+		default List<String> getClientCommonNames() throws Exception { return null; }
+
+		default List<String> getHeaders() throws Exception { return null; }
+
+		default List<String> getPreferredUsernameHeaders() throws Exception { return null; }
+
+		default List<String> getNameHeaders() throws Exception { return null; }
+
+		default List<String> getEmailHeaders() throws Exception { return null; }
+
+	}
 
 }

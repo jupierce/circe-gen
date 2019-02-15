@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface AuditConfig extends Bean {
+
 	@YamlPropertyName(value="enabled")
 	Boolean getEnabled() throws Exception;
 
@@ -33,5 +34,29 @@ public interface AuditConfig extends Bean {
 
 	@YamlPropertyName(value="webHookMode")
 	String getWebHookMode() throws Exception;
+
+	interface EZ extends AuditConfig {
+
+		default Boolean getEnabled() throws Exception { return null; }
+
+		default String getAuditFilePath() throws Exception { return null; }
+
+		default Long getMaximumFileRetentionDays() throws Exception { return null; }
+
+		default Long getMaximumRetainedFiles() throws Exception { return null; }
+
+		default Long getMaximumFileSizeMegabytes() throws Exception { return null; }
+
+		default String getPolicyFile() throws Exception { return null; }
+
+		default String getPolicyConfiguration() throws Exception { return null; }
+
+		default String getLogFormat() throws Exception { return null; }
+
+		default String getWebHookKubeConfig() throws Exception { return null; }
+
+		default String getWebHookMode() throws Exception { return null; }
+
+	}
 
 }

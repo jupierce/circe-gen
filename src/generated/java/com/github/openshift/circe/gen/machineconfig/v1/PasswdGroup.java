@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface PasswdGroup extends Bean {
+
 	@YamlPropertyName(value="gid")
 	Long getGid() throws Exception;
 
@@ -15,5 +16,17 @@ public interface PasswdGroup extends Bean {
 
 	@YamlPropertyName(value="system")
 	Boolean getSystem() throws Exception;
+
+	interface EZ extends PasswdGroup {
+
+		default Long getGid() throws Exception { return null; }
+
+		default String getName() throws Exception { return null; }
+
+		default String getPasswordHash() throws Exception { return null; }
+
+		default Boolean getSystem() throws Exception { return null; }
+
+	}
 
 }

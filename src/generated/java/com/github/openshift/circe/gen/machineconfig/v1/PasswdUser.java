@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface PasswdUser extends Bean {
+
 	@YamlPropertyName(value="create")
 	Usercreate getCreate() throws Exception;
 
@@ -45,5 +46,37 @@ public interface PasswdUser extends Bean {
 
 	@YamlPropertyName(value="uid")
 	Long getUID() throws Exception;
+
+	interface EZ extends PasswdUser {
+
+		default Usercreate getCreate() throws Exception { return null; }
+
+		default String getGecos() throws Exception { return null; }
+
+		default List<String> getGroups() throws Exception { return null; }
+
+		default String getHomeDir() throws Exception { return null; }
+
+		default String getName() throws Exception { return null; }
+
+		default Boolean getNoCreateHome() throws Exception { return null; }
+
+		default Boolean getNoLogInit() throws Exception { return null; }
+
+		default Boolean getNoUserGroup() throws Exception { return null; }
+
+		default String getPasswordHash() throws Exception { return null; }
+
+		default String getPrimaryGroup() throws Exception { return null; }
+
+		default List<String> getSSHAuthorizedKeys() throws Exception { return null; }
+
+		default String getShell() throws Exception { return null; }
+
+		default Boolean getSystem() throws Exception { return null; }
+
+		default Long getUID() throws Exception { return null; }
+
+	}
 
 }

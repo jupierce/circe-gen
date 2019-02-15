@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface KubeAPIServer extends Bean {
+
 	default String getKind() { return "KubeAPIServer"; }
 	default String getApiVersion() { return "operator.openshift.io/v1"; }
 	@YamlPropertyIgnore
@@ -13,5 +14,11 @@ public interface KubeAPIServer extends Bean {
 	default ObjectMeta getMetadata() throws Exception { return new ObjectMeta(_getGeneratorNamespaceHint(), _getGeneratorNameHint()); }
 	@YamlPropertyName(value="spec")
 	KubeAPIServerSpec getSpec() throws Exception;
+
+	interface EZ extends KubeAPIServer {
+
+		default KubeAPIServerSpec getSpec() throws Exception { return null; }
+
+	}
 
 }

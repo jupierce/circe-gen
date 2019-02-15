@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface AdditionalNetworkDefinition extends Bean {
+
 	@YamlPropertyName(value="type")
 	String getType() throws Exception;
 
@@ -12,5 +13,15 @@ public interface AdditionalNetworkDefinition extends Bean {
 
 	@YamlPropertyName(value="rawCNIConfig")
 	String getRawCNIConfig() throws Exception;
+
+	interface EZ extends AdditionalNetworkDefinition {
+
+		default String getType() throws Exception { return null; }
+
+		default String getName() throws Exception { return null; }
+
+		default String getRawCNIConfig() throws Exception { return null; }
+
+	}
 
 }

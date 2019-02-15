@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Tuned extends Bean {
+
 	default String getKind() { return "Tuned"; }
 	default String getApiVersion() { return "v1alpha1"; }
 	@YamlPropertyIgnore
@@ -13,5 +14,11 @@ public interface Tuned extends Bean {
 	default ObjectMeta getMetadata() throws Exception { return new ObjectMeta(_getGeneratorNamespaceHint(), _getGeneratorNameHint()); }
 	@YamlPropertyName(value="spec")
 	TunedSpec getSpec() throws Exception;
+
+	interface EZ extends Tuned {
+
+		default TunedSpec getSpec() throws Exception { return null; }
+
+	}
 
 }

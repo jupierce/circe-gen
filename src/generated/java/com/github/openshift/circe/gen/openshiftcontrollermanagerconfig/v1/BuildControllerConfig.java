@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface BuildControllerConfig extends Bean {
+
 	@YamlPropertyName(value="imageTemplateFormat")
 	ImageConfig getImageTemplateFormat() throws Exception;
 
@@ -15,5 +16,17 @@ public interface BuildControllerConfig extends Bean {
 
 	@YamlPropertyName(value="additionalTrustedCA")
 	String getAdditionalTrustedCA() throws Exception;
+
+	interface EZ extends BuildControllerConfig {
+
+		default ImageConfig getImageTemplateFormat() throws Exception { return null; }
+
+		default BuildDefaultsConfig getBuildDefaults() throws Exception { return null; }
+
+		default BuildOverridesConfig getBuildOverrides() throws Exception { return null; }
+
+		default String getAdditionalTrustedCA() throws Exception { return null; }
+
+	}
 
 }

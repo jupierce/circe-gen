@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface ResourceQuotaControllerConfig extends Bean {
+
 	@YamlPropertyName(value="concurrentSyncs")
 	Long getConcurrentSyncs() throws Exception;
 
@@ -12,5 +13,15 @@ public interface ResourceQuotaControllerConfig extends Bean {
 
 	@YamlPropertyName(value="minResyncPeriod")
 	Duration getMinResyncPeriod() throws Exception;
+
+	interface EZ extends ResourceQuotaControllerConfig {
+
+		default Long getConcurrentSyncs() throws Exception { return null; }
+
+		default Duration getSyncPeriod() throws Exception { return null; }
+
+		default Duration getMinResyncPeriod() throws Exception { return null; }
+
+	}
 
 }

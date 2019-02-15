@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface IdentityProvider extends Bean {
+
 	@YamlPropertyName(value="name")
 	String getName() throws Exception;
 
@@ -19,5 +20,19 @@ public interface IdentityProvider extends Bean {
 	@YamlPropertyName(value="identityProviderConfig")
 	@YamlPropertyInline
 	IdentityProviderConfig getIdentityProviderConfig() throws Exception;
+
+	interface EZ extends IdentityProvider {
+
+		default String getName() throws Exception { return null; }
+
+		default Boolean getUseAsChallenger() throws Exception { return null; }
+
+		default Boolean getUseAsLogin() throws Exception { return null; }
+
+		default String getMappingMethod() throws Exception { return null; }
+
+		default IdentityProviderConfig getIdentityProviderConfig() throws Exception { return null; }
+
+	}
 
 }

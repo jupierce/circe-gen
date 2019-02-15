@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface MachineSetSpec extends Bean {
+
 	@YamlPropertyName(value="replicas")
 	Long getReplicas() throws Exception;
 
@@ -15,5 +16,17 @@ public interface MachineSetSpec extends Bean {
 
 	@YamlPropertyName(value="template")
 	MachineTemplateSpec getTemplate() throws Exception;
+
+	interface EZ extends MachineSetSpec {
+
+		default Long getReplicas() throws Exception { return null; }
+
+		default Long getMinReadySeconds() throws Exception { return null; }
+
+		default LabelSelector getSelector() throws Exception { return null; }
+
+		default MachineTemplateSpec getTemplate() throws Exception { return null; }
+
+	}
 
 }

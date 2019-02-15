@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface NetworkConfig extends Bean {
+
 	default String getKind() { return "NetworkConfig"; }
 	default String getApiVersion() { return "v1"; }
 	@YamlPropertyIgnore
@@ -13,5 +14,11 @@ public interface NetworkConfig extends Bean {
 	default ObjectMeta getMetadata() throws Exception { return new ObjectMeta(_getGeneratorNamespaceHint(), _getGeneratorNameHint()); }
 	@YamlPropertyName(value="spec")
 	NetworkConfigSpec getSpec() throws Exception;
+
+	interface EZ extends NetworkConfig {
+
+		default NetworkConfigSpec getSpec() throws Exception { return null; }
+
+	}
 
 }

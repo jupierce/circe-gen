@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface NetworkConfigSpec extends Bean {
+
 	@YamlPropertyName(value="clusterNetworks")
 	List<ClusterNetwork> getClusterNetworks() throws Exception;
 
@@ -24,5 +25,23 @@ public interface NetworkConfigSpec extends Bean {
 
 	@YamlPropertyName(value="someNewField")
 	String getSomeNewField() throws Exception;
+
+	interface EZ extends NetworkConfigSpec {
+
+		default List<ClusterNetwork> getClusterNetworks() throws Exception { return null; }
+
+		default String getServiceNetwork() throws Exception { return null; }
+
+		default DefaultNetworkDefinition getDefaultNetwork() throws Exception { return null; }
+
+		default List<AdditionalNetworkDefinition> getAdditionalNetworks() throws Exception { return null; }
+
+		default Boolean getDeployKubeProxy() throws Exception { return null; }
+
+		default ProxyConfig getKubeProxyConfig() throws Exception { return null; }
+
+		default String getSomeNewField() throws Exception { return null; }
+
+	}
 
 }

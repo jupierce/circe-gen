@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface ResourceFieldSelector extends Bean {
+
 	@YamlPropertyName(value="containerName")
 	String getContainerName() throws Exception;
 
@@ -12,5 +13,15 @@ public interface ResourceFieldSelector extends Bean {
 
 	@YamlPropertyName(value="divisor")
 	Quantity getDivisor() throws Exception;
+
+	interface EZ extends ResourceFieldSelector {
+
+		default String getContainerName() throws Exception { return null; }
+
+		default String getResource() throws Exception { return null; }
+
+		default Quantity getDivisor() throws Exception { return null; }
+
+	}
 
 }

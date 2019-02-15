@@ -4,7 +4,14 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Networkd extends Bean {
+
 	@YamlPropertyName(value="units")
 	List<Networkdunit> getUnits() throws Exception;
+
+	interface EZ extends Networkd {
+
+		default List<Networkdunit> getUnits() throws Exception { return null; }
+
+	}
 
 }

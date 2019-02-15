@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface OpenShiftControllerManagerConfig extends Bean {
+
 	default String getKind() { return "OpenShiftControllerManagerConfig"; }
 	default String getApiVersion() { return "openshiftcontrolplane.config.openshift.io/v1"; }
 	@YamlPropertyName(value="kubeClientConfig")
@@ -47,5 +48,37 @@ public interface OpenShiftControllerManagerConfig extends Bean {
 
 	@YamlPropertyName(value="securityAllocator")
 	SecurityAllocator getSecurityAllocator() throws Exception;
+
+	interface EZ extends OpenShiftControllerManagerConfig {
+
+		default KubeClientConfig getKubeClientConfig() throws Exception { return null; }
+
+		default HTTPServingInfo getServingInfo() throws Exception { return null; }
+
+		default LeaderElection getLeaderElection() throws Exception { return null; }
+
+		default List<String> getControllers() throws Exception { return null; }
+
+		default ResourceQuotaControllerConfig getResourceQuota() throws Exception { return null; }
+
+		default ServiceServingCert getServiceServingCert() throws Exception { return null; }
+
+		default DeployerControllerConfig getDeployer() throws Exception { return null; }
+
+		default BuildControllerConfig getBuild() throws Exception { return null; }
+
+		default ServiceAccountControllerConfig getServiceAccount() throws Exception { return null; }
+
+		default DockerPullSecretControllerConfig getDockerPullSecret() throws Exception { return null; }
+
+		default NetworkControllerConfig getNetwork() throws Exception { return null; }
+
+		default IngressControllerConfig getIngress() throws Exception { return null; }
+
+		default ImageImportControllerConfig getImageImport() throws Exception { return null; }
+
+		default SecurityAllocator getSecurityAllocator() throws Exception { return null; }
+
+	}
 
 }

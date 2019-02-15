@@ -4,7 +4,14 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Security extends Bean {
+
 	@YamlPropertyName(value="tls")
 	TLS getTLS() throws Exception;
+
+	interface EZ extends Security {
+
+		default TLS getTLS() throws Exception { return null; }
+
+	}
 
 }

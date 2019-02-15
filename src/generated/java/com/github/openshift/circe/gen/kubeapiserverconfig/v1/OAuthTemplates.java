@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface OAuthTemplates extends Bean {
+
 	@YamlPropertyName(value="login")
 	String getLogin() throws Exception;
 
@@ -12,5 +13,15 @@ public interface OAuthTemplates extends Bean {
 
 	@YamlPropertyName(value="error")
 	String getError() throws Exception;
+
+	interface EZ extends OAuthTemplates {
+
+		default String getLogin() throws Exception { return null; }
+
+		default String getProviderSelection() throws Exception { return null; }
+
+		default String getError() throws Exception { return null; }
+
+	}
 
 }

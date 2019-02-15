@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Raid extends Bean {
+
 	@YamlPropertyName(value="devices")
 	List<String> getDevices() throws Exception;
 
@@ -18,5 +19,19 @@ public interface Raid extends Bean {
 
 	@YamlPropertyName(value="spares")
 	Long getSpares() throws Exception;
+
+	interface EZ extends Raid {
+
+		default List<String> getDevices() throws Exception { return null; }
+
+		default String getLevel() throws Exception { return null; }
+
+		default String getName() throws Exception { return null; }
+
+		default List<String> getOptions() throws Exception { return null; }
+
+		default Long getSpares() throws Exception { return null; }
+
+	}
 
 }

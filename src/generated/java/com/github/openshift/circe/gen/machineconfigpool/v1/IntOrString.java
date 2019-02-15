@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface IntOrString extends Bean {
+
 	@YamlPropertyName(value="type")
 	Long getType() throws Exception;
 
@@ -12,5 +13,15 @@ public interface IntOrString extends Bean {
 
 	@YamlPropertyName(value="strVal")
 	String getStrVal() throws Exception;
+
+	interface EZ extends IntOrString {
+
+		default Long getType() throws Exception { return null; }
+
+		default Long getIntVal() throws Exception { return null; }
+
+		default String getStrVal() throws Exception { return null; }
+
+	}
 
 }

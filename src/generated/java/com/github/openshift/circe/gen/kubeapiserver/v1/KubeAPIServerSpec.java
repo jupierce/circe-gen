@@ -4,11 +4,20 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface KubeAPIServerSpec extends Bean {
+
 	@YamlPropertyName(value="staticPodOperatorSpec")
 	@YamlPropertyInline
 	StaticPodOperatorSpec getStaticPodOperatorSpec() throws Exception;
 
 	@YamlPropertyName(value="forceRedeploymentReason")
 	String getForceRedeploymentReason() throws Exception;
+
+	interface EZ extends KubeAPIServerSpec {
+
+		default StaticPodOperatorSpec getStaticPodOperatorSpec() throws Exception { return null; }
+
+		default String getForceRedeploymentReason() throws Exception { return null; }
+
+	}
 
 }

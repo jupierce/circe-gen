@@ -4,4 +4,9 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Time extends Bean {
+
+	interface EZ extends Time {
+
+	}
+
 }

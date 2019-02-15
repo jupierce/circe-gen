@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Parameter extends Bean {
+
 	@YamlPropertyName(value="name")
 	String getName() throws Exception;
 
@@ -24,5 +25,23 @@ public interface Parameter extends Bean {
 
 	@YamlPropertyName(value="required")
 	Boolean getRequired() throws Exception;
+
+	interface EZ extends Parameter {
+
+		default String getName() throws Exception { return null; }
+
+		default String getDisplayName() throws Exception { return null; }
+
+		default String getDescription() throws Exception { return null; }
+
+		default String getValue() throws Exception { return null; }
+
+		default String getGenerate() throws Exception { return null; }
+
+		default String getFrom() throws Exception { return null; }
+
+		default Boolean getRequired() throws Exception { return null; }
+
+	}
 
 }

@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface JenkinsPipelineConfig extends Bean {
+
 	@YamlPropertyName(value="autoProvisionEnabled")
 	Boolean getAutoProvisionEnabled() throws Exception;
 
@@ -18,5 +19,19 @@ public interface JenkinsPipelineConfig extends Bean {
 
 	@YamlPropertyName(value="parameters")
 	Map<String,String> getParameters() throws Exception;
+
+	interface EZ extends JenkinsPipelineConfig {
+
+		default Boolean getAutoProvisionEnabled() throws Exception { return null; }
+
+		default String getTemplateNamespace() throws Exception { return null; }
+
+		default String getTemplateName() throws Exception { return null; }
+
+		default String getServiceName() throws Exception { return null; }
+
+		default Map<String,String> getParameters() throws Exception { return null; }
+
+	}
 
 }

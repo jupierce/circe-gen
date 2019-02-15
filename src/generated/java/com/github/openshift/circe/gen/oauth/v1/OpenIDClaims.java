@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface OpenIDClaims extends Bean {
+
 	@YamlPropertyName(value="preferredUsername")
 	List<String> getPreferredUsername() throws Exception;
 
@@ -12,5 +13,15 @@ public interface OpenIDClaims extends Bean {
 
 	@YamlPropertyName(value="email")
 	List<String> getEmail() throws Exception;
+
+	interface EZ extends OpenIDClaims {
+
+		default List<String> getPreferredUsername() throws Exception { return null; }
+
+		default List<String> getName() throws Exception { return null; }
+
+		default List<String> getEmail() throws Exception { return null; }
+
+	}
 
 }

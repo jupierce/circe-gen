@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface BuildDefaultsConfig extends Bean {
+
 	default String getKind() { return "BuildDefaultsConfig"; }
 	default String getApiVersion() { return "openshiftcontrolplane.config.openshift.io/v1"; }
 	@YamlPropertyName(value="gitHTTPProxy")
@@ -32,5 +33,27 @@ public interface BuildDefaultsConfig extends Bean {
 
 	@YamlPropertyName(value="resources")
 	ResourceRequirements getResources() throws Exception;
+
+	interface EZ extends BuildDefaultsConfig {
+
+		default String getGitHTTPProxy() throws Exception { return null; }
+
+		default String getGitHTTPSProxy() throws Exception { return null; }
+
+		default String getGitNoProxy() throws Exception { return null; }
+
+		default List<EnvVar> getEnv() throws Exception { return null; }
+
+		default SourceStrategyDefaultsConfig getSourceStrategyDefaults() throws Exception { return null; }
+
+		default List<ImageLabel> getImageLabels() throws Exception { return null; }
+
+		default Map<String,String> getNodeSelector() throws Exception { return null; }
+
+		default Map<String,String> getAnnotations() throws Exception { return null; }
+
+		default ResourceRequirements getResources() throws Exception { return null; }
+
+	}
 
 }

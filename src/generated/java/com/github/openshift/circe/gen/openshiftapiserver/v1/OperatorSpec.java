@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface OperatorSpec extends Bean {
+
 	@YamlPropertyName(value="managementState")
 	String getManagementState() throws Exception;
 
@@ -18,5 +19,19 @@ public interface OperatorSpec extends Bean {
 
 	@YamlPropertyName(value="observedConfig")
 	String getObservedConfig() throws Exception;
+
+	interface EZ extends OperatorSpec {
+
+		default String getManagementState() throws Exception { return null; }
+
+		default String getLogLevel() throws Exception { return null; }
+
+		default List<OperandSpec> getOperandSpecs() throws Exception { return null; }
+
+		default String getUnsupportedConfigOverrides() throws Exception { return null; }
+
+		default String getObservedConfig() throws Exception { return null; }
+
+	}
 
 }

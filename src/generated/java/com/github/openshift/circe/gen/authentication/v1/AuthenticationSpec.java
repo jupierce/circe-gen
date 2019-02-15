@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface AuthenticationSpec extends Bean {
+
 	@YamlPropertyName(value="type")
 	String getType() throws Exception;
 
@@ -12,5 +13,15 @@ public interface AuthenticationSpec extends Bean {
 
 	@YamlPropertyName(value="webhookTokenAuthenticators")
 	List<WebhookTokenAuthenticator> getWebhookTokenAuthenticators() throws Exception;
+
+	interface EZ extends AuthenticationSpec {
+
+		default String getType() throws Exception { return null; }
+
+		default ConfigMapNameReference getOAuthMetadata() throws Exception { return null; }
+
+		default List<WebhookTokenAuthenticator> getWebhookTokenAuthenticators() throws Exception { return null; }
+
+	}
 
 }

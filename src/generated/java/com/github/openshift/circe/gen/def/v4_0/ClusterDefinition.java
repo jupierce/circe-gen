@@ -18,5 +18,15 @@ public interface ClusterDefinition extends Definition {
 	@RenderOrder(value ="0003")
 	NetworkConfig getNetworkConfig() throws Exception;
 
+	interface EZ extends ClusterDefinition {
+
+		default Tuned getTuned() throws Exception { return null; }
+
+		default KubeList<MachineSet> getMachineSetList() throws Exception { return null; }
+
+		default NetworkConfig getNetworkConfig() throws Exception { return null; }
+
+	}
+
 
 }

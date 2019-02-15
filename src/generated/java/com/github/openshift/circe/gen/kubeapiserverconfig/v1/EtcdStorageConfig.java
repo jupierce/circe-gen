@@ -4,11 +4,20 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface EtcdStorageConfig extends Bean {
+
 	@YamlPropertyName(value="etcdConnectionInfo")
 	@YamlPropertyInline
 	EtcdConnectionInfo getEtcdConnectionInfo() throws Exception;
 
 	@YamlPropertyName(value="storagePrefix")
 	String getStoragePrefix() throws Exception;
+
+	interface EZ extends EtcdStorageConfig {
+
+		default EtcdConnectionInfo getEtcdConnectionInfo() throws Exception { return null; }
+
+		default String getStoragePrefix() throws Exception { return null; }
+
+	}
 
 }

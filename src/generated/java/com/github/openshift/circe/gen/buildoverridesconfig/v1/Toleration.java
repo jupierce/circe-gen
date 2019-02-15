@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Toleration extends Bean {
+
 	@YamlPropertyName(value="key")
 	String getKey() throws Exception;
 
@@ -18,5 +19,19 @@ public interface Toleration extends Bean {
 
 	@YamlPropertyName(value="tolerationSeconds")
 	Long getTolerationSeconds() throws Exception;
+
+	interface EZ extends Toleration {
+
+		default String getKey() throws Exception { return null; }
+
+		default String getOperator() throws Exception { return null; }
+
+		default String getValue() throws Exception { return null; }
+
+		default String getEffect() throws Exception { return null; }
+
+		default Long getTolerationSeconds() throws Exception { return null; }
+
+	}
 
 }

@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Project extends Bean {
+
 	default String getKind() { return "Project"; }
 	default String getApiVersion() { return "config.openshift.io/v1"; }
 	@YamlPropertyIgnore
@@ -13,5 +14,11 @@ public interface Project extends Bean {
 	default ObjectMeta getMetadata() throws Exception { return new ObjectMeta(_getGeneratorNamespaceHint(), _getGeneratorNameHint()); }
 	@YamlPropertyName(value="spec")
 	ProjectSpec getSpec() throws Exception;
+
+	interface EZ extends Project {
+
+		default ProjectSpec getSpec() throws Exception { return null; }
+
+	}
 
 }

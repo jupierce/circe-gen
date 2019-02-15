@@ -4,7 +4,14 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface WebhookTokenAuthenticator extends Bean {
+
 	@YamlPropertyName(value="kubeConfig")
 	SecretNameReference getKubeConfig() throws Exception;
+
+	interface EZ extends WebhookTokenAuthenticator {
+
+		default SecretNameReference getKubeConfig() throws Exception { return null; }
+
+	}
 
 }

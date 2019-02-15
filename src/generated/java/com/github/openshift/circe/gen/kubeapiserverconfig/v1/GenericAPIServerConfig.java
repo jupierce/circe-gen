@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface GenericAPIServerConfig extends Bean {
+
 	@YamlPropertyName(value="servingInfo")
 	HTTPServingInfo getServingInfo() throws Exception;
 
@@ -21,5 +22,21 @@ public interface GenericAPIServerConfig extends Bean {
 
 	@YamlPropertyName(value="kubeClientConfig")
 	KubeClientConfig getKubeClientConfig() throws Exception;
+
+	interface EZ extends GenericAPIServerConfig {
+
+		default HTTPServingInfo getServingInfo() throws Exception { return null; }
+
+		default List<String> getCORSAllowedOrigins() throws Exception { return null; }
+
+		default AuditConfig getAuditConfig() throws Exception { return null; }
+
+		default EtcdStorageConfig getStorageConfig() throws Exception { return null; }
+
+		default Map<String,AdmissionPluginConfig> getAdmissionPluginConfig() throws Exception { return null; }
+
+		default KubeClientConfig getKubeClientConfig() throws Exception { return null; }
+
+	}
 
 }

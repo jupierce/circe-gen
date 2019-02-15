@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Template extends Bean {
+
 	default String getKind() { return "Template"; }
 	default String getApiVersion() { return "template.openshift.io/v1"; }
 	@YamlPropertyIgnore
@@ -18,7 +19,20 @@ public interface Template extends Bean {
 	List<Parameter> getParameters() throws Exception;
 
 	List<Bean> getObjects() throws Exception;
+
 	@YamlPropertyName(value="objectLabels")
 	Map<String,String> getObjectLabels() throws Exception;
+
+	interface EZ extends Template {
+
+		default String getMessage() throws Exception { return null; }
+
+		default List<Parameter> getParameters() throws Exception { return null; }
+
+		default List<Bean> getObjects() throws Exception { return null; }
+
+		default Map<String,String> getObjectLabels() throws Exception { return null; }
+
+	}
 
 }

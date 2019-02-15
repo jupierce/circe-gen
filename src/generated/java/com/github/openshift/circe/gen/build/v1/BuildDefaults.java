@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface BuildDefaults extends Bean {
+
 	@YamlPropertyName(value="defaultProxy")
 	ProxySpec getDefaultProxy() throws Exception;
 
@@ -21,5 +22,21 @@ public interface BuildDefaults extends Bean {
 
 	@YamlPropertyName(value="registriesConfig")
 	RegistriesConfig getRegistriesConfig() throws Exception;
+
+	interface EZ extends BuildDefaults {
+
+		default ProxySpec getDefaultProxy() throws Exception { return null; }
+
+		default ProxySpec getGitProxy() throws Exception { return null; }
+
+		default List<EnvVar> getEnv() throws Exception { return null; }
+
+		default List<ImageLabel> getImageLabels() throws Exception { return null; }
+
+		default ResourceRequirements getResources() throws Exception { return null; }
+
+		default RegistriesConfig getRegistriesConfig() throws Exception { return null; }
+
+	}
 
 }

@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface ProxyConfig extends Bean {
+
 	@YamlPropertyName(value="iptablesSyncPeriod")
 	String getIptablesSyncPeriod() throws Exception;
 
@@ -12,5 +13,15 @@ public interface ProxyConfig extends Bean {
 
 	@YamlPropertyName(value="proxyArguments")
 	Map<String,List<String>> getProxyArguments() throws Exception;
+
+	interface EZ extends ProxyConfig {
+
+		default String getIptablesSyncPeriod() throws Exception { return null; }
+
+		default String getBindAddress() throws Exception { return null; }
+
+		default Map<String,List<String>> getProxyArguments() throws Exception { return null; }
+
+	}
 
 }

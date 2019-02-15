@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Mount extends Bean {
+
 	@YamlPropertyName(value="create")
 	Create getCreate() throws Exception;
 
@@ -24,5 +25,23 @@ public interface Mount extends Bean {
 
 	@YamlPropertyName(value="wipeFilesystem")
 	Boolean getWipeFilesystem() throws Exception;
+
+	interface EZ extends Mount {
+
+		default Create getCreate() throws Exception { return null; }
+
+		default String getDevice() throws Exception { return null; }
+
+		default String getFormat() throws Exception { return null; }
+
+		default String getLabel() throws Exception { return null; }
+
+		default List<String> getOptions() throws Exception { return null; }
+
+		default String getUUID() throws Exception { return null; }
+
+		default Boolean getWipeFilesystem() throws Exception { return null; }
+
+	}
 
 }

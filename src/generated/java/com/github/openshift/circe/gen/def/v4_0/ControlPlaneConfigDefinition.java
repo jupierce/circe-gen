@@ -26,5 +26,19 @@ public interface ControlPlaneConfigDefinition extends Definition {
 	@RenderOrder(value ="0005")
 	OpenShiftControllerManagerConfig getOpenShiftControllerManagerConfig() throws Exception;
 
+	interface EZ extends ControlPlaneConfigDefinition {
+
+		default KubeAPIServerConfig getKubeAPIServerConfig() throws Exception { return null; }
+
+		default KubeAPIServer getKubeAPIServer() throws Exception { return null; }
+
+		default OpenShiftAPIServer getOpenShiftAPIServer() throws Exception { return null; }
+
+		default OpenShiftAPIServerConfig getOpenShiftAPIServerConfig() throws Exception { return null; }
+
+		default OpenShiftControllerManagerConfig getOpenShiftControllerManagerConfig() throws Exception { return null; }
+
+	}
+
 
 }

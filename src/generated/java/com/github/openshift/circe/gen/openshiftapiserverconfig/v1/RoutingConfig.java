@@ -4,7 +4,14 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface RoutingConfig extends Bean {
+
 	@YamlPropertyName(value="subdomain")
 	String getSubdomain() throws Exception;
+
+	interface EZ extends RoutingConfig {
+
+		default String getSubdomain() throws Exception { return null; }
+
+	}
 
 }

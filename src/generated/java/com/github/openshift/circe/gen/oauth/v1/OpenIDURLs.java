@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface OpenIDURLs extends Bean {
+
 	@YamlPropertyName(value="authorize")
 	String getAuthorize() throws Exception;
 
@@ -12,5 +13,15 @@ public interface OpenIDURLs extends Bean {
 
 	@YamlPropertyName(value="userInfo")
 	String getUserInfo() throws Exception;
+
+	interface EZ extends OpenIDURLs {
+
+		default String getAuthorize() throws Exception { return null; }
+
+		default String getToken() throws Exception { return null; }
+
+		default String getUserInfo() throws Exception { return null; }
+
+	}
 
 }

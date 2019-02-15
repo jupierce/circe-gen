@@ -4,7 +4,14 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface KubeAPIServerProjectConfig extends Bean {
+
 	@YamlPropertyName(value="defaultNodeSelector")
 	String getDefaultNodeSelector() throws Exception;
+
+	interface EZ extends KubeAPIServerProjectConfig {
+
+		default String getDefaultNodeSelector() throws Exception { return null; }
+
+	}
 
 }

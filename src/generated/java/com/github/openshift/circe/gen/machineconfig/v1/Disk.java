@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Disk extends Bean {
+
 	@YamlPropertyName(value="device")
 	String getDevice() throws Exception;
 
@@ -12,5 +13,15 @@ public interface Disk extends Bean {
 
 	@YamlPropertyName(value="wipeTable")
 	Boolean getWipeTable() throws Exception;
+
+	interface EZ extends Disk {
+
+		default String getDevice() throws Exception { return null; }
+
+		default List<Partition> getPartitions() throws Exception { return null; }
+
+		default Boolean getWipeTable() throws Exception { return null; }
+
+	}
 
 }

@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface ServingInfo extends Bean {
+
 	@YamlPropertyName(value="bindAddress")
 	String getBindAddress() throws Exception;
 
@@ -25,5 +26,23 @@ public interface ServingInfo extends Bean {
 
 	@YamlPropertyName(value="cipherSuites")
 	List<String> getCipherSuites() throws Exception;
+
+	interface EZ extends ServingInfo {
+
+		default String getBindAddress() throws Exception { return null; }
+
+		default String getBindNetwork() throws Exception { return null; }
+
+		default CertInfo getCertInfo() throws Exception { return null; }
+
+		default String getClientCA() throws Exception { return null; }
+
+		default List<NamedCertificate> getNamedCertificates() throws Exception { return null; }
+
+		default String getMinTLSVersion() throws Exception { return null; }
+
+		default List<String> getCipherSuites() throws Exception { return null; }
+
+	}
 
 }

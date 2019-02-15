@@ -4,8 +4,15 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface BasicAuthIdentityProvider extends Bean {
+
 	@YamlPropertyName(value="oAuthRemoteConnectionInfo")
 	@YamlPropertyInline
 	OAuthRemoteConnectionInfo getOAuthRemoteConnectionInfo() throws Exception;
+
+	interface EZ extends BasicAuthIdentityProvider {
+
+		default OAuthRemoteConnectionInfo getOAuthRemoteConnectionInfo() throws Exception { return null; }
+
+	}
 
 }

@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface OpenIDIdentityProvider extends Bean {
+
 	@YamlPropertyName(value="clientID")
 	String getClientID() throws Exception;
 
@@ -24,5 +25,23 @@ public interface OpenIDIdentityProvider extends Bean {
 
 	@YamlPropertyName(value="claims")
 	OpenIDClaims getClaims() throws Exception;
+
+	interface EZ extends OpenIDIdentityProvider {
+
+		default String getClientID() throws Exception { return null; }
+
+		default SecretNameReference getClientSecret() throws Exception { return null; }
+
+		default ConfigMapNameReference getCA() throws Exception { return null; }
+
+		default List<String> getExtraScopes() throws Exception { return null; }
+
+		default Map<String,String> getExtraAuthorizeParameters() throws Exception { return null; }
+
+		default OpenIDURLs getURLs() throws Exception { return null; }
+
+		default OpenIDClaims getClaims() throws Exception { return null; }
+
+	}
 
 }

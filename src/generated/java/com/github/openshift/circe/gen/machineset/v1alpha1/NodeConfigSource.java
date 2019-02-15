@@ -4,7 +4,14 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface NodeConfigSource extends Bean {
+
 	@YamlPropertyName(value="configMap")
 	ConfigMapNodeConfigSource getConfigMap() throws Exception;
+
+	interface EZ extends NodeConfigSource {
+
+		default ConfigMapNodeConfigSource getConfigMap() throws Exception { return null; }
+
+	}
 
 }

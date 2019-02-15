@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface TunedMatch extends Bean {
+
 	@YamlPropertyName(value="label")
 	String getLabel() throws Exception;
 
@@ -15,5 +16,17 @@ public interface TunedMatch extends Bean {
 
 	@YamlPropertyName(value="match")
 	List<TunedMatch> getMatch() throws Exception;
+
+	interface EZ extends TunedMatch {
+
+		default String getLabel() throws Exception { return null; }
+
+		default String getValue() throws Exception { return null; }
+
+		default String getType() throws Exception { return null; }
+
+		default List<TunedMatch> getMatch() throws Exception { return null; }
+
+	}
 
 }

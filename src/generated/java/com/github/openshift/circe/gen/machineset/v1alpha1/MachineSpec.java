@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface MachineSpec extends Bean {
+
 	@YamlPropertyIgnore
 	default String _getGeneratorNamespaceHint() { return "openshift-cluster-api"; }
 	@YamlPropertyIgnore
@@ -20,5 +21,17 @@ public interface MachineSpec extends Bean {
 
 	@YamlPropertyName(value="configSource")
 	NodeConfigSource getConfigSource() throws Exception;
+
+	interface EZ extends MachineSpec {
+
+		default List<Taint> getTaints() throws Exception { return null; }
+
+		default ProviderSpec getProviderSpec() throws Exception { return null; }
+
+		default MachineVersionInfo getVersions() throws Exception { return null; }
+
+		default NodeConfigSource getConfigSource() throws Exception { return null; }
+
+	}
 
 }

@@ -4,6 +4,7 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface Config extends Bean {
+
 	@YamlPropertyName(value="ignition")
 	Ignition getIgnition() throws Exception;
 
@@ -18,5 +19,19 @@ public interface Config extends Bean {
 
 	@YamlPropertyName(value="systemd")
 	Systemd getSystemd() throws Exception;
+
+	interface EZ extends Config {
+
+		default Ignition getIgnition() throws Exception { return null; }
+
+		default Networkd getNetworkd() throws Exception { return null; }
+
+		default Passwd getPasswd() throws Exception { return null; }
+
+		default Storage getStorage() throws Exception { return null; }
+
+		default Systemd getSystemd() throws Exception { return null; }
+
+	}
 
 }

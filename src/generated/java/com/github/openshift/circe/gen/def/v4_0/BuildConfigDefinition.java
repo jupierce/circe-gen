@@ -14,5 +14,13 @@ public interface BuildConfigDefinition extends Definition {
 	@RenderOrder(value ="0002")
 	BuildOverridesConfig getBuildOverridesConfig() throws Exception;
 
+	interface EZ extends BuildConfigDefinition {
+
+		default BuildDefaultsConfig getBuildDefaultsConfig() throws Exception { return null; }
+
+		default BuildOverridesConfig getBuildOverridesConfig() throws Exception { return null; }
+
+	}
+
 
 }

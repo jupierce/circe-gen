@@ -4,7 +4,14 @@ import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
 public interface DeployerControllerConfig extends Bean {
+
 	@YamlPropertyName(value="imageTemplateFormat")
 	ImageConfig getImageTemplateFormat() throws Exception;
+
+	interface EZ extends DeployerControllerConfig {
+
+		default ImageConfig getImageTemplateFormat() throws Exception { return null; }
+
+	}
 
 }
