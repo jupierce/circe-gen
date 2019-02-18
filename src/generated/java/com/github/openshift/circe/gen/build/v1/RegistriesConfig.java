@@ -5,9 +5,6 @@ import java.util.*;
 
 public interface RegistriesConfig extends Bean {
 
-	@YamlPropertyName(value="searchRegistries")
-	List<String> getSearchRegistries() throws Exception;
-
 	@YamlPropertyName(value="insecureRegistries")
 	List<String> getInsecureRegistries() throws Exception;
 
@@ -18,8 +15,6 @@ public interface RegistriesConfig extends Bean {
 	List<String> getAllowedRegistries() throws Exception;
 
 	interface EZ extends RegistriesConfig {
-
-		default List<String> getSearchRegistries() throws Exception { return null; }
 
 		default List<String> getInsecureRegistries() throws Exception { return null; }
 
