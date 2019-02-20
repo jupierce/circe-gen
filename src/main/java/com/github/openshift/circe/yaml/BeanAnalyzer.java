@@ -220,7 +220,7 @@ public class BeanAnalyzer {
 
         /**
          * By default, bean methods are sorted lexicographically. However, methods can
-         * be annotated with a oder which will be used as the actual lex value
+         * be annotated with a order which will be used as the actual lex value
          * to compare.
          */
         Arrays.sort(methods, new Comparator<Method>() {
