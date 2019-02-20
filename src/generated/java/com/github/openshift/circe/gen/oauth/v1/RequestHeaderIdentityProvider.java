@@ -31,20 +31,28 @@ public interface RequestHeaderIdentityProvider extends Bean {
 
 	interface EZ extends RequestHeaderIdentityProvider {
 
+		@YamlPropertyName(value="loginURL")
 		default String getLoginURL() throws Exception { return null; }
 
+		@YamlPropertyName(value="challengeURL")
 		default String getChallengeURL() throws Exception { return null; }
 
+		@YamlPropertyName(value="ca")
 		default ConfigMapNameReference getClientCA() throws Exception { return null; }
 
+		@YamlPropertyName(value="clientCommonNames")
 		default List<String> getClientCommonNames() throws Exception { return null; }
 
+		@YamlPropertyName(value="headers")
 		default List<String> getHeaders() throws Exception { return null; }
 
+		@YamlPropertyName(value="preferredUsernameHeaders")
 		default List<String> getPreferredUsernameHeaders() throws Exception { return null; }
 
+		@YamlPropertyName(value="nameHeaders")
 		default List<String> getNameHeaders() throws Exception { return null; }
 
+		@YamlPropertyName(value="emailHeaders")
 		default List<String> getEmailHeaders() throws Exception { return null; }
 
 	}

@@ -17,10 +17,14 @@ public interface StaticPodOperatorSpec extends Bean {
 
 	interface EZ extends StaticPodOperatorSpec {
 
+		@YamlPropertyName(value="operatorSpec")
+		@YamlPropertyInline
 		default OperatorSpec getOperatorSpec() throws Exception { return null; }
 
+		@YamlPropertyName(value="failedRevisionLimit")
 		default Long getFailedRevisionLimit() throws Exception { return null; }
 
+		@YamlPropertyName(value="succeededRevisionLimit")
 		default Long getSucceededRevisionLimit() throws Exception { return null; }
 
 	}

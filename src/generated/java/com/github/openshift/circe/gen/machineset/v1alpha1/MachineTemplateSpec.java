@@ -15,6 +15,7 @@ public interface MachineTemplateSpec extends Bean {
 
 	interface EZ extends MachineTemplateSpec {
 
+		@YamlPropertyName(value="spec")
 		default MachineSpec getSpec() throws Exception { return null; }
 
 	}

@@ -16,10 +16,13 @@ public interface Rule extends Bean {
 
 	interface EZ extends Rule {
 
+		@YamlPropertyName(value="apiGroups")
 		default List<String> getAPIGroups() throws Exception { return null; }
 
+		@YamlPropertyName(value="apiVersions")
 		default List<String> getAPIVersions() throws Exception { return null; }
 
+		@YamlPropertyName(value="resources")
 		default List<String> getResources() throws Exception { return null; }
 
 	}

@@ -13,8 +13,10 @@ public interface Passwd extends Bean {
 
 	interface EZ extends Passwd {
 
+		@YamlPropertyName(value="groups")
 		default List<PasswdGroup> getGroups() throws Exception { return null; }
 
+		@YamlPropertyName(value="users")
 		default List<PasswdUser> getUsers() throws Exception { return null; }
 
 	}

@@ -10,6 +10,7 @@ public interface ProviderSpecSource extends Bean {
 
 	interface EZ extends ProviderSpecSource {
 
+		@YamlPropertyName(value="machineClass")
 		default MachineClassRef getMachineClass() throws Exception { return null; }
 
 	}

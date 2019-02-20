@@ -14,8 +14,11 @@ public interface KeystoneIdentityProvider extends Bean {
 
 	interface EZ extends KeystoneIdentityProvider {
 
+		@YamlPropertyName(value="oAuthRemoteConnectionInfo")
+		@YamlPropertyInline
 		default OAuthRemoteConnectionInfo getOAuthRemoteConnectionInfo() throws Exception { return null; }
 
+		@YamlPropertyName(value="domainName")
 		default String getDomainName() throws Exception { return null; }
 
 	}

@@ -23,14 +23,20 @@ public interface IdentityProvider extends Bean {
 
 	interface EZ extends IdentityProvider {
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
+		@YamlPropertyName(value="challenge")
 		default Boolean getUseAsChallenger() throws Exception { return null; }
 
+		@YamlPropertyName(value="login")
 		default Boolean getUseAsLogin() throws Exception { return null; }
 
+		@YamlPropertyName(value="mappingMethod")
 		default String getMappingMethod() throws Exception { return null; }
 
+		@YamlPropertyName(value="identityProviderConfig")
+		@YamlPropertyInline
 		default IdentityProviderConfig getIdentityProviderConfig() throws Exception { return null; }
 
 	}

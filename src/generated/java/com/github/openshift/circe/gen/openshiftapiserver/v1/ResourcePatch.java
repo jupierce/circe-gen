@@ -13,8 +13,10 @@ public interface ResourcePatch extends Bean {
 
 	interface EZ extends ResourcePatch {
 
+		@YamlPropertyName(value="type")
 		default String getType() throws Exception { return null; }
 
+		@YamlPropertyName(value="patch")
 		default String getPatch() throws Exception { return null; }
 
 	}

@@ -16,10 +16,13 @@ public interface Filesystem extends Bean {
 
 	interface EZ extends Filesystem {
 
+		@YamlPropertyName(value="mount")
 		default Mount getMount() throws Exception { return null; }
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
+		@YamlPropertyName(value="path")
 		default String getPath() throws Exception { return null; }
 
 	}

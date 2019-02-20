@@ -13,8 +13,10 @@ public interface OperandContainerSpec extends Bean {
 
 	interface EZ extends OperandContainerSpec {
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
+		@YamlPropertyName(value="resources")
 		default ResourceRequirements getResources() throws Exception { return null; }
 
 	}

@@ -10,6 +10,7 @@ public interface Networkd extends Bean {
 
 	interface EZ extends Networkd {
 
+		@YamlPropertyName(value="units")
 		default List<Networkdunit> getUnits() throws Exception { return null; }
 
 	}

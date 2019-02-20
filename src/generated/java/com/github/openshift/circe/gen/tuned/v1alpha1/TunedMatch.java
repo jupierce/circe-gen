@@ -19,12 +19,16 @@ public interface TunedMatch extends Bean {
 
 	interface EZ extends TunedMatch {
 
+		@YamlPropertyName(value="label")
 		default String getLabel() throws Exception { return null; }
 
+		@YamlPropertyName(value="value")
 		default String getValue() throws Exception { return null; }
 
+		@YamlPropertyName(value="type")
 		default String getType() throws Exception { return null; }
 
+		@YamlPropertyName(value="match")
 		default List<TunedMatch> getMatch() throws Exception { return null; }
 
 	}

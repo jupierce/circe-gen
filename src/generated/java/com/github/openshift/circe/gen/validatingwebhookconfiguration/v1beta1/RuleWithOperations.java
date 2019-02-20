@@ -14,8 +14,11 @@ public interface RuleWithOperations extends Bean {
 
 	interface EZ extends RuleWithOperations {
 
+		@YamlPropertyName(value="operations")
 		default List<String> getOperations() throws Exception { return null; }
 
+		@YamlPropertyName(value="rule")
+		@YamlPropertyInline
 		default Rule getRule() throws Exception { return null; }
 
 	}

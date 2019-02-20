@@ -24,12 +24,16 @@ public interface MachineSpec extends Bean {
 
 	interface EZ extends MachineSpec {
 
+		@YamlPropertyName(value="taints")
 		default List<Taint> getTaints() throws Exception { return null; }
 
+		@YamlPropertyName(value="providerSpec")
 		default ProviderSpec getProviderSpec() throws Exception { return null; }
 
+		@YamlPropertyName(value="versions")
 		default MachineVersionInfo getVersions() throws Exception { return null; }
 
+		@YamlPropertyName(value="configSource")
 		default NodeConfigSource getConfigSource() throws Exception { return null; }
 
 	}

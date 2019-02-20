@@ -22,14 +22,19 @@ public interface Raid extends Bean {
 
 	interface EZ extends Raid {
 
+		@YamlPropertyName(value="devices")
 		default List<String> getDevices() throws Exception { return null; }
 
+		@YamlPropertyName(value="level")
 		default String getLevel() throws Exception { return null; }
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
+		@YamlPropertyName(value="options")
 		default List<String> getOptions() throws Exception { return null; }
 
+		@YamlPropertyName(value="spares")
 		default Long getSpares() throws Exception { return null; }
 
 	}

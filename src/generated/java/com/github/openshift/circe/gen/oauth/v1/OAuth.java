@@ -17,6 +17,7 @@ public interface OAuth extends Bean {
 
 	interface EZ extends OAuth {
 
+		@YamlPropertyName(value="spec")
 		default OAuthSpec getSpec() throws Exception { return null; }
 
 	}

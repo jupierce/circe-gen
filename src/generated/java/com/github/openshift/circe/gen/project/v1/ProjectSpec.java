@@ -13,8 +13,10 @@ public interface ProjectSpec extends Bean {
 
 	interface EZ extends ProjectSpec {
 
+		@YamlPropertyName(value="projectRequestMessage")
 		default String getProjectRequestMessage() throws Exception { return null; }
 
+		@YamlPropertyName(value="projectRequestTemplate")
 		default TemplateReference getProjectRequestTemplate() throws Exception { return null; }
 
 	}

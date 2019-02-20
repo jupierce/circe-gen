@@ -13,8 +13,10 @@ public interface ImageLabel extends Bean {
 
 	interface EZ extends ImageLabel {
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
+		@YamlPropertyName(value="value")
 		default String getValue() throws Exception { return null; }
 
 	}

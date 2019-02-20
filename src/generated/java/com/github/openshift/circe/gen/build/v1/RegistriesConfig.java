@@ -16,10 +16,13 @@ public interface RegistriesConfig extends Bean {
 
 	interface EZ extends RegistriesConfig {
 
+		@YamlPropertyName(value="insecureRegistries")
 		default List<String> getInsecureRegistries() throws Exception { return null; }
 
+		@YamlPropertyName(value="blockedRegistries")
 		default List<String> getBlockedRegistries() throws Exception { return null; }
 
+		@YamlPropertyName(value="allowedRegistries")
 		default List<String> getAllowedRegistries() throws Exception { return null; }
 
 	}

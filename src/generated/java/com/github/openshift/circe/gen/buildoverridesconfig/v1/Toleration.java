@@ -22,14 +22,19 @@ public interface Toleration extends Bean {
 
 	interface EZ extends Toleration {
 
+		@YamlPropertyName(value="key")
 		default String getKey() throws Exception { return null; }
 
+		@YamlPropertyName(value="operator")
 		default String getOperator() throws Exception { return null; }
 
+		@YamlPropertyName(value="value")
 		default String getValue() throws Exception { return null; }
 
+		@YamlPropertyName(value="effect")
 		default String getEffect() throws Exception { return null; }
 
+		@YamlPropertyName(value="tolerationSeconds")
 		default Long getTolerationSeconds() throws Exception { return null; }
 
 	}

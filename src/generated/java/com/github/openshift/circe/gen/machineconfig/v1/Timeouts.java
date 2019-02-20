@@ -13,8 +13,10 @@ public interface Timeouts extends Bean {
 
 	interface EZ extends Timeouts {
 
+		@YamlPropertyName(value="httpResponseHeaders")
 		default Long getHTTPResponseHeaders() throws Exception { return null; }
 
+		@YamlPropertyName(value="httpTotal")
 		default Long getHTTPTotal() throws Exception { return null; }
 
 	}

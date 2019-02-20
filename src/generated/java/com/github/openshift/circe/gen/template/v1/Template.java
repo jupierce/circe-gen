@@ -18,6 +18,7 @@ public interface Template extends Bean {
 	@YamlPropertyName(value="parameters")
 	List<Parameter> getParameters() throws Exception;
 
+	@YamlPropertyName(value="objects")
 	List<Bean> getObjects() throws Exception;
 
 	@YamlPropertyName(value="objectLabels")
@@ -25,12 +26,16 @@ public interface Template extends Bean {
 
 	interface EZ extends Template {
 
+		@YamlPropertyName(value="message")
 		default String getMessage() throws Exception { return null; }
 
+		@YamlPropertyName(value="parameters")
 		default List<Parameter> getParameters() throws Exception { return null; }
 
+		@YamlPropertyName(value="objects")
 		default List<Bean> getObjects() throws Exception { return null; }
 
+		@YamlPropertyName(value="objectLabels")
 		default Map<String,String> getObjectLabels() throws Exception { return null; }
 
 	}

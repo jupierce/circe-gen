@@ -10,6 +10,7 @@ public interface WebhookTokenAuthenticator extends Bean {
 
 	interface EZ extends WebhookTokenAuthenticator {
 
+		@YamlPropertyName(value="kubeConfig")
 		default SecretNameReference getKubeConfig() throws Exception { return null; }
 
 	}

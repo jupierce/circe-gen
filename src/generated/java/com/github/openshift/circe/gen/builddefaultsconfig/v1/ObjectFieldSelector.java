@@ -13,8 +13,10 @@ public interface ObjectFieldSelector extends Bean {
 
 	interface EZ extends ObjectFieldSelector {
 
+		@YamlPropertyName(value="apiVersion")
 		default String getAPIVersion() throws Exception { return null; }
 
+		@YamlPropertyName(value="fieldPath")
 		default String getFieldPath() throws Exception { return null; }
 
 	}

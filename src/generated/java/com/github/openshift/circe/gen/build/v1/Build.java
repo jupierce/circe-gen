@@ -17,6 +17,7 @@ public interface Build extends Bean {
 
 	interface EZ extends Build {
 
+		@YamlPropertyName(value="spec")
 		default BuildSpec getSpec() throws Exception { return null; }
 
 	}

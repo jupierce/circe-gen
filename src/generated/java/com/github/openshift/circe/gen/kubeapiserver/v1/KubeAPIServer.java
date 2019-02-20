@@ -17,6 +17,7 @@ public interface KubeAPIServer extends Bean {
 
 	interface EZ extends KubeAPIServer {
 
+		@YamlPropertyName(value="spec")
 		default KubeAPIServerSpec getSpec() throws Exception { return null; }
 
 	}

@@ -17,6 +17,7 @@ public interface Authentication extends Bean {
 
 	interface EZ extends Authentication {
 
+		@YamlPropertyName(value="spec")
 		default AuthenticationSpec getSpec() throws Exception { return null; }
 
 	}

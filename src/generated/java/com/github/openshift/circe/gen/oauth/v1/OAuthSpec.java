@@ -16,10 +16,13 @@ public interface OAuthSpec extends Bean {
 
 	interface EZ extends OAuthSpec {
 
+		@YamlPropertyName(value="identityProviders")
 		default List<IdentityProvider> getIdentityProviders() throws Exception { return null; }
 
+		@YamlPropertyName(value="tokenConfig")
 		default TokenConfig getTokenConfig() throws Exception { return null; }
 
+		@YamlPropertyName(value="templates")
 		default OAuthTemplates getTemplates() throws Exception { return null; }
 
 	}

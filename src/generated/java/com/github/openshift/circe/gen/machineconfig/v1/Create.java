@@ -13,8 +13,10 @@ public interface Create extends Bean {
 
 	interface EZ extends Create {
 
+		@YamlPropertyName(value="force")
 		default Boolean getForce() throws Exception { return null; }
 
+		@YamlPropertyName(value="options")
 		default List<String> getOptions() throws Exception { return null; }
 
 	}

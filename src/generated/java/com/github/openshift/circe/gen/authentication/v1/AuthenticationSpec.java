@@ -16,10 +16,13 @@ public interface AuthenticationSpec extends Bean {
 
 	interface EZ extends AuthenticationSpec {
 
+		@YamlPropertyName(value="type")
 		default String getType() throws Exception { return null; }
 
+		@YamlPropertyName(value="oauthMetadata")
 		default ConfigMapNameReference getOAuthMetadata() throws Exception { return null; }
 
+		@YamlPropertyName(value="webhookTokenAuthenticators")
 		default List<WebhookTokenAuthenticator> getWebhookTokenAuthenticators() throws Exception { return null; }
 
 	}

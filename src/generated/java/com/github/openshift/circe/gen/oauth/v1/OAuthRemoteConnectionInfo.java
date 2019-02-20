@@ -19,12 +19,16 @@ public interface OAuthRemoteConnectionInfo extends Bean {
 
 	interface EZ extends OAuthRemoteConnectionInfo {
 
+		@YamlPropertyName(value="url")
 		default String getURL() throws Exception { return null; }
 
+		@YamlPropertyName(value="ca")
 		default ConfigMapNameReference getCA() throws Exception { return null; }
 
+		@YamlPropertyName(value="tlsClientCert")
 		default SecretNameReference getTLSClientCert() throws Exception { return null; }
 
+		@YamlPropertyName(value="tlsClientKey")
 		default SecretNameReference getTLSClientKey() throws Exception { return null; }
 
 	}

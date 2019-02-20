@@ -13,8 +13,10 @@ public interface CaReference extends Bean {
 
 	interface EZ extends CaReference {
 
+		@YamlPropertyName(value="source")
 		default String getSource() throws Exception { return null; }
 
+		@YamlPropertyName(value="verification")
 		default Verification getVerification() throws Exception { return null; }
 
 	}

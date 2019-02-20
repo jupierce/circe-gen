@@ -19,12 +19,16 @@ public interface Ignition extends Bean {
 
 	interface EZ extends Ignition {
 
+		@YamlPropertyName(value="config")
 		default IgnitionConfig getConfig() throws Exception { return null; }
 
+		@YamlPropertyName(value="security")
 		default Security getSecurity() throws Exception { return null; }
 
+		@YamlPropertyName(value="timeouts")
 		default Timeouts getTimeouts() throws Exception { return null; }
 
+		@YamlPropertyName(value="version")
 		default String getVersion() throws Exception { return null; }
 
 	}

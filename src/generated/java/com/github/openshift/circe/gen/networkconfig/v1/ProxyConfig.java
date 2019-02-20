@@ -16,10 +16,13 @@ public interface ProxyConfig extends Bean {
 
 	interface EZ extends ProxyConfig {
 
+		@YamlPropertyName(value="iptablesSyncPeriod")
 		default String getIptablesSyncPeriod() throws Exception { return null; }
 
+		@YamlPropertyName(value="bindAddress")
 		default String getBindAddress() throws Exception { return null; }
 
+		@YamlPropertyName(value="proxyArguments")
 		default Map<String,List<String>> getProxyArguments() throws Exception { return null; }
 
 	}

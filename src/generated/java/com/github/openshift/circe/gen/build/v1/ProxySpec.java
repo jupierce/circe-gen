@@ -16,10 +16,13 @@ public interface ProxySpec extends Bean {
 
 	interface EZ extends ProxySpec {
 
+		@YamlPropertyName(value="httpProxy")
 		default String getHTTPProxy() throws Exception { return null; }
 
+		@YamlPropertyName(value="httpsProxy")
 		default String getHTTPSProxy() throws Exception { return null; }
 
+		@YamlPropertyName(value="noProxy")
 		default String getNoProxy() throws Exception { return null; }
 
 	}

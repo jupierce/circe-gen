@@ -10,6 +10,7 @@ public interface SecretNameReference extends Bean {
 
 	interface EZ extends SecretNameReference {
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
 	}

@@ -13,8 +13,10 @@ public interface TunedProfile extends Bean {
 
 	interface EZ extends TunedProfile {
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
+		@YamlPropertyName(value="data")
 		default String getData() throws Exception { return null; }
 
 	}

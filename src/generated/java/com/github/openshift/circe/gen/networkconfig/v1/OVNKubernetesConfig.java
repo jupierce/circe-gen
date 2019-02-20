@@ -13,8 +13,10 @@ public interface OVNKubernetesConfig extends Bean {
 
 	interface EZ extends OVNKubernetesConfig {
 
+		@YamlPropertyName(value="genevePort")
 		default Long getGenevePort() throws Exception { return null; }
 
+		@YamlPropertyName(value="mtu")
 		default Long getMTU() throws Exception { return null; }
 
 	}

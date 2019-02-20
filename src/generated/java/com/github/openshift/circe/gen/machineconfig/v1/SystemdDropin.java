@@ -13,8 +13,10 @@ public interface SystemdDropin extends Bean {
 
 	interface EZ extends SystemdDropin {
 
+		@YamlPropertyName(value="contents")
 		default String getContents() throws Exception { return null; }
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
 	}

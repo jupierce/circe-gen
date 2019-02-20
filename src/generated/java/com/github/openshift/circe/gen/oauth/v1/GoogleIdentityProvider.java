@@ -16,10 +16,13 @@ public interface GoogleIdentityProvider extends Bean {
 
 	interface EZ extends GoogleIdentityProvider {
 
+		@YamlPropertyName(value="clientID")
 		default String getClientID() throws Exception { return null; }
 
+		@YamlPropertyName(value="clientSecret")
 		default SecretNameReference getClientSecret() throws Exception { return null; }
 
+		@YamlPropertyName(value="hostedDomain")
 		default String getHostedDomain() throws Exception { return null; }
 
 	}

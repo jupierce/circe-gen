@@ -13,8 +13,10 @@ public interface TokenConfig extends Bean {
 
 	interface EZ extends TokenConfig {
 
+		@YamlPropertyName(value="accessTokenMaxAgeSeconds")
 		default Long getAccessTokenMaxAgeSeconds() throws Exception { return null; }
 
+		@YamlPropertyName(value="accessTokenInactivityTimeoutSeconds")
 		default Long getAccessTokenInactivityTimeoutSeconds() throws Exception { return null; }
 
 	}

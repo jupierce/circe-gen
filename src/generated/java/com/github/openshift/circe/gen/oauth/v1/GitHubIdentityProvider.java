@@ -25,16 +25,22 @@ public interface GitHubIdentityProvider extends Bean {
 
 	interface EZ extends GitHubIdentityProvider {
 
+		@YamlPropertyName(value="clientID")
 		default String getClientID() throws Exception { return null; }
 
+		@YamlPropertyName(value="clientSecret")
 		default SecretNameReference getClientSecret() throws Exception { return null; }
 
+		@YamlPropertyName(value="organizations")
 		default List<String> getOrganizations() throws Exception { return null; }
 
+		@YamlPropertyName(value="teams")
 		default List<String> getTeams() throws Exception { return null; }
 
+		@YamlPropertyName(value="hostname")
 		default String getHostname() throws Exception { return null; }
 
+		@YamlPropertyName(value="ca")
 		default ConfigMapNameReference getCA() throws Exception { return null; }
 
 	}

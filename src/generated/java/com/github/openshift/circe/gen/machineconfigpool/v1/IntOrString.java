@@ -16,10 +16,13 @@ public interface IntOrString extends Bean {
 
 	interface EZ extends IntOrString {
 
+		@YamlPropertyName(value="type")
 		default Long getType() throws Exception { return null; }
 
+		@YamlPropertyName(value="intVal")
 		default Long getIntVal() throws Exception { return null; }
 
+		@YamlPropertyName(value="strVal")
 		default String getStrVal() throws Exception { return null; }
 
 	}

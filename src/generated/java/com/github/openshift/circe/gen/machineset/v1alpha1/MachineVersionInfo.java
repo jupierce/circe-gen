@@ -13,8 +13,10 @@ public interface MachineVersionInfo extends Bean {
 
 	interface EZ extends MachineVersionInfo {
 
+		@YamlPropertyName(value="kubelet")
 		default String getKubelet() throws Exception { return null; }
 
+		@YamlPropertyName(value="controlPlane")
 		default String getControlPlane() throws Exception { return null; }
 
 	}

@@ -17,6 +17,7 @@ public interface ValidatingWebhookConfiguration extends Bean {
 
 	interface EZ extends ValidatingWebhookConfiguration {
 
+		@YamlPropertyName(value="webhooks")
 		default List<Webhook> getWebhooks() throws Exception { return null; }
 
 	}

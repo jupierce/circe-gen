@@ -10,6 +10,7 @@ public interface NodeConfigSource extends Bean {
 
 	interface EZ extends NodeConfigSource {
 
+		@YamlPropertyName(value="configMap")
 		default ConfigMapNodeConfigSource getConfigMap() throws Exception { return null; }
 
 	}

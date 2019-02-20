@@ -15,8 +15,12 @@ public interface File extends Bean {
 
 	interface EZ extends File {
 
+		@YamlPropertyName(value="node")
+		@YamlPropertyInline
 		default Node getNode() throws Exception { return null; }
 
+		@YamlPropertyName(value="fileEmbedded1")
+		@YamlPropertyInline
 		default FileEmbedded1 getFileEmbedded1() throws Exception { return null; }
 
 	}

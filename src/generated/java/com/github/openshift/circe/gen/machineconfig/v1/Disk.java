@@ -16,10 +16,13 @@ public interface Disk extends Bean {
 
 	interface EZ extends Disk {
 
+		@YamlPropertyName(value="device")
 		default String getDevice() throws Exception { return null; }
 
+		@YamlPropertyName(value="partitions")
 		default List<Partition> getPartitions() throws Exception { return null; }
 
+		@YamlPropertyName(value="wipeTable")
 		default Boolean getWipeTable() throws Exception { return null; }
 
 	}

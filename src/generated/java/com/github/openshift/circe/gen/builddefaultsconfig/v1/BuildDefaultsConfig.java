@@ -36,22 +36,31 @@ public interface BuildDefaultsConfig extends Bean {
 
 	interface EZ extends BuildDefaultsConfig {
 
+		@YamlPropertyName(value="gitHTTPProxy")
 		default String getGitHTTPProxy() throws Exception { return null; }
 
+		@YamlPropertyName(value="gitHTTPSProxy")
 		default String getGitHTTPSProxy() throws Exception { return null; }
 
+		@YamlPropertyName(value="gitNoProxy")
 		default String getGitNoProxy() throws Exception { return null; }
 
+		@YamlPropertyName(value="env")
 		default List<EnvVar> getEnv() throws Exception { return null; }
 
+		@YamlPropertyName(value="sourceStrategyDefaults")
 		default SourceStrategyDefaultsConfig getSourceStrategyDefaults() throws Exception { return null; }
 
+		@YamlPropertyName(value="imageLabels")
 		default List<ImageLabel> getImageLabels() throws Exception { return null; }
 
+		@YamlPropertyName(value="nodeSelector")
 		default Map<String,String> getNodeSelector() throws Exception { return null; }
 
+		@YamlPropertyName(value="annotations")
 		default Map<String,String> getAnnotations() throws Exception { return null; }
 
+		@YamlPropertyName(value="resources")
 		default ResourceRequirements getResources() throws Exception { return null; }
 
 	}

@@ -16,10 +16,13 @@ public interface FileContents extends Bean {
 
 	interface EZ extends FileContents {
 
+		@YamlPropertyName(value="compression")
 		default String getCompression() throws Exception { return null; }
 
+		@YamlPropertyName(value="source")
 		default String getSource() throws Exception { return null; }
 
+		@YamlPropertyName(value="verification")
 		default Verification getVerification() throws Exception { return null; }
 
 	}

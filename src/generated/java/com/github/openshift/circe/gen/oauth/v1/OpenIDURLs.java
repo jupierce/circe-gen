@@ -16,10 +16,13 @@ public interface OpenIDURLs extends Bean {
 
 	interface EZ extends OpenIDURLs {
 
+		@YamlPropertyName(value="authorize")
 		default String getAuthorize() throws Exception { return null; }
 
+		@YamlPropertyName(value="token")
 		default String getToken() throws Exception { return null; }
 
+		@YamlPropertyName(value="userInfo")
 		default String getUserInfo() throws Exception { return null; }
 
 	}

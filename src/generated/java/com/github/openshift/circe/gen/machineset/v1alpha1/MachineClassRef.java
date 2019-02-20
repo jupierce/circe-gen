@@ -14,8 +14,11 @@ public interface MachineClassRef extends Bean {
 
 	interface EZ extends MachineClassRef {
 
+		@YamlPropertyName(value="objectReference")
+		@YamlPropertyInline
 		default ObjectReference getObjectReference() throws Exception { return null; }
 
+		@YamlPropertyName(value="provider")
 		default String getProvider() throws Exception { return null; }
 
 	}

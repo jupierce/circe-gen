@@ -14,8 +14,11 @@ public interface KubeAPIServerSpec extends Bean {
 
 	interface EZ extends KubeAPIServerSpec {
 
+		@YamlPropertyName(value="staticPodOperatorSpec")
+		@YamlPropertyInline
 		default StaticPodOperatorSpec getStaticPodOperatorSpec() throws Exception { return null; }
 
+		@YamlPropertyName(value="forceRedeploymentReason")
 		default String getForceRedeploymentReason() throws Exception { return null; }
 
 	}

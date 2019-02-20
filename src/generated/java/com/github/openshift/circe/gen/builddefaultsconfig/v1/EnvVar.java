@@ -16,10 +16,13 @@ public interface EnvVar extends Bean {
 
 	interface EZ extends EnvVar {
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
+		@YamlPropertyName(value="value")
 		default String getValue() throws Exception { return null; }
 
+		@YamlPropertyName(value="valueFrom")
 		default EnvVarSource getValueFrom() throws Exception { return null; }
 
 	}

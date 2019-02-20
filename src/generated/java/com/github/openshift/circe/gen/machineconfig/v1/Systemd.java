@@ -10,6 +10,7 @@ public interface Systemd extends Bean {
 
 	interface EZ extends Systemd {
 
+		@YamlPropertyName(value="units")
 		default List<Unit> getUnits() throws Exception { return null; }
 
 	}

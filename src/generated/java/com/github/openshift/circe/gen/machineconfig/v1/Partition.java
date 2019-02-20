@@ -25,16 +25,22 @@ public interface Partition extends Bean {
 
 	interface EZ extends Partition {
 
+		@YamlPropertyName(value="guid")
 		default String getGUID() throws Exception { return null; }
 
+		@YamlPropertyName(value="label")
 		default String getLabel() throws Exception { return null; }
 
+		@YamlPropertyName(value="number")
 		default Long getNumber() throws Exception { return null; }
 
+		@YamlPropertyName(value="size")
 		default Long getSize() throws Exception { return null; }
 
+		@YamlPropertyName(value="start")
 		default Long getStart() throws Exception { return null; }
 
+		@YamlPropertyName(value="typeGuid")
 		default String getTypeGUID() throws Exception { return null; }
 
 	}

@@ -22,14 +22,19 @@ public interface Node extends Bean {
 
 	interface EZ extends Node {
 
+		@YamlPropertyName(value="filesystem")
 		default String getFilesystem() throws Exception { return null; }
 
+		@YamlPropertyName(value="group")
 		default NodeGroup getGroup() throws Exception { return null; }
 
+		@YamlPropertyName(value="overwrite")
 		default Boolean getOverwrite() throws Exception { return null; }
 
+		@YamlPropertyName(value="path")
 		default String getPath() throws Exception { return null; }
 
+		@YamlPropertyName(value="user")
 		default NodeUser getUser() throws Exception { return null; }
 
 	}

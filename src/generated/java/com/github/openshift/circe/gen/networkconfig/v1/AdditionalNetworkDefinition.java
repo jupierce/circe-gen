@@ -16,10 +16,13 @@ public interface AdditionalNetworkDefinition extends Bean {
 
 	interface EZ extends AdditionalNetworkDefinition {
 
+		@YamlPropertyName(value="type")
 		default String getType() throws Exception { return null; }
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
+		@YamlPropertyName(value="rawCNIConfig")
 		default String getRawCNIConfig() throws Exception { return null; }
 
 	}

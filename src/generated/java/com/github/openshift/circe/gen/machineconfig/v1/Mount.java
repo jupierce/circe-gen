@@ -28,18 +28,25 @@ public interface Mount extends Bean {
 
 	interface EZ extends Mount {
 
+		@YamlPropertyName(value="create")
 		default Create getCreate() throws Exception { return null; }
 
+		@YamlPropertyName(value="device")
 		default String getDevice() throws Exception { return null; }
 
+		@YamlPropertyName(value="format")
 		default String getFormat() throws Exception { return null; }
 
+		@YamlPropertyName(value="label")
 		default String getLabel() throws Exception { return null; }
 
+		@YamlPropertyName(value="options")
 		default List<String> getOptions() throws Exception { return null; }
 
+		@YamlPropertyName(value="uuid")
 		default String getUUID() throws Exception { return null; }
 
+		@YamlPropertyName(value="wipeFilesystem")
 		default Boolean getWipeFilesystem() throws Exception { return null; }
 
 	}

@@ -25,16 +25,22 @@ public interface Webhook extends Bean {
 
 	interface EZ extends Webhook {
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
+		@YamlPropertyName(value="clientConfig")
 		default WebhookClientConfig getClientConfig() throws Exception { return null; }
 
+		@YamlPropertyName(value="rules")
 		default List<RuleWithOperations> getRules() throws Exception { return null; }
 
+		@YamlPropertyName(value="failurePolicy")
 		default String getFailurePolicy() throws Exception { return null; }
 
+		@YamlPropertyName(value="namespaceSelector")
 		default LabelSelector getNamespaceSelector() throws Exception { return null; }
 
+		@YamlPropertyName(value="sideEffects")
 		default String getSideEffects() throws Exception { return null; }
 
 	}

@@ -25,16 +25,22 @@ public interface BuildDefaults extends Bean {
 
 	interface EZ extends BuildDefaults {
 
+		@YamlPropertyName(value="defaultProxy")
 		default ProxySpec getDefaultProxy() throws Exception { return null; }
 
+		@YamlPropertyName(value="gitProxy")
 		default ProxySpec getGitProxy() throws Exception { return null; }
 
+		@YamlPropertyName(value="env")
 		default List<EnvVar> getEnv() throws Exception { return null; }
 
+		@YamlPropertyName(value="imageLabels")
 		default List<ImageLabel> getImageLabels() throws Exception { return null; }
 
+		@YamlPropertyName(value="resources")
 		default ResourceRequirements getResources() throws Exception { return null; }
 
+		@YamlPropertyName(value="registriesConfig")
 		default RegistriesConfig getRegistriesConfig() throws Exception { return null; }
 
 	}

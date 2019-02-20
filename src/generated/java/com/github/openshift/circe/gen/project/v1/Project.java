@@ -17,6 +17,7 @@ public interface Project extends Bean {
 
 	interface EZ extends Project {
 
+		@YamlPropertyName(value="spec")
 		default ProjectSpec getSpec() throws Exception { return null; }
 
 	}

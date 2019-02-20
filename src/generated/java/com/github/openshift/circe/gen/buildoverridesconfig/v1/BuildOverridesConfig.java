@@ -24,14 +24,19 @@ public interface BuildOverridesConfig extends Bean {
 
 	interface EZ extends BuildOverridesConfig {
 
+		@YamlPropertyName(value="forcePull")
 		default Boolean getForcePull() throws Exception { return null; }
 
+		@YamlPropertyName(value="imageLabels")
 		default List<ImageLabel> getImageLabels() throws Exception { return null; }
 
+		@YamlPropertyName(value="nodeSelector")
 		default Map<String,String> getNodeSelector() throws Exception { return null; }
 
+		@YamlPropertyName(value="annotations")
 		default Map<String,String> getAnnotations() throws Exception { return null; }
 
+		@YamlPropertyName(value="tolerations")
 		default List<Toleration> getTolerations() throws Exception { return null; }
 
 	}

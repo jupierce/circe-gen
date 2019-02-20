@@ -10,6 +10,7 @@ public interface Verification extends Bean {
 
 	interface EZ extends Verification {
 
+		@YamlPropertyName(value="hash")
 		default String getHash() throws Exception { return null; }
 
 	}

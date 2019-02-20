@@ -28,18 +28,25 @@ public interface NetworkConfigSpec extends Bean {
 
 	interface EZ extends NetworkConfigSpec {
 
+		@YamlPropertyName(value="clusterNetworks")
 		default List<ClusterNetwork> getClusterNetworks() throws Exception { return null; }
 
+		@YamlPropertyName(value="serviceNetwork")
 		default String getServiceNetwork() throws Exception { return null; }
 
+		@YamlPropertyName(value="defaultNetwork")
 		default DefaultNetworkDefinition getDefaultNetwork() throws Exception { return null; }
 
+		@YamlPropertyName(value="additionalNetworks")
 		default List<AdditionalNetworkDefinition> getAdditionalNetworks() throws Exception { return null; }
 
+		@YamlPropertyName(value="deployKubeProxy")
 		default Boolean getDeployKubeProxy() throws Exception { return null; }
 
+		@YamlPropertyName(value="kubeProxyConfig")
 		default ProxyConfig getKubeProxyConfig() throws Exception { return null; }
 
+		@YamlPropertyName(value="someNewField")
 		default String getSomeNewField() throws Exception { return null; }
 
 	}

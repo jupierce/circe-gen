@@ -15,8 +15,12 @@ public interface Link extends Bean {
 
 	interface EZ extends Link {
 
+		@YamlPropertyName(value="node")
+		@YamlPropertyInline
 		default Node getNode() throws Exception { return null; }
 
+		@YamlPropertyName(value="linkEmbedded1")
+		@YamlPropertyInline
 		default LinkEmbedded1 getLinkEmbedded1() throws Exception { return null; }
 
 	}

@@ -19,12 +19,16 @@ public interface DefaultNetworkDefinition extends Bean {
 
 	interface EZ extends DefaultNetworkDefinition {
 
+		@YamlPropertyName(value="type")
 		default String getType() throws Exception { return null; }
 
+		@YamlPropertyName(value="openshiftSDNConfig")
 		default OpenShiftSDNConfig getOpenShiftSDNConfig() throws Exception { return null; }
 
+		@YamlPropertyName(value="ovnKubernetesConfig")
 		default OVNKubernetesConfig getOVNKubernetesConfig() throws Exception { return null; }
 
+		@YamlPropertyName(value="otherConfig")
 		default Map<String,String> getOtherConfig() throws Exception { return null; }
 
 	}

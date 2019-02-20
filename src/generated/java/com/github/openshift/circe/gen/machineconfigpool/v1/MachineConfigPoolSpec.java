@@ -19,12 +19,16 @@ public interface MachineConfigPoolSpec extends Bean {
 
 	interface EZ extends MachineConfigPoolSpec {
 
+		@YamlPropertyName(value="machineConfigSelector")
 		default LabelSelector getMachineConfigSelector() throws Exception { return null; }
 
+		@YamlPropertyName(value="machineSelector")
 		default LabelSelector getMachineSelector() throws Exception { return null; }
 
+		@YamlPropertyName(value="paused")
 		default Boolean getPaused() throws Exception { return null; }
 
+		@YamlPropertyName(value="maxUnavailable")
 		default IntOrString getMaxUnavailable() throws Exception { return null; }
 
 	}

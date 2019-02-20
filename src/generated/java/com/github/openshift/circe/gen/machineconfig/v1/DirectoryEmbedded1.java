@@ -10,6 +10,7 @@ public interface DirectoryEmbedded1 extends Bean {
 
 	interface EZ extends DirectoryEmbedded1 {
 
+		@YamlPropertyName(value="mode")
 		default Long getMode() throws Exception { return null; }
 
 	}

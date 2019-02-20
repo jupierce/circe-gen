@@ -16,10 +16,13 @@ public interface FileEmbedded1 extends Bean {
 
 	interface EZ extends FileEmbedded1 {
 
+		@YamlPropertyName(value="append")
 		default Boolean getAppend() throws Exception { return null; }
 
+		@YamlPropertyName(value="contents")
 		default FileContents getContents() throws Exception { return null; }
 
+		@YamlPropertyName(value="mode")
 		default Long getMode() throws Exception { return null; }
 
 	}

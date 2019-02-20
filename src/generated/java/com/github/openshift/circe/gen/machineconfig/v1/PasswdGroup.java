@@ -19,12 +19,16 @@ public interface PasswdGroup extends Bean {
 
 	interface EZ extends PasswdGroup {
 
+		@YamlPropertyName(value="gid")
 		default Long getGid() throws Exception { return null; }
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
+		@YamlPropertyName(value="passwordHash")
 		default String getPasswordHash() throws Exception { return null; }
 
+		@YamlPropertyName(value="system")
 		default Boolean getSystem() throws Exception { return null; }
 
 	}

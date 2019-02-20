@@ -28,18 +28,25 @@ public interface Parameter extends Bean {
 
 	interface EZ extends Parameter {
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
+		@YamlPropertyName(value="displayName")
 		default String getDisplayName() throws Exception { return null; }
 
+		@YamlPropertyName(value="description")
 		default String getDescription() throws Exception { return null; }
 
+		@YamlPropertyName(value="value")
 		default String getValue() throws Exception { return null; }
 
+		@YamlPropertyName(value="generate")
 		default String getGenerate() throws Exception { return null; }
 
+		@YamlPropertyName(value="from")
 		default String getFrom() throws Exception { return null; }
 
+		@YamlPropertyName(value="required")
 		default Boolean getRequired() throws Exception { return null; }
 
 	}

@@ -19,12 +19,16 @@ public interface EnvVarSource extends Bean {
 
 	interface EZ extends EnvVarSource {
 
+		@YamlPropertyName(value="fieldRef")
 		default ObjectFieldSelector getFieldRef() throws Exception { return null; }
 
+		@YamlPropertyName(value="resourceFieldRef")
 		default ResourceFieldSelector getResourceFieldRef() throws Exception { return null; }
 
+		@YamlPropertyName(value="configMapKeyRef")
 		default ConfigMapKeySelector getConfigMapKeyRef() throws Exception { return null; }
 
+		@YamlPropertyName(value="secretKeyRef")
 		default SecretKeySelector getSecretKeyRef() throws Exception { return null; }
 
 	}

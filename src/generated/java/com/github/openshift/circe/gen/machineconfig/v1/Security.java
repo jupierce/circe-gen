@@ -10,6 +10,7 @@ public interface Security extends Bean {
 
 	interface EZ extends Security {
 
+		@YamlPropertyName(value="tls")
 		default TLS getTLS() throws Exception { return null; }
 
 	}

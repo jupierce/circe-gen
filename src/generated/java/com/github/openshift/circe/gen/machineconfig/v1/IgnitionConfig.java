@@ -13,8 +13,10 @@ public interface IgnitionConfig extends Bean {
 
 	interface EZ extends IgnitionConfig {
 
+		@YamlPropertyName(value="append")
 		default List<ConfigReference> getAppend() throws Exception { return null; }
 
+		@YamlPropertyName(value="replace")
 		default ConfigReference getReplace() throws Exception { return null; }
 
 	}

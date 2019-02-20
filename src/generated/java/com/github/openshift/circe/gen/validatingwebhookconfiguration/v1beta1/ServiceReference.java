@@ -16,10 +16,13 @@ public interface ServiceReference extends Bean {
 
 	interface EZ extends ServiceReference {
 
+		@YamlPropertyName(value="namespace")
 		default String getNamespace() throws Exception { return null; }
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
+		@YamlPropertyName(value="path")
 		default String getPath() throws Exception { return null; }
 
 	}

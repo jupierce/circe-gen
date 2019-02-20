@@ -13,8 +13,10 @@ public interface TunedSpec extends Bean {
 
 	interface EZ extends TunedSpec {
 
+		@YamlPropertyName(value="profile")
 		default List<TunedProfile> getProfile() throws Exception { return null; }
 
+		@YamlPropertyName(value="recommend")
 		default List<TunedRecommend> getRecommend() throws Exception { return null; }
 
 	}

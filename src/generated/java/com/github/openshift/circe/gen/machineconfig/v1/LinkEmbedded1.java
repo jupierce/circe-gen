@@ -13,8 +13,10 @@ public interface LinkEmbedded1 extends Bean {
 
 	interface EZ extends LinkEmbedded1 {
 
+		@YamlPropertyName(value="hard")
 		default Boolean getHard() throws Exception { return null; }
 
+		@YamlPropertyName(value="target")
 		default String getTarget() throws Exception { return null; }
 
 	}

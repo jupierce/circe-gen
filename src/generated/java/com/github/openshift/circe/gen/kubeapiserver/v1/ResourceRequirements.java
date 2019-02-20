@@ -13,8 +13,10 @@ public interface ResourceRequirements extends Bean {
 
 	interface EZ extends ResourceRequirements {
 
+		@YamlPropertyName(value="limits")
 		default Quantity getLimits() throws Exception { return null; }
 
+		@YamlPropertyName(value="requests")
 		default Quantity getRequests() throws Exception { return null; }
 
 	}

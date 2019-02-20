@@ -10,6 +10,7 @@ public interface ConfigMapNameReference extends Bean {
 
 	interface EZ extends ConfigMapNameReference {
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
 	}

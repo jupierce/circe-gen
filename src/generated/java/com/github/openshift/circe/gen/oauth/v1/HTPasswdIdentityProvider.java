@@ -10,6 +10,7 @@ public interface HTPasswdIdentityProvider extends Bean {
 
 	interface EZ extends HTPasswdIdentityProvider {
 
+		@YamlPropertyName(value="fileData")
 		default SecretNameReference getFileData() throws Exception { return null; }
 
 	}

@@ -16,10 +16,13 @@ public interface OperandSpec extends Bean {
 
 	interface EZ extends OperandSpec {
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
+		@YamlPropertyName(value="operandContainerSpecs")
 		default List<OperandContainerSpec> getOperandContainerSpecs() throws Exception { return null; }
 
+		@YamlPropertyName(value="unsupportedResourcePatches")
 		default List<ResourcePatch> getUnsupportedResourcePatches() throws Exception { return null; }
 
 	}

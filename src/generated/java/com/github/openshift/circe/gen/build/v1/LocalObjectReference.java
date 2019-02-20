@@ -10,6 +10,7 @@ public interface LocalObjectReference extends Bean {
 
 	interface EZ extends LocalObjectReference {
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
 	}

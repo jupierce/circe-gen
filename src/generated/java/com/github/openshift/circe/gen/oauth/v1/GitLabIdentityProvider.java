@@ -19,12 +19,16 @@ public interface GitLabIdentityProvider extends Bean {
 
 	interface EZ extends GitLabIdentityProvider {
 
+		@YamlPropertyName(value="clientID")
 		default String getClientID() throws Exception { return null; }
 
+		@YamlPropertyName(value="clientSecret")
 		default SecretNameReference getClientSecret() throws Exception { return null; }
 
+		@YamlPropertyName(value="url")
 		default String getURL() throws Exception { return null; }
 
+		@YamlPropertyName(value="ca")
 		default ConfigMapNameReference getCA() throws Exception { return null; }
 
 	}

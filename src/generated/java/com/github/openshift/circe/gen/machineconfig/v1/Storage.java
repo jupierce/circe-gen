@@ -25,16 +25,22 @@ public interface Storage extends Bean {
 
 	interface EZ extends Storage {
 
+		@YamlPropertyName(value="directories")
 		default List<Directory> getDirectories() throws Exception { return null; }
 
+		@YamlPropertyName(value="disks")
 		default List<Disk> getDisks() throws Exception { return null; }
 
+		@YamlPropertyName(value="files")
 		default List<File> getFiles() throws Exception { return null; }
 
+		@YamlPropertyName(value="filesystems")
 		default List<Filesystem> getFilesystems() throws Exception { return null; }
 
+		@YamlPropertyName(value="links")
 		default List<Link> getLinks() throws Exception { return null; }
 
+		@YamlPropertyName(value="raid")
 		default List<Raid> getRaid() throws Exception { return null; }
 
 	}

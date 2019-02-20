@@ -22,14 +22,19 @@ public interface ConfigMapNodeConfigSource extends Bean {
 
 	interface EZ extends ConfigMapNodeConfigSource {
 
+		@YamlPropertyName(value="namespace")
 		default String getNamespace() throws Exception { return null; }
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
+		@YamlPropertyName(value="uid")
 		default String getUID() throws Exception { return null; }
 
+		@YamlPropertyName(value="resourceVersion")
 		default String getResourceVersion() throws Exception { return null; }
 
+		@YamlPropertyName(value="kubeletConfigKey")
 		default String getKubeletConfigKey() throws Exception { return null; }
 
 	}

@@ -16,10 +16,13 @@ public interface LabelSelectorRequirement extends Bean {
 
 	interface EZ extends LabelSelectorRequirement {
 
+		@YamlPropertyName(value="key")
 		default String getKey() throws Exception { return null; }
 
+		@YamlPropertyName(value="operator")
 		default String getOperator() throws Exception { return null; }
 
+		@YamlPropertyName(value="values")
 		default List<String> getValues() throws Exception { return null; }
 
 	}

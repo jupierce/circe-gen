@@ -22,14 +22,19 @@ public interface Config extends Bean {
 
 	interface EZ extends Config {
 
+		@YamlPropertyName(value="ignition")
 		default Ignition getIgnition() throws Exception { return null; }
 
+		@YamlPropertyName(value="networkd")
 		default Networkd getNetworkd() throws Exception { return null; }
 
+		@YamlPropertyName(value="passwd")
 		default Passwd getPasswd() throws Exception { return null; }
 
+		@YamlPropertyName(value="storage")
 		default Storage getStorage() throws Exception { return null; }
 
+		@YamlPropertyName(value="systemd")
 		default Systemd getSystemd() throws Exception { return null; }
 
 	}

@@ -10,6 +10,7 @@ public interface SourceStrategyDefaultsConfig extends Bean {
 
 	interface EZ extends SourceStrategyDefaultsConfig {
 
+		@YamlPropertyName(value="incremental")
 		default Boolean getIncremental() throws Exception { return null; }
 
 	}

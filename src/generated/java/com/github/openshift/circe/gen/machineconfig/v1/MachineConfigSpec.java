@@ -13,8 +13,10 @@ public interface MachineConfigSpec extends Bean {
 
 	interface EZ extends MachineConfigSpec {
 
+		@YamlPropertyName(value="osImageURL")
 		default String getOSImageURL() throws Exception { return null; }
 
+		@YamlPropertyName(value="config")
 		default Config getConfig() throws Exception { return null; }
 
 	}

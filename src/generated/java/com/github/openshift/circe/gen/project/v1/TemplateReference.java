@@ -10,6 +10,7 @@ public interface TemplateReference extends Bean {
 
 	interface EZ extends TemplateReference {
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
 	}

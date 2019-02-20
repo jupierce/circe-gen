@@ -17,6 +17,7 @@ public interface NetworkConfig extends Bean {
 
 	interface EZ extends NetworkConfig {
 
+		@YamlPropertyName(value="spec")
 		default NetworkConfigSpec getSpec() throws Exception { return null; }
 
 	}

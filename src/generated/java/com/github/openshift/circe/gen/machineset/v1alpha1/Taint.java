@@ -19,12 +19,16 @@ public interface Taint extends Bean {
 
 	interface EZ extends Taint {
 
+		@YamlPropertyName(value="key")
 		default String getKey() throws Exception { return null; }
 
+		@YamlPropertyName(value="value")
 		default String getValue() throws Exception { return null; }
 
+		@YamlPropertyName(value="effect")
 		default String getEffect() throws Exception { return null; }
 
+		@YamlPropertyName(value="timeAdded")
 		default Time getTimeAdded() throws Exception { return null; }
 
 	}

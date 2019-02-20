@@ -13,8 +13,10 @@ public interface LabelSelector extends Bean {
 
 	interface EZ extends LabelSelector {
 
+		@YamlPropertyName(value="matchLabels")
 		default Map<String,String> getMatchLabels() throws Exception { return null; }
 
+		@YamlPropertyName(value="matchExpressions")
 		default List<LabelSelectorRequirement> getMatchExpressions() throws Exception { return null; }
 
 	}

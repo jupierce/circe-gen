@@ -17,6 +17,7 @@ public interface Tuned extends Bean {
 
 	interface EZ extends Tuned {
 
+		@YamlPropertyName(value="spec")
 		default TunedSpec getSpec() throws Exception { return null; }
 
 	}

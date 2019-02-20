@@ -13,8 +13,10 @@ public interface ClusterNetwork extends Bean {
 
 	interface EZ extends ClusterNetwork {
 
+		@YamlPropertyName(value="cidr")
 		default String getCIDR() throws Exception { return null; }
 
+		@YamlPropertyName(value="hostSubnetLength")
 		default Long getHostSubnetLength() throws Exception { return null; }
 
 	}

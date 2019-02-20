@@ -16,10 +16,13 @@ public interface Networkdunit extends Bean {
 
 	interface EZ extends Networkdunit {
 
+		@YamlPropertyName(value="contents")
 		default String getContents() throws Exception { return null; }
 
+		@YamlPropertyName(value="dropins")
 		default List<NetworkdDropin> getDropins() throws Exception { return null; }
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
 	}

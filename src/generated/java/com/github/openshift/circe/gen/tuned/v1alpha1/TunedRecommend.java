@@ -16,10 +16,13 @@ public interface TunedRecommend extends Bean {
 
 	interface EZ extends TunedRecommend {
 
+		@YamlPropertyName(value="profile")
 		default String getProfile() throws Exception { return null; }
 
+		@YamlPropertyName(value="priority")
 		default Long getPriority() throws Exception { return null; }
 
+		@YamlPropertyName(value="match")
 		default List<TunedMatch> getMatch() throws Exception { return null; }
 
 	}

@@ -17,10 +17,14 @@ public interface SecretKeySelector extends Bean {
 
 	interface EZ extends SecretKeySelector {
 
+		@YamlPropertyName(value="localObjectReference")
+		@YamlPropertyInline
 		default LocalObjectReference getLocalObjectReference() throws Exception { return null; }
 
+		@YamlPropertyName(value="key")
 		default String getKey() throws Exception { return null; }
 
+		@YamlPropertyName(value="optional")
 		default Boolean getOptional() throws Exception { return null; }
 
 	}

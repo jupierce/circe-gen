@@ -16,10 +16,13 @@ public interface OpenIDClaims extends Bean {
 
 	interface EZ extends OpenIDClaims {
 
+		@YamlPropertyName(value="preferredUsername")
 		default List<String> getPreferredUsername() throws Exception { return null; }
 
+		@YamlPropertyName(value="name")
 		default List<String> getName() throws Exception { return null; }
 
+		@YamlPropertyName(value="email")
 		default List<String> getEmail() throws Exception { return null; }
 
 	}

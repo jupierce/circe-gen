@@ -19,12 +19,16 @@ public interface MachineSetSpec extends Bean {
 
 	interface EZ extends MachineSetSpec {
 
+		@YamlPropertyName(value="replicas")
 		default Long getReplicas() throws Exception { return null; }
 
+		@YamlPropertyName(value="minReadySeconds")
 		default Long getMinReadySeconds() throws Exception { return null; }
 
+		@YamlPropertyName(value="selector")
 		default LabelSelector getSelector() throws Exception { return null; }
 
+		@YamlPropertyName(value="template")
 		default MachineTemplateSpec getTemplate() throws Exception { return null; }
 
 	}

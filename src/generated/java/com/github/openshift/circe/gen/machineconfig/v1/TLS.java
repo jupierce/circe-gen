@@ -10,6 +10,7 @@ public interface TLS extends Bean {
 
 	interface EZ extends TLS {
 
+		@YamlPropertyName(value="certificateAuthorities")
 		default List<CaReference> getCertificateAuthorities() throws Exception { return null; }
 
 	}

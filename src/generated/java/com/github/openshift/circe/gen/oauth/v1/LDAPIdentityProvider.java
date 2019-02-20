@@ -25,16 +25,22 @@ public interface LDAPIdentityProvider extends Bean {
 
 	interface EZ extends LDAPIdentityProvider {
 
+		@YamlPropertyName(value="url")
 		default String getURL() throws Exception { return null; }
 
+		@YamlPropertyName(value="bindDN")
 		default String getBindDN() throws Exception { return null; }
 
+		@YamlPropertyName(value="bindPassword")
 		default SecretNameReference getBindPassword() throws Exception { return null; }
 
+		@YamlPropertyName(value="insecure")
 		default Boolean getInsecure() throws Exception { return null; }
 
+		@YamlPropertyName(value="ca")
 		default ConfigMapNameReference getCA() throws Exception { return null; }
 
+		@YamlPropertyName(value="attributes")
 		default LDAPAttributeMapping getAttributes() throws Exception { return null; }
 
 	}

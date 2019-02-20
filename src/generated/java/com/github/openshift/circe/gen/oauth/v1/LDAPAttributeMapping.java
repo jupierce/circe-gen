@@ -19,12 +19,16 @@ public interface LDAPAttributeMapping extends Bean {
 
 	interface EZ extends LDAPAttributeMapping {
 
+		@YamlPropertyName(value="id")
 		default List<String> getID() throws Exception { return null; }
 
+		@YamlPropertyName(value="preferredUsername")
 		default List<String> getPreferredUsername() throws Exception { return null; }
 
+		@YamlPropertyName(value="name")
 		default List<String> getName() throws Exception { return null; }
 
+		@YamlPropertyName(value="email")
 		default List<String> getEmail() throws Exception { return null; }
 
 	}

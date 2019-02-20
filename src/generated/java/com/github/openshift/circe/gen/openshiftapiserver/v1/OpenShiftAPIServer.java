@@ -17,6 +17,7 @@ public interface OpenShiftAPIServer extends Bean {
 
 	interface EZ extends OpenShiftAPIServer {
 
+		@YamlPropertyName(value="spec")
 		default OpenShiftAPIServerSpec getSpec() throws Exception { return null; }
 
 	}

@@ -22,14 +22,19 @@ public interface OperatorSpec extends Bean {
 
 	interface EZ extends OperatorSpec {
 
+		@YamlPropertyName(value="managementState")
 		default String getManagementState() throws Exception { return null; }
 
+		@YamlPropertyName(value="logLevel")
 		default String getLogLevel() throws Exception { return null; }
 
+		@YamlPropertyName(value="operandSpecs")
 		default List<OperandSpec> getOperandSpecs() throws Exception { return null; }
 
+		@YamlPropertyName(value="unsupportedConfigOverrides")
 		default String getUnsupportedConfigOverrides() throws Exception { return null; }
 
+		@YamlPropertyName(value="observedConfig")
 		default String getObservedConfig() throws Exception { return null; }
 
 	}

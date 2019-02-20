@@ -13,8 +13,10 @@ public interface ProviderSpec extends Bean {
 
 	interface EZ extends ProviderSpec {
 
+		@YamlPropertyName(value="value")
 		default String getValue() throws Exception { return null; }
 
+		@YamlPropertyName(value="valueFrom")
 		default ProviderSpecSource getValueFrom() throws Exception { return null; }
 
 	}

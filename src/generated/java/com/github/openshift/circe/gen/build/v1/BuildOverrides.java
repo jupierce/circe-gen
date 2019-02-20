@@ -16,10 +16,13 @@ public interface BuildOverrides extends Bean {
 
 	interface EZ extends BuildOverrides {
 
+		@YamlPropertyName(value="imageLabels")
 		default List<ImageLabel> getImageLabels() throws Exception { return null; }
 
+		@YamlPropertyName(value="nodeSelector")
 		default Map<String,String> getNodeSelector() throws Exception { return null; }
 
+		@YamlPropertyName(value="tolerations")
 		default List<Toleration> getTolerations() throws Exception { return null; }
 
 	}

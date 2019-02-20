@@ -13,8 +13,10 @@ public interface NodeUser extends Bean {
 
 	interface EZ extends NodeUser {
 
+		@YamlPropertyName(value="id")
 		default Long getID() throws Exception { return null; }
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
 	}

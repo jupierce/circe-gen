@@ -11,6 +11,8 @@ public interface BasicAuthIdentityProvider extends Bean {
 
 	interface EZ extends BasicAuthIdentityProvider {
 
+		@YamlPropertyName(value="oAuthRemoteConnectionInfo")
+		@YamlPropertyInline
 		default OAuthRemoteConnectionInfo getOAuthRemoteConnectionInfo() throws Exception { return null; }
 
 	}

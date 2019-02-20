@@ -25,16 +25,22 @@ public interface Unit extends Bean {
 
 	interface EZ extends Unit {
 
+		@YamlPropertyName(value="contents")
 		default String getContents() throws Exception { return null; }
 
+		@YamlPropertyName(value="dropins")
 		default List<SystemdDropin> getDropins() throws Exception { return null; }
 
+		@YamlPropertyName(value="enable")
 		default Boolean getEnable() throws Exception { return null; }
 
+		@YamlPropertyName(value="enabled")
 		default Boolean getEnabled() throws Exception { return null; }
 
+		@YamlPropertyName(value="mask")
 		default Boolean getMask() throws Exception { return null; }
 
+		@YamlPropertyName(value="name")
 		default String getName() throws Exception { return null; }
 
 	}

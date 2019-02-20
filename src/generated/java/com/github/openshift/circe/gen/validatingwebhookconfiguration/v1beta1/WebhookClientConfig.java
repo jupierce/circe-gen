@@ -16,10 +16,13 @@ public interface WebhookClientConfig extends Bean {
 
 	interface EZ extends WebhookClientConfig {
 
+		@YamlPropertyName(value="url")
 		default String getURL() throws Exception { return null; }
 
+		@YamlPropertyName(value="service")
 		default ServiceReference getService() throws Exception { return null; }
 
+		@YamlPropertyName(value="caBundle")
 		default List<Long> getCABundle() throws Exception { return null; }
 
 	}

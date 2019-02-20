@@ -19,12 +19,16 @@ public interface OpenShiftSDNConfig extends Bean {
 
 	interface EZ extends OpenShiftSDNConfig {
 
+		@YamlPropertyName(value="mode")
 		default String getMode() throws Exception { return null; }
 
+		@YamlPropertyName(value="vxlanPort")
 		default Long getVXLANPort() throws Exception { return null; }
 
+		@YamlPropertyName(value="mtu")
 		default Long getMTU() throws Exception { return null; }
 
+		@YamlPropertyName(value="useExternalOpenvswitch")
 		default Boolean getUseExternalOpenvswitch() throws Exception { return null; }
 
 	}

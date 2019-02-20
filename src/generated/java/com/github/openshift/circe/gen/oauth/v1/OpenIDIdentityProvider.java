@@ -28,18 +28,25 @@ public interface OpenIDIdentityProvider extends Bean {
 
 	interface EZ extends OpenIDIdentityProvider {
 
+		@YamlPropertyName(value="clientID")
 		default String getClientID() throws Exception { return null; }
 
+		@YamlPropertyName(value="clientSecret")
 		default SecretNameReference getClientSecret() throws Exception { return null; }
 
+		@YamlPropertyName(value="ca")
 		default ConfigMapNameReference getCA() throws Exception { return null; }
 
+		@YamlPropertyName(value="extraScopes")
 		default List<String> getExtraScopes() throws Exception { return null; }
 
+		@YamlPropertyName(value="extraAuthorizeParameters")
 		default Map<String,String> getExtraAuthorizeParameters() throws Exception { return null; }
 
+		@YamlPropertyName(value="urls")
 		default OpenIDURLs getURLs() throws Exception { return null; }
 
+		@YamlPropertyName(value="claims")
 		default OpenIDClaims getClaims() throws Exception { return null; }
 
 	}

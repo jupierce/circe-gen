@@ -16,10 +16,13 @@ public interface BuildSpec extends Bean {
 
 	interface EZ extends BuildSpec {
 
+		@YamlPropertyName(value="additionalTrustedCA")
 		default ConfigMapNameReference getAdditionalTrustedCA() throws Exception { return null; }
 
+		@YamlPropertyName(value="buildDefaults")
 		default BuildDefaults getBuildDefaults() throws Exception { return null; }
 
+		@YamlPropertyName(value="buildOverrides")
 		default BuildOverrides getBuildOverrides() throws Exception { return null; }
 
 	}

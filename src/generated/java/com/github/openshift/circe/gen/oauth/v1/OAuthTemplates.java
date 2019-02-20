@@ -16,10 +16,13 @@ public interface OAuthTemplates extends Bean {
 
 	interface EZ extends OAuthTemplates {
 
+		@YamlPropertyName(value="login")
 		default SecretNameReference getLogin() throws Exception { return null; }
 
+		@YamlPropertyName(value="providerSelection")
 		default SecretNameReference getProviderSelection() throws Exception { return null; }
 
+		@YamlPropertyName(value="error")
 		default SecretNameReference getError() throws Exception { return null; }
 
 	}

@@ -17,6 +17,7 @@ public interface MachineConfigPool extends Bean {
 
 	interface EZ extends MachineConfigPool {
 
+		@YamlPropertyName(value="spec")
 		default MachineConfigPoolSpec getSpec() throws Exception { return null; }
 
 	}
