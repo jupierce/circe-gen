@@ -6,7 +6,7 @@ import com.github.openshift.circe.gen.console.v1.*;
 import com.github.openshift.circe.gen.consoleoperator.v1.*;
 import com.github.openshift.circe.beans.*;
 
-public interface AdminConsoleDefinition extends Definition {
+public interface ConsoleDefinition extends Definition {
 
 	@RenderOrder(value ="0001")
 	Console getConsole() throws Exception;
@@ -14,7 +14,7 @@ public interface AdminConsoleDefinition extends Definition {
 	@RenderOrder(value ="0002")
 	ConsoleOperator getConsoleOperator() throws Exception;
 
-	interface EZ extends AdminConsoleDefinition {
+	interface EZ extends ConsoleDefinition {
 
 		@RenderOrder(value ="0001")
 		default Console getConsole() throws Exception { return null; }
