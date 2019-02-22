@@ -10,6 +10,7 @@ public enum DefinitionType {
 	v4_0_machineconfig(com.github.openshift.circe.gen.def.v4_0.MachineConfigDefinition.class, "v4.0-machineconfig"),
 	v4_0_controlplane(com.github.openshift.circe.gen.def.v4_0.ControlPlaneConfigDefinition.class, "v4.0-controlplane"),
 	v4_0_builds(com.github.openshift.circe.gen.def.v4_0.BuildConfigDefinition.class, "v4.0-builds"),
+	v4_0_adminconsole(com.github.openshift.circe.gen.def.v4_0.AdminConsoleDefinition.class, "v4.0-adminconsole"),
 	;
 
 	public Class<?> mustImplementClass;
