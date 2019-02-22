@@ -1,4 +1,4 @@
-package com.github.openshift.circe.gen.kubeapiserver.v1;
+package com.github.openshift.circe.gen.kubeapiserveroperator.v1;
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
@@ -19,24 +19,6 @@ public interface KubeAPIServerOperator extends Bean {
 
 		@YamlPropertyName(value="spec")
 		default KubeAPIServerSpec getSpec() throws Exception { return null; }
-
-	}
-
-}
-evisionLimit")
-		default Long getSucceededRevisionLimit() throws Exception { return null; }
-
-	}
-
-}
-lue="operandSpecs")
-		default List<OperandSpec> getOperandSpecs() throws Exception { return null; }
-
-		@YamlPropertyName(value="unsupportedConfigOverrides")
-		default String getUnsupportedConfigOverrides() throws Exception { return null; }
-
-		@YamlPropertyName(value="observedConfig")
-		default String getObservedConfig() throws Exception { return null; }
 
 	}
 

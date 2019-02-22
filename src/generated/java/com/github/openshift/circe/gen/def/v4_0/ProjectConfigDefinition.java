@@ -16,8 +16,10 @@ public interface ProjectConfigDefinition extends Definition {
 
 	interface EZ extends ProjectConfigDefinition {
 
+		@RenderOrder(value ="0001")
 		default Template getTemplate() throws Exception { return null; }
 
+		@RenderOrder(value ="0002")
 		default Project getProject() throws Exception { return null; }
 
 	}

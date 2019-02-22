@@ -16,8 +16,10 @@ public interface MachineConfigDefinition extends Definition {
 
 	interface EZ extends MachineConfigDefinition {
 
+		@RenderOrder(value ="0001")
 		default KubeList<MachineConfigPool> getMachineConfigPoolList() throws Exception { return null; }
 
+		@RenderOrder(value ="0002")
 		default KubeList<MachineConfig> getMachineConfigList() throws Exception { return null; }
 
 	}

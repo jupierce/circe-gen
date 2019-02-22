@@ -1,4 +1,4 @@
-package com.github.openshift.circe.gen.console.v1;
+package com.github.openshift.circe.gen.consoleoperator.v1;
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;

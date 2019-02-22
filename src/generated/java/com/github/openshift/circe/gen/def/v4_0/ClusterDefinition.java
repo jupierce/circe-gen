@@ -20,10 +20,13 @@ public interface ClusterDefinition extends Definition {
 
 	interface EZ extends ClusterDefinition {
 
+		@RenderOrder(value ="0001")
 		default Tuned getTuned() throws Exception { return null; }
 
+		@RenderOrder(value ="0002")
 		default KubeList<MachineSet> getMachineSetList() throws Exception { return null; }
 
+		@RenderOrder(value ="0003")
 		default NetworkConfig getNetworkConfig() throws Exception { return null; }
 
 	}
