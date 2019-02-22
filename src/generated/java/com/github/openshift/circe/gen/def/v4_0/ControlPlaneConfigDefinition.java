@@ -10,19 +10,19 @@ import com.github.openshift.circe.beans.*;
 public interface ControlPlaneConfigDefinition extends Definition {
 
 	@RenderOrder(value ="0001")
-	KubeAPIServer getKubeAPIServer() throws Exception;
+	KubeAPIServerOperator getKubeAPIServerOperator() throws Exception;
 
 	@RenderOrder(value ="0002")
-	OpenShiftAPIServer getOpenShiftAPIServer() throws Exception;
+	OpenShiftAPIServerOperator getOpenShiftAPIServerOperator() throws Exception;
 
 	@RenderOrder(value ="0003")
 	KubeList<ValidatingWebhookConfiguration> getValidatingWebhookConfigurationList() throws Exception;
 
 	interface EZ extends ControlPlaneConfigDefinition {
 
-		default KubeAPIServer getKubeAPIServer() throws Exception { return null; }
+		default KubeAPIServerOperator getKubeAPIServerOperator() throws Exception { return null; }
 
-		default OpenShiftAPIServer getOpenShiftAPIServer() throws Exception { return null; }
+		default OpenShiftAPIServerOperator getOpenShiftAPIServerOperator() throws Exception { return null; }
 
 		default KubeList<ValidatingWebhookConfiguration> getValidatingWebhookConfigurationList() throws Exception { return null; }
 

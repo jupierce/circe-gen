@@ -3,7 +3,7 @@ import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;
 
-public interface OpenShiftAPIServer extends Bean {
+public interface OpenShiftAPIServerOperator extends Bean {
 
 	default String getKind() { return "OpenShiftAPIServer"; }
 	default String getApiVersion() { return "operator.openshift.io/v1"; }
@@ -15,10 +15,24 @@ public interface OpenShiftAPIServer extends Bean {
 	@YamlPropertyName(value="spec")
 	OpenShiftAPIServerSpec getSpec() throws Exception;
 
-	interface EZ extends OpenShiftAPIServer {
+	interface EZ extends OpenShiftAPIServerOperator {
 
 		@YamlPropertyName(value="spec")
 		default OpenShiftAPIServerSpec getSpec() throws Exception { return null; }
+
+	}
+
+}
+fault String getLogLevel() throws Exception { return null; }
+
+		@YamlPropertyName(value="operandSpecs")
+		default List<OperandSpec> getOperandSpecs() throws Exception { return null; }
+
+		@YamlPropertyName(value="unsupportedConfigOverrides")
+		default String getUnsupportedConfigOverrides() throws Exception { return null; }
+
+		@YamlPropertyName(value="observedConfig")
+		default String getObservedConfig() throws Exception { return null; }
 
 	}
 

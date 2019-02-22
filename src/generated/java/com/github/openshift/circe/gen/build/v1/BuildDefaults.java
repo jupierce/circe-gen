@@ -20,9 +20,6 @@ public interface BuildDefaults extends Bean {
 	@YamlPropertyName(value="resources")
 	ResourceRequirements getResources() throws Exception;
 
-	@YamlPropertyName(value="registriesConfig")
-	RegistriesConfig getRegistriesConfig() throws Exception;
-
 	interface EZ extends BuildDefaults {
 
 		@YamlPropertyName(value="defaultProxy")
@@ -39,9 +36,6 @@ public interface BuildDefaults extends Bean {
 
 		@YamlPropertyName(value="resources")
 		default ResourceRequirements getResources() throws Exception { return null; }
-
-		@YamlPropertyName(value="registriesConfig")
-		default RegistriesConfig getRegistriesConfig() throws Exception { return null; }
 
 	}
 
