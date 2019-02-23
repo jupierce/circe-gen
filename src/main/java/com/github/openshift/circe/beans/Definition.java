@@ -11,7 +11,7 @@ public interface Definition {
      * before anything else in the definition.
      */
     @RenderOrder(value="0000")
-    default KubeList<Bean> getPreMisc()  {
+    default KubeList<Bean> getPreMisc() throws Exception  {
         return null;
     }
 
@@ -21,7 +21,7 @@ public interface Definition {
      * after everything else in the definition.
      */
     @RenderOrder(value="9999")
-    default KubeList<Bean> getPostMisc()  {
+    default KubeList<Bean> getPostMisc() throws Exception {
         return null;
     }
 
