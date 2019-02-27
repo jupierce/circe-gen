@@ -125,8 +125,9 @@ public class Renderer {
         return beans;
     }
 
-    public static void toYamlDir(DefinitionType unit, Definition def, Path outputDir, boolean serializeSecrets) throws Exception {
+    public static void toYamlDir(DefinitionType unit, Definition def, Path baseDir, boolean serializeSecrets) throws Exception {
         YamlDumper dumper = new YamlDumper(YamlDumper.Verbosity.SHOW_VALUE_SOURCE);
+        Path outputDir = baseDir.resolve(unit.unitName);
         outputDir.toFile().mkdirs();
         for (BeanInfo info : getOrderedBeans(unit, def)) {
             String filename = info.fullSortKey + ".yaml";
