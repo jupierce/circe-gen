@@ -15,10 +15,10 @@ public interface OperatorSpec extends Bean {
 	List<OperandSpec> getOperandSpecs() throws Exception;
 
 	@YamlPropertyName(value="unsupportedConfigOverrides")
-	String getUnsupportedConfigOverrides() throws Exception;
+	Bean getUnsupportedConfigOverrides() throws Exception;
 
 	@YamlPropertyName(value="observedConfig")
-	String getObservedConfig() throws Exception;
+	Bean getObservedConfig() throws Exception;
 
 	interface EZ extends OperatorSpec {
 
@@ -32,10 +32,10 @@ public interface OperatorSpec extends Bean {
 		default List<OperandSpec> getOperandSpecs() throws Exception { return null; }
 
 		@YamlPropertyName(value="unsupportedConfigOverrides")
-		default String getUnsupportedConfigOverrides() throws Exception { return null; }
+		default Bean getUnsupportedConfigOverrides() throws Exception { return null; }
 
 		@YamlPropertyName(value="observedConfig")
-		default String getObservedConfig() throws Exception { return null; }
+		default Bean getObservedConfig() throws Exception { return null; }
 
 	}
 
