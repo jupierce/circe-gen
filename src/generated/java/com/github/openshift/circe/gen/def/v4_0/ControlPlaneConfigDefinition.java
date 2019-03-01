@@ -31,21 +31,6 @@ public interface ControlPlaneConfigDefinition extends Definition {
 	@RenderOrder(value ="0005")
 	KubeList<ValidatingWebhookConfiguration> getValidatingWebhookConfigurationList() throws Exception;
 
-	@RenderOrder(value ="0006")
-	ClusterResourceOverrideConfig getClusterResourceOverrideConfig() throws Exception;
-
-	@RenderOrder(value ="0007")
-	RunOnceDurationConfig getRunOnceDurationConfig() throws Exception;
-
-	@RenderOrder(value ="0008")
-	ClusterResourceOverrideConfig getClusterResourceOverrideConfig() throws Exception;
-
-	@RenderOrder(value ="0009")
-	ProjectRequestLimitConfig getProjectRequestLimitConfig() throws Exception;
-
-	@RenderOrder(value ="0010")
-	ImagePolicyConfig getImagePolicyConfig() throws Exception;
-
 	interface EZ extends ControlPlaneConfigDefinition {
 
 		@RenderOrder(value ="0001")
@@ -62,21 +47,6 @@ public interface ControlPlaneConfigDefinition extends Definition {
 
 		@RenderOrder(value ="0005")
 		default KubeList<ValidatingWebhookConfiguration> getValidatingWebhookConfigurationList() throws Exception { return null; }
-
-		@RenderOrder(value ="0006")
-		default ClusterResourceOverrideConfig getClusterResourceOverrideConfig() throws Exception { return null; }
-
-		@RenderOrder(value ="0007")
-		default RunOnceDurationConfig getRunOnceDurationConfig() throws Exception { return null; }
-
-		@RenderOrder(value ="0008")
-		default ClusterResourceOverrideConfig getClusterResourceOverrideConfig() throws Exception { return null; }
-
-		@RenderOrder(value ="0009")
-		default ProjectRequestLimitConfig getProjectRequestLimitConfig() throws Exception { return null; }
-
-		@RenderOrder(value ="0010")
-		default ImagePolicyConfig getImagePolicyConfig() throws Exception { return null; }
 
 	}
 
