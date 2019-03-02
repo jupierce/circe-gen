@@ -1,3 +1,5 @@
+// GENERATED FILE -- DO NOT ALTER (circe.go)
+
 package com.github.openshift.circe.gen.networkconfig.v1;
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;

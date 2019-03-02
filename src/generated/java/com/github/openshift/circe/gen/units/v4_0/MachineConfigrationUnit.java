@@ -1,4 +1,6 @@
-package com.github.openshift.circe.gen.def.v4_0;
+// GENERATED FILE -- DO NOT ALTER (circe.go)
+
+package com.github.openshift.circe.gen.units.v4_0;
 
 import java.util.*;
 import com.github.openshift.circe.yaml.*;
@@ -7,7 +9,7 @@ import com.github.openshift.circe.gen.machineconfig.v1.*;
 import com.github.openshift.circe.gen.tuned.v1alpha1.*;
 import com.github.openshift.circe.beans.*;
 
-public interface MachineConfigrationUnit extends Definition {
+public interface MachineConfigrationUnit extends UnitBase {
 
 	@RenderOrder(value ="0001")
 	KubeList<MachineConfigPool> getMachineConfigPoolList() throws Exception;

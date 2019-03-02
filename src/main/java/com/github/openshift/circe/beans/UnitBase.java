@@ -3,10 +3,10 @@ package com.github.openshift.circe.beans;
 import com.github.openshift.circe.yaml.Bean;
 import com.github.openshift.circe.yaml.RenderOrder;
 
-public interface Definition {
+public interface UnitBase {
 
     /**
-     * Allows each Definition to return a set of miscellaneous resources
+     * Allows each UnitBase to return a set of miscellaneous resources
      * which will be created alongside it. These resources will be created
      * before anything else in the definition.
      */
@@ -16,7 +16,7 @@ public interface Definition {
     }
 
     /**
-     * Allows each Definition to return a set of miscellaneous resources
+     * Allows each UnitBase to return a set of miscellaneous resources
      * which will be created alongside it. These resources will be created
      * after everything else in the definition.
      */

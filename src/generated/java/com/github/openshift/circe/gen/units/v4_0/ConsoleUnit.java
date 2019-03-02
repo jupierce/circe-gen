@@ -1,4 +1,6 @@
-package com.github.openshift.circe.gen.def.v4_0;
+// GENERATED FILE -- DO NOT ALTER (circe.go)
+
+package com.github.openshift.circe.gen.units.v4_0;
 
 import java.util.*;
 import com.github.openshift.circe.yaml.*;
@@ -6,7 +8,7 @@ import com.github.openshift.circe.gen.console.v1.*;
 import com.github.openshift.circe.gen.consoleoperator.v1.*;
 import com.github.openshift.circe.beans.*;
 
-public interface ConsoleUnit extends Definition {
+public interface ConsoleUnit extends UnitBase {
 
 	@RenderOrder(value ="0001")
 	Console getConsole() throws Exception;

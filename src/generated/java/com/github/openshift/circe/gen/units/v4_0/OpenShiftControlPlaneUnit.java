@@ -1,4 +1,6 @@
-package com.github.openshift.circe.gen.def.v4_0;
+// GENERATED FILE -- DO NOT ALTER (circe.go)
+
+package com.github.openshift.circe.gen.units.v4_0;
 
 import java.util.*;
 import com.github.openshift.circe.yaml.*;
@@ -9,7 +11,7 @@ import com.github.openshift.circe.gen.projectrequestlimitconfig.v1.*;
 import com.github.openshift.circe.gen.imagepolicyconfig.v1.*;
 import com.github.openshift.circe.beans.*;
 
-public interface OpenShiftControlPlaneUnit extends Definition {
+public interface OpenShiftControlPlaneUnit extends UnitBase {
 
 	@RenderOrder(value ="0001")
 	OpenShiftAPIServerOperator getOpenShiftAPIServerOperator() throws Exception;

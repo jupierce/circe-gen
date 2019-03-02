@@ -1,8 +1,8 @@
 package com.github.openshift.circe;
 
-import com.github.openshift.circe.beans.Definition;
+import com.github.openshift.circe.beans.UnitBase;
 import com.github.openshift.circe.beans.KubeList;
-import com.github.openshift.circe.gen.DefinitionType;
+import com.github.openshift.circe.gen.UnitType;
 import com.github.openshift.circe.yaml.*;
 
 import java.io.FileWriter;
@@ -13,20 +13,18 @@ import java.lang.reflect.Method;
 import java.nio.file.Path;
 import java.util.*;
 
-import static java.awt.SystemColor.info;
-
 public class Renderer {
 
     public static class BeanInfo {
-        public final DefinitionType unit;
+        public final UnitType unit;
         public final String objName;
         public final Bean bean;
-        public final Definition source;
+        public final UnitBase source;
         public final Method fromMethod;
         public final String renderOrderHint;
         public final String fullSortKey;
 
-        public BeanInfo(DefinitionType unit, Definition def, Method method, String objName, Bean bean, String renderOrderHint) {
+        public BeanInfo(UnitType unit, UnitBase def, Method method, String objName, Bean bean, String renderOrderHint) {
             this.unit = unit;
             this.objName = objName;
             this.source = def;
@@ -62,7 +60,7 @@ public class Renderer {
      * @throws IllegalAccessException
      * @throws IOException
      */
-    public static void visitBeans(DefinitionType unit, Definition def, BeanHandler handler) throws Exception {
+    public static void visitBeans(UnitType unit, UnitBase def, BeanHandler handler) throws Exception {
         HashMap<String, Bean> beans = new HashMap<>();
 
         for ( Method m : unit.mustImplementClass.getMethods() ) {
@@ -89,7 +87,7 @@ public class Renderer {
         }
     }
 
-    private static List<BeanInfo> getOrderedBeans(DefinitionType unit, Definition def) throws Exception {
+    private static List<BeanInfo> getOrderedBeans(UnitType unit, UnitBase def) throws Exception {
         List<BeanInfo> beans = new ArrayList<>();
 
         visitBeans(unit, def, new BeanHandler() {
@@ -125,7 +123,7 @@ public class Renderer {
         return beans;
     }
 
-    public static void toYamlDir(DefinitionType unit, Definition def, Path baseDir, boolean serializeSecrets) throws Exception {
+    public static void toYamlDir(UnitType unit, UnitBase def, Path baseDir, boolean serializeSecrets) throws Exception {
         YamlDumper dumper = new YamlDumper(YamlDumper.Verbosity.SHOW_VALUE_SOURCE);
         Path outputDir = baseDir.resolve(unit.unitName);
         outputDir.toFile().mkdirs();
@@ -147,7 +145,7 @@ public class Renderer {
         }
     }
 
-    public static KubeList<Bean> toKubeList(DefinitionType unit, Definition def) throws Exception {
+    public static KubeList<Bean> toKubeList(UnitType unit, UnitBase def) throws Exception {
         ArrayList<Bean> beans = new ArrayList<>();
         for (BeanInfo info : getOrderedBeans(unit, def)) {
             if (info.bean instanceof KubeList) {
@@ -159,7 +157,7 @@ public class Renderer {
         return new KubeList<>(beans);
     }
 
-    public static String toKubeListString(DefinitionType unit, Definition def) throws Exception {
+    public static String toKubeListString(UnitType unit, UnitBase def) throws Exception {
         YamlDumper dumper = new YamlDumper(YamlDumper.Verbosity.SHOW_VALUE_SOURCE);
         KubeList<Bean> list = toKubeList(unit, def);
         String yaml = dumper.toString(list);
