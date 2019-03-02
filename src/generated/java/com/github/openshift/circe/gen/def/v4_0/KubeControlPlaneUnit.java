@@ -3,34 +3,31 @@ package com.github.openshift.circe.gen.def.v4_0;
 import java.util.*;
 import com.github.openshift.circe.yaml.*;
 import com.github.openshift.circe.gen.kubeapiserveroperator.v1.*;
-import com.github.openshift.circe.gen.openshiftapiserveroperator.v1.*;
+import com.github.openshift.circe.gen.kubecontrollermanagerconfig.v1.*;
 import com.github.openshift.circe.gen.validatingwebhookconfiguration.v1beta1.*;
 import com.github.openshift.circe.gen.genericapiserverconfig.v1.*;
 import com.github.openshift.circe.gen.clusterresourceoverrideconfig.v1.*;
 import com.github.openshift.circe.gen.runoncedurationconfig.v1.*;
-import com.github.openshift.circe.gen.clusterresourceoverrideconfig.v1.*;
-import com.github.openshift.circe.gen.projectrequestlimitconfig.v1.*;
-import com.github.openshift.circe.gen.imagepolicyconfig.v1.*;
 import com.github.openshift.circe.beans.*;
 
-public interface ControlPlaneConfigDefinition extends Definition {
+public interface KubeControlPlaneUnit extends Definition {
 
 	@RenderOrder(value ="0001")
 	KubeAPIServerOperator getKubeAPIServerOperator() throws Exception;
 
 	@RenderOrder(value ="0002")
-	OpenShiftAPIServerOperator getOpenShiftAPIServerOperator() throws Exception;
+	KubeControllerManagerConfig getKubeControllerManagerConfig() throws Exception;
 
 	@RenderOrder(value ="0003")
 	KubeList<ValidatingWebhookConfiguration> getValidatingWebhookConfigurationList() throws Exception;
 
-	interface EZ extends ControlPlaneConfigDefinition {
+	interface EZ extends KubeControlPlaneUnit {
 
 		@RenderOrder(value ="0001")
 		default KubeAPIServerOperator getKubeAPIServerOperator() throws Exception { return null; }
 
 		@RenderOrder(value ="0002")
-		default OpenShiftAPIServerOperator getOpenShiftAPIServerOperator() throws Exception { return null; }
+		default KubeControllerManagerConfig getKubeControllerManagerConfig() throws Exception { return null; }
 
 		@RenderOrder(value ="0003")
 		default KubeList<ValidatingWebhookConfiguration> getValidatingWebhookConfigurationList() throws Exception { return null; }

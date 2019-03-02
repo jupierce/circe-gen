@@ -7,7 +7,7 @@ import com.github.openshift.circe.gen.machineconfig.v1.*;
 import com.github.openshift.circe.gen.tuned.v1alpha1.*;
 import com.github.openshift.circe.beans.*;
 
-public interface MachineConfigDefinition extends Definition {
+public interface MachineConfigrationUnit extends Definition {
 
 	@RenderOrder(value ="0001")
 	KubeList<MachineConfigPool> getMachineConfigPoolList() throws Exception;
@@ -18,7 +18,7 @@ public interface MachineConfigDefinition extends Definition {
 	@RenderOrder(value ="0003")
 	Tuned getTuned() throws Exception;
 
-	interface EZ extends MachineConfigDefinition {
+	interface EZ extends MachineConfigrationUnit {
 
 		@RenderOrder(value ="0001")
 		default KubeList<MachineConfigPool> getMachineConfigPoolList() throws Exception { return null; }

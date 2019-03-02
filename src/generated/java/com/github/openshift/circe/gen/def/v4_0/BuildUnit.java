@@ -5,12 +5,12 @@ import com.github.openshift.circe.yaml.*;
 import com.github.openshift.circe.gen.build.v1.*;
 import com.github.openshift.circe.beans.*;
 
-public interface BuildDefinition extends Definition {
+public interface BuildUnit extends Definition {
 
 	@RenderOrder(value ="0001")
 	Build getBuild() throws Exception;
 
-	interface EZ extends BuildDefinition {
+	interface EZ extends BuildUnit {
 
 		@RenderOrder(value ="0001")
 		default Build getBuild() throws Exception { return null; }

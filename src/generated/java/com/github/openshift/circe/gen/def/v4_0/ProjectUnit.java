@@ -6,7 +6,7 @@ import com.github.openshift.circe.gen.template.v1.*;
 import com.github.openshift.circe.gen.project.v1.*;
 import com.github.openshift.circe.beans.*;
 
-public interface ProjectConfigDefinition extends Definition {
+public interface ProjectUnit extends Definition {
 
 	@RenderOrder(value ="0001")
 	Template getTemplate() throws Exception;
@@ -14,7 +14,7 @@ public interface ProjectConfigDefinition extends Definition {
 	@RenderOrder(value ="0002")
 	Project getProject() throws Exception;
 
-	interface EZ extends ProjectConfigDefinition {
+	interface EZ extends ProjectUnit {
 
 		@RenderOrder(value ="0001")
 		default Template getTemplate() throws Exception { return null; }

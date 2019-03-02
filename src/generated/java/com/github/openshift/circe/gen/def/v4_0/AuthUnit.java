@@ -6,7 +6,7 @@ import com.github.openshift.circe.gen.authentication.v1.*;
 import com.github.openshift.circe.gen.oauth.v1.*;
 import com.github.openshift.circe.beans.*;
 
-public interface AuthDefinition extends Definition {
+public interface AuthUnit extends Definition {
 
 	@RenderOrder(value ="0001")
 	KubeList<Secret> getSecretList() throws Exception;
@@ -17,7 +17,7 @@ public interface AuthDefinition extends Definition {
 	@RenderOrder(value ="0003")
 	OAuth getOAuth() throws Exception;
 
-	interface EZ extends AuthDefinition {
+	interface EZ extends AuthUnit {
 
 		@RenderOrder(value ="0001")
 		default KubeList<Secret> getSecretList() throws Exception { return null; }
