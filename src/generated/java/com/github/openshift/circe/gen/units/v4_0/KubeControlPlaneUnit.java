@@ -5,7 +5,7 @@ package com.github.openshift.circe.gen.units.v4_0;
 import java.util.*;
 import com.github.openshift.circe.yaml.*;
 import com.github.openshift.circe.gen.kubeapiserveroperator.v1.*;
-import com.github.openshift.circe.gen.genericapiserverconfig.v1.*;
+import com.github.openshift.circe.gen.kubeapiserverconfig.v1.*;
 import com.github.openshift.circe.gen.clusterresourceoverrideconfig.v1.*;
 import com.github.openshift.circe.gen.runoncedurationconfig.v1.*;
 import com.github.openshift.circe.gen.kubecontrollermanageroperator.v1.*;

@@ -1,6 +1,6 @@
 // GENERATED FILE -- DO NOT ALTER (circe.go)
 
-package com.github.openshift.circe.gen.genericapiserverconfig.v1;
+package com.github.openshift.circe.gen.openshiftapiserverconfig.v1;
 import com.github.openshift.circe.beans.*;
 import com.github.openshift.circe.yaml.*;
 import java.util.*;

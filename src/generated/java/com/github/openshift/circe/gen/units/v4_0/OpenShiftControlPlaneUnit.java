@@ -5,7 +5,7 @@ package com.github.openshift.circe.gen.units.v4_0;
 import java.util.*;
 import com.github.openshift.circe.yaml.*;
 import com.github.openshift.circe.gen.openshiftapiserveroperator.v1.*;
-import com.github.openshift.circe.gen.genericapiserverconfig.v1.*;
+import com.github.openshift.circe.gen.openshiftapiserverconfig.v1.*;
 import com.github.openshift.circe.gen.projectrequestlimitconfig.v1.*;
 import com.github.openshift.circe.gen.admissionimagepolicyconfig.v1.*;
 import com.github.openshift.circe.gen.openshiftcontrollermanageroperator.v1.*;
