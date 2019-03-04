@@ -8,7 +8,7 @@ import java.util.*;
 public interface OpenShiftAPIServerConfig extends Bean {
 
 	default String getKind() { return "OpenShiftAPIServerConfig"; }
-	default String getApiVersion() { return "v1"; }
+	default String getApiVersion() { return "openshiftcontrolplane.config.openshift.io/v1"; }
 	@YamlPropertyName(value="genericAPIServerConfig")
 	@YamlPropertyInline
 	GenericAPIServerConfig getGenericAPIServerConfig() throws Exception;

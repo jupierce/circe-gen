@@ -8,7 +8,7 @@ import java.util.*;
 public interface KubeAPIServerConfig extends Bean {
 
 	default String getKind() { return "KubeAPIServerConfig"; }
-	default String getApiVersion() { return "v1"; }
+	default String getApiVersion() { return "kubecontrolplane.config.openshift.io/v1"; }
 	@YamlPropertyName(value="genericAPIServerConfig")
 	@YamlPropertyInline
 	GenericAPIServerConfig getGenericAPIServerConfig() throws Exception;
