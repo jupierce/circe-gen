@@ -18,7 +18,7 @@ public interface MachineConfigrationUnit extends UnitBase {
 	KubeList<MachineConfig> getMachineConfigList() throws Exception;
 
 	@RenderOrder(value ="0003")
-	Tuned getTuned() throws Exception;
+	KubeList<Tuned> getTunedList() throws Exception;
 
 	interface EZ extends MachineConfigrationUnit {
 
@@ -29,7 +29,7 @@ public interface MachineConfigrationUnit extends UnitBase {
 		default KubeList<MachineConfig> getMachineConfigList() throws Exception { return null; }
 
 		@RenderOrder(value ="0003")
-		default Tuned getTuned() throws Exception { return null; }
+		default KubeList<Tuned> getTunedList() throws Exception { return null; }
 
 	}
 

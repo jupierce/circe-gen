@@ -10,7 +10,7 @@ public interface MachineConfigPool extends Bean {
 	default String getKind() { return "MachineConfigPool"; }
 	default String getApiVersion() { return "machineconfiguration.openshift.io/v1"; }
 	@YamlPropertyIgnore
-	default String _getGeneratorNamespaceHint() { return "openshift-machine-config-operator"; }
+	default String _getGeneratorNamespaceHint() { return ""; }
 	@YamlPropertyIgnore
 	default String _getGeneratorNameHint() { return ""; }
 	ObjectMeta getMetadata() throws Exception;
