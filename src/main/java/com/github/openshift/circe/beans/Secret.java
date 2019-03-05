@@ -2,10 +2,15 @@ package com.github.openshift.circe.beans;
 
 import com.github.openshift.circe.yaml.YamlPropertyIgnore;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
 import java.util.Base64;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static java.nio.file.Files.readAllBytes;
 
 /**
  * Provides a helper Secret implementations.
@@ -88,6 +93,15 @@ public abstract class Secret extends BaseObject {
             if ( was != null ) {
                 throw new UnsupportedOperationException("Data was already present for key: " + key + ". Use 'set'");
             }
+        }
+
+        public void setTls(byte[] tlsCrt, byte[]tlsKey) {
+            entries.put("tls.crt", tlsCrt);
+            entries.put("tls.key", tlsKey);
+        }
+
+        public void setTls(File tlsCrt, File tlsKey) throws IOException {
+            setTls(Files.readAllBytes(tlsCrt.toPath()), Files.readAllBytes(tlsKey.toPath()));
         }
 
         public void set(String key, byte[]data) {

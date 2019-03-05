@@ -132,7 +132,7 @@ public class Renderer {
             Bean bean = info.bean;
             String yaml = dumper.toString(bean);
 
-            if ( serializeSecrets == false && yaml.contains("kind: Secret")) {
+            if ( serializeSecrets == false && yaml.contains("kind: \"Secret\"")) {
                 System.err.println("Skipping serialization of secret to disk");
                 continue;
             }
