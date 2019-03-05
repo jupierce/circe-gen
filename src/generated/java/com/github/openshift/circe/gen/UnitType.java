@@ -10,6 +10,8 @@ public enum UnitType {
 	v4_0_build(com.github.openshift.circe.gen.units.v4_0.BuildUnit.class, "build", "v4.0-build"),
 	v4_0_auth(com.github.openshift.circe.gen.units.v4_0.AuthUnit.class, "auth", "v4.0-auth"),
 	v4_0_machineconfig(com.github.openshift.circe.gen.units.v4_0.MachineConfigrationUnit.class, "machineconfig", "v4.0-machineconfig"),
+	v4_0_openshiftingress(com.github.openshift.circe.gen.units.v4_0.OpenShiftIngressUnit.class, "openshiftingress", "v4.0-openshiftingress"),
+	v4_0_controlplane(com.github.openshift.circe.gen.units.v4_0.ControlPlaneUnit.class, "controlplane", "v4.0-controlplane"),
 	v4_0_kubecontrolplane(com.github.openshift.circe.gen.units.v4_0.KubeControlPlaneUnit.class, "kubecontrolplane", "v4.0-kubecontrolplane"),
 	v4_0_openshiftcontrolplane(com.github.openshift.circe.gen.units.v4_0.OpenShiftControlPlaneUnit.class, "openshiftcontrolplane", "v4.0-openshiftcontrolplane"),
 	v4_0_console(com.github.openshift.circe.gen.units.v4_0.ConsoleUnit.class, "console", "v4.0-console"),
