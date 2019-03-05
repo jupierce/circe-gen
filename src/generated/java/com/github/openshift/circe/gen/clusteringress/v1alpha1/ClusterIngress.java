@@ -10,9 +10,9 @@ public interface ClusterIngress extends Bean {
 	default String getKind() { return "ClusterIngress"; }
 	default String getApiVersion() { return "ingress.openshift.io/v1alpha1"; }
 	@YamlPropertyIgnore
-	default String _getGeneratorNamespaceHint() { return ""; }
+	default String _getGeneratorNamespaceHint() { return "openshift-ingress-operator"; }
 	@YamlPropertyIgnore
-	default String _getGeneratorNameHint() { return "cluster"; }
+	default String _getGeneratorNameHint() { return "default"; }
 	default ObjectMeta getMetadata() throws Exception { return new ObjectMeta(_getGeneratorNamespaceHint(), _getGeneratorNameHint()); }
 	@YamlPropertyName(value="spec")
 	ClusterIngressSpec getSpec() throws Exception;
