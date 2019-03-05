@@ -12,10 +12,16 @@ public interface OpenShiftIngressUnit extends UnitBase {
 	@RenderOrder(value ="0001")
 	ClusterIngress getClusterIngress() throws Exception;
 
+	@RenderOrder(value ="0002")
+	KubeList<Secret> getSecretList() throws Exception;
+
 	interface EZ extends OpenShiftIngressUnit {
 
 		@RenderOrder(value ="0001")
 		default ClusterIngress getClusterIngress() throws Exception { return null; }
+
+		@RenderOrder(value ="0002")
+		default KubeList<Secret> getSecretList() throws Exception { return null; }
 
 	}
 
