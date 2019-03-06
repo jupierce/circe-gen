@@ -1,6 +1,7 @@
 package com.github.openshift.circe.beans;
 
 import com.github.openshift.circe.yaml.Bean;
+import com.github.openshift.circe.yaml.YamlPropertyIgnore;
 
 public abstract class BaseObject implements Bean {
 

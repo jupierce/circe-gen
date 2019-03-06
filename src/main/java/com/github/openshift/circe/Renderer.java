@@ -1,5 +1,6 @@
 package com.github.openshift.circe;
 
+import com.github.openshift.circe.beans.BaseObject;
 import com.github.openshift.circe.beans.UnitBase;
 import com.github.openshift.circe.beans.KubeList;
 import com.github.openshift.circe.gen.UnitType;
@@ -12,6 +13,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class Renderer {
 
@@ -123,6 +125,8 @@ public class Renderer {
         return beans;
     }
 
+   private static final Pattern detectSecret = Pattern.compile(".*['\"]*kind['\"]*\\s*:\\s*[\"']Secret['\"].*", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+
     public static void toYamlDir(UnitType unit, UnitBase def, Path baseDir, boolean serializeSecrets) throws Exception {
         YamlDumper dumper = new YamlDumper(YamlDumper.Verbosity.SHOW_VALUE_SOURCE);
         Path outputDir = baseDir.resolve(unit.unitName);
@@ -132,9 +136,20 @@ public class Renderer {
             Bean bean = info.bean;
             String yaml = dumper.toString(bean);
 
-            if ( serializeSecrets == false && yaml.contains("kind: \"Secret\"")) {
-                System.err.println("Skipping serialization of secret to disk");
-                continue;
+            if ( serializeSecrets == false && detectSecret.matcher(yaml).matches() ) {
+
+                boolean fakeData = false;
+                if (bean instanceof BaseObject) {
+                    BaseObject base = (BaseObject)bean;
+                    fakeData = base.getMetadata().isFakeData();
+                }
+
+                if ( !fakeData ) {
+                    System.err.println("Skipping serialization of secret to disk");
+                    continue;
+                } else {
+                    System.err.println(String.format("Rendering secret with fake data: %s", filename));
+                }
             }
 
             Path yamlOutputFile = outputDir.resolve(filename);
