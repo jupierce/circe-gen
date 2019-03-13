@@ -1,5 +1,6 @@
 package com.github.openshift.circe.beans;
 
+import com.github.openshift.circe.Renderer;
 import com.github.openshift.circe.yaml.YamlPropertyIgnore;
 
 import java.io.File;
@@ -9,8 +10,6 @@ import java.nio.file.Files;
 import java.util.Base64;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import static java.nio.file.Files.readAllBytes;
 
 /**
  * Provides a helper Secret implementations.
