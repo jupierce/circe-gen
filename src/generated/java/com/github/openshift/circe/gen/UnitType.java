@@ -5,7 +5,6 @@ package com.github.openshift.circe.gen;
 
 public enum UnitType {
 
-	v4_0_network(com.github.openshift.circe.gen.units.v4_0.NetworkUnit.class, "network", "v4.0-network"),
 	v4_0_project(com.github.openshift.circe.gen.units.v4_0.ProjectUnit.class, "project", "v4.0-project"),
 	v4_0_build(com.github.openshift.circe.gen.units.v4_0.BuildUnit.class, "build", "v4.0-build"),
 	v4_0_auth(com.github.openshift.circe.gen.units.v4_0.AuthUnit.class, "auth", "v4.0-auth"),
