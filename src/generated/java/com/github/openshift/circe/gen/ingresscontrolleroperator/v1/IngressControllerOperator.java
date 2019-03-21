@@ -10,9 +10,9 @@ public interface IngressControllerOperator extends Bean {
 	default String getKind() { return "IngressController"; }
 	default String getApiVersion() { return "operator.openshift.io/v1"; }
 	@YamlPropertyIgnore
-	default String _getGeneratorNamespaceHint() { return ""; }
+	default String _getGeneratorNamespaceHint() { return "openshift-ingress-operator"; }
 	@YamlPropertyIgnore
-	default String _getGeneratorNameHint() { return "cluster"; }
+	default String _getGeneratorNameHint() { return "default"; }
 	default ObjectMeta getMetadata() throws Exception { return new ObjectMeta(_getGeneratorNamespaceHint(), _getGeneratorNameHint()); }
 	@YamlPropertyName(value="spec")
 	IngressControllerSpec getSpec() throws Exception;
