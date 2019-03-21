@@ -10,18 +10,18 @@ import com.github.openshift.circe.beans.*;
 public interface OpenShiftIngressUnit extends UnitBase {
 
 	@RenderOrder(value ="0001")
-	IngressControllerOperator getIngressControllerOperator() throws Exception;
+	KubeList<Secret> getSecretList() throws Exception;
 
 	@RenderOrder(value ="0002")
-	KubeList<Secret> getSecretList() throws Exception;
+	IngressControllerOperator getIngressControllerOperator() throws Exception;
 
 	interface EZ extends OpenShiftIngressUnit {
 
 		@RenderOrder(value ="0001")
-		default IngressControllerOperator getIngressControllerOperator() throws Exception { return null; }
+		default KubeList<Secret> getSecretList() throws Exception { return null; }
 
 		@RenderOrder(value ="0002")
-		default KubeList<Secret> getSecretList() throws Exception { return null; }
+		default IngressControllerOperator getIngressControllerOperator() throws Exception { return null; }
 
 	}
 
