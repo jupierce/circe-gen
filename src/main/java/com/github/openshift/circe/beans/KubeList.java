@@ -32,6 +32,11 @@ public class KubeList<T extends Bean> extends BaseObject {
         this.list.addAll(item);
     }
 
+    @YamlPropertyIgnore
+    public int size() {
+        return list.size();
+    }
+
     public List<T> getItems() {
         if ( list.size() == 0 ) {
             return null;
