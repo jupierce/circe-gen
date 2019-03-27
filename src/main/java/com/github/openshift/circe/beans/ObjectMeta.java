@@ -81,7 +81,7 @@ public class ObjectMeta {
      *
      */
     @YamlPropertyIgnore
-    public void markDoNotApply() {
+    public void markAsDoNotApply() {
         addLabel(LABEL_NAME_APPLIER_MARKER, MARKER_VALUE_DO_NOT_APPLY);
     }
 
@@ -90,7 +90,7 @@ public class ObjectMeta {
      * within the is fake and it is safe to persist the secret to disk.
      */
     @YamlPropertyIgnore
-    public void markFakeData() {
+    public void markAsFakeData() {
         addLabel(LABEL_NAME_APPLIER_MARKER, MARKER_VALUE_FAKEDATA);
     }
 
