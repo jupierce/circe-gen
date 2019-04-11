@@ -18,7 +18,7 @@ public interface YamlProvider {
      * return (MachineSet)YamlProvider.buildFor("the yaml I want", MachineSet.class);
      * @param yaml The Yaml the provider will always return.
      * @param mustImplementInterfaces One or more interfaces the proxy should satisfy
-     * @return A proxy object that implementas YamlProvider and the specified interfaces.
+     * @return A proxy object that implements YamlProvider and the specified interfaces.
      */
     static YamlProvider buildFor(final String yaml, Class<?>... mustImplementInterfaces) {
         ArrayList<Class<?>> interfaces = new ArrayList<>();
