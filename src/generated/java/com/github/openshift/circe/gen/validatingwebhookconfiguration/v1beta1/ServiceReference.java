@@ -16,6 +16,9 @@ public interface ServiceReference extends Bean {
 	@YamlPropertyName(value="path")
 	String getPath() throws Exception;
 
+	@YamlPropertyName(value="port")
+	Long getPort() throws Exception;
+
 	interface EZ extends ServiceReference {
 
 		@YamlPropertyName(value="namespace")
@@ -26,6 +29,9 @@ public interface ServiceReference extends Bean {
 
 		@YamlPropertyName(value="path")
 		default String getPath() throws Exception { return null; }
+
+		@YamlPropertyName(value="port")
+		default Long getPort() throws Exception { return null; }
 
 	}
 

@@ -7,6 +7,7 @@ import com.github.openshift.circe.yaml.*;
 import com.github.openshift.circe.gen.kubeapiserveroperator.v1.*;
 import com.github.openshift.circe.gen.kubeapiserverconfig.v1.*;
 import com.github.openshift.circe.gen.clusterresourceoverrideconfig.v1.*;
+import com.github.openshift.circe.gen.podnodeselectorconfig.v1.*;
 import com.github.openshift.circe.gen.runoncedurationconfig.v1.*;
 import com.github.openshift.circe.gen.kubecontrollermanageroperator.v1.*;
 import com.github.openshift.circe.gen.kubecontrollermanagerconfig.v1.*;

@@ -22,8 +22,8 @@ public interface OpenIDIdentityProvider extends Bean {
 	@YamlPropertyName(value="extraAuthorizeParameters")
 	Map<String,String> getExtraAuthorizeParameters() throws Exception;
 
-	@YamlPropertyName(value="urls")
-	OpenIDURLs getURLs() throws Exception;
+	@YamlPropertyName(value="issuer")
+	String getIssuer() throws Exception;
 
 	@YamlPropertyName(value="claims")
 	OpenIDClaims getClaims() throws Exception;
@@ -45,8 +45,8 @@ public interface OpenIDIdentityProvider extends Bean {
 		@YamlPropertyName(value="extraAuthorizeParameters")
 		default Map<String,String> getExtraAuthorizeParameters() throws Exception { return null; }
 
-		@YamlPropertyName(value="urls")
-		default OpenIDURLs getURLs() throws Exception { return null; }
+		@YamlPropertyName(value="issuer")
+		default String getIssuer() throws Exception { return null; }
 
 		@YamlPropertyName(value="claims")
 		default OpenIDClaims getClaims() throws Exception { return null; }

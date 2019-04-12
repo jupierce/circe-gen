@@ -22,9 +22,6 @@ public interface GenericAPIServerConfig extends Bean {
 	@YamlPropertyName(value="admission")
 	AdmissionConfig getAdmissionConfig() throws Exception;
 
-	@YamlPropertyName(value="admissionPluginConfig")
-	Map<String,AdmissionPluginConfig> getAdmissionPluginConfig() throws Exception;
-
 	@YamlPropertyName(value="kubeClientConfig")
 	KubeClientConfig getKubeClientConfig() throws Exception;
 
@@ -44,9 +41,6 @@ public interface GenericAPIServerConfig extends Bean {
 
 		@YamlPropertyName(value="admission")
 		default AdmissionConfig getAdmissionConfig() throws Exception { return null; }
-
-		@YamlPropertyName(value="admissionPluginConfig")
-		default Map<String,AdmissionPluginConfig> getAdmissionPluginConfig() throws Exception { return null; }
 
 		@YamlPropertyName(value="kubeClientConfig")
 		default KubeClientConfig getKubeClientConfig() throws Exception { return null; }

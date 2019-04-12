@@ -25,6 +25,12 @@ public interface Webhook extends Bean {
 	@YamlPropertyName(value="sideEffects")
 	String getSideEffects() throws Exception;
 
+	@YamlPropertyName(value="timeoutSeconds")
+	Long getTimeoutSeconds() throws Exception;
+
+	@YamlPropertyName(value="admissionReviewVersions")
+	List<String> getAdmissionReviewVersions() throws Exception;
+
 	interface EZ extends Webhook {
 
 		@YamlPropertyName(value="name")
@@ -44,6 +50,12 @@ public interface Webhook extends Bean {
 
 		@YamlPropertyName(value="sideEffects")
 		default String getSideEffects() throws Exception { return null; }
+
+		@YamlPropertyName(value="timeoutSeconds")
+		default Long getTimeoutSeconds() throws Exception { return null; }
+
+		@YamlPropertyName(value="admissionReviewVersions")
+		default List<String> getAdmissionReviewVersions() throws Exception { return null; }
 
 	}
 

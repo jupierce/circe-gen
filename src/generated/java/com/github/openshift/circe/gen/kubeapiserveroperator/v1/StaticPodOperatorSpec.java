@@ -11,6 +11,9 @@ public interface StaticPodOperatorSpec extends Bean {
 	@YamlPropertyInline
 	OperatorSpec getOperatorSpec() throws Exception;
 
+	@YamlPropertyName(value="forceRedeploymentReason")
+	String getForceRedeploymentReason() throws Exception;
+
 	@YamlPropertyName(value="failedRevisionLimit")
 	Long getFailedRevisionLimit() throws Exception;
 
@@ -22,6 +25,9 @@ public interface StaticPodOperatorSpec extends Bean {
 		@YamlPropertyName(value="operatorSpec")
 		@YamlPropertyInline
 		default OperatorSpec getOperatorSpec() throws Exception { return null; }
+
+		@YamlPropertyName(value="forceRedeploymentReason")
+		default String getForceRedeploymentReason() throws Exception { return null; }
 
 		@YamlPropertyName(value="failedRevisionLimit")
 		default Long getFailedRevisionLimit() throws Exception { return null; }

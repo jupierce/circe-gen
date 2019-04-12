@@ -13,6 +13,9 @@ public interface MachineConfigPoolSpec extends Bean {
 	@YamlPropertyName(value="machineSelector")
 	LabelSelector getMachineSelector() throws Exception;
 
+	@YamlPropertyName(value="nodeSelector")
+	LabelSelector getNodeSelector() throws Exception;
+
 	@YamlPropertyName(value="paused")
 	Boolean getPaused() throws Exception;
 
@@ -26,6 +29,9 @@ public interface MachineConfigPoolSpec extends Bean {
 
 		@YamlPropertyName(value="machineSelector")
 		default LabelSelector getMachineSelector() throws Exception { return null; }
+
+		@YamlPropertyName(value="nodeSelector")
+		default LabelSelector getNodeSelector() throws Exception { return null; }
 
 		@YamlPropertyName(value="paused")
 		default Boolean getPaused() throws Exception { return null; }

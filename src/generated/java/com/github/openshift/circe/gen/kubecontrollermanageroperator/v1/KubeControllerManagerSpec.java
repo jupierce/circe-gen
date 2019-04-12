@@ -11,17 +11,11 @@ public interface KubeControllerManagerSpec extends Bean {
 	@YamlPropertyInline
 	StaticPodOperatorSpec getStaticPodOperatorSpec() throws Exception;
 
-	@YamlPropertyName(value="forceRedeploymentReason")
-	String getForceRedeploymentReason() throws Exception;
-
 	interface EZ extends KubeControllerManagerSpec {
 
 		@YamlPropertyName(value="staticPodOperatorSpec")
 		@YamlPropertyInline
 		default StaticPodOperatorSpec getStaticPodOperatorSpec() throws Exception { return null; }
-
-		@YamlPropertyName(value="forceRedeploymentReason")
-		default String getForceRedeploymentReason() throws Exception { return null; }
 
 	}
 

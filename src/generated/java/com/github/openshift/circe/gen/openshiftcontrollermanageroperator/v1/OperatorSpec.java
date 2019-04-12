@@ -13,8 +13,8 @@ public interface OperatorSpec extends Bean {
 	@YamlPropertyName(value="logLevel")
 	String getLogLevel() throws Exception;
 
-	@YamlPropertyName(value="operandSpecs")
-	List<OperandSpec> getOperandSpecs() throws Exception;
+	@YamlPropertyName(value="operatorLogLevel")
+	String getOperatorLogLevel() throws Exception;
 
 	@YamlPropertyName(value="unsupportedConfigOverrides")
 	Bean getUnsupportedConfigOverrides() throws Exception;
@@ -30,8 +30,8 @@ public interface OperatorSpec extends Bean {
 		@YamlPropertyName(value="logLevel")
 		default String getLogLevel() throws Exception { return null; }
 
-		@YamlPropertyName(value="operandSpecs")
-		default List<OperandSpec> getOperandSpecs() throws Exception { return null; }
+		@YamlPropertyName(value="operatorLogLevel")
+		default String getOperatorLogLevel() throws Exception { return null; }
 
 		@YamlPropertyName(value="unsupportedConfigOverrides")
 		default Bean getUnsupportedConfigOverrides() throws Exception { return null; }

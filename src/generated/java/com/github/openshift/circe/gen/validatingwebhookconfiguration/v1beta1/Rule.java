@@ -16,6 +16,9 @@ public interface Rule extends Bean {
 	@YamlPropertyName(value="resources")
 	List<String> getResources() throws Exception;
 
+	@YamlPropertyName(value="scope")
+	String getScope() throws Exception;
+
 	interface EZ extends Rule {
 
 		@YamlPropertyName(value="apiGroups")
@@ -26,6 +29,9 @@ public interface Rule extends Bean {
 
 		@YamlPropertyName(value="resources")
 		default List<String> getResources() throws Exception { return null; }
+
+		@YamlPropertyName(value="scope")
+		default String getScope() throws Exception { return null; }
 
 	}
 
