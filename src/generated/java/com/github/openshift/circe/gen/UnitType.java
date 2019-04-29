@@ -14,6 +14,7 @@ public enum UnitType {
 	v4_0_kubecontrolplane(com.github.openshift.circe.gen.units.v4_0.KubeControlPlaneUnit.class, "kubecontrolplane", "v4.0-kubecontrolplane"),
 	v4_0_openshiftcontrolplane(com.github.openshift.circe.gen.units.v4_0.OpenShiftControlPlaneUnit.class, "openshiftcontrolplane", "v4.0-openshiftcontrolplane"),
 	v4_0_console(com.github.openshift.circe.gen.units.v4_0.ConsoleUnit.class, "console", "v4.0-console"),
+	v4_0_monitoring(com.github.openshift.circe.gen.units.v4_0.MonitoringUnit.class, "monitoring", "v4.0-monitoring"),
 	;
 
 	public Class<?> mustImplementClass;
