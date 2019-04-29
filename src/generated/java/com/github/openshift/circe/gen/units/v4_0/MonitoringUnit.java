@@ -10,12 +10,12 @@ import com.github.openshift.circe.beans.*;
 public interface MonitoringUnit extends UnitBase {
 
 	@RenderOrder(value ="0001")
-	ConfigMap getConfigMap() throws Exception;
+	ConfigMap getClusterMonitoringConfigMap() throws Exception;
 
 	interface EZ extends MonitoringUnit {
 
 		@RenderOrder(value ="0001")
-		default ConfigMap getConfigMap() throws Exception { return null; }
+		default ConfigMap getClusterMonitoringConfigMap() throws Exception { return null; }
 
 	}
 
