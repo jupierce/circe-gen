@@ -12,6 +12,12 @@ public class ObjectMeta {
     private final String MARKER_VALUE_FAKEDATA = "fake_data";
     private final String MARKER_VALUE_DO_NOT_APPLY = "do_not_apply";
 
+    // The values MUST match applier.py
+    private final String LABEL_NAME_APPLIER_MODE = "cr.applier/mode";
+    // Force applier to delete resource before apply. This is useful for bugs in operators
+    // when they do not detect subtle changes in resources and need to see it created.
+    public final String MODE_VALUE_DELETE_BEFORE = "delete";
+
     private final String name, namespace;
     private final Map<String, String> annotations = new HashMap<>();
     private final Map<String, String> labels = new HashMap<>();
@@ -66,6 +72,21 @@ public class ObjectMeta {
             return null;
         }
         return labels;
+    }
+
+    @YamlPropertyIgnore
+    private void setApplierMode(String mode) {
+        addLabel(LABEL_NAME_APPLIER_MODE, mode);
+    }
+
+    /**
+     * Set a flag that tells applier to handle this resource differently. This is useful
+     * to overcome bugs where operators do not correctly detect oc apply.
+     * https://bugzilla.redhat.com/show_bug.cgi?id=1701410
+     */
+    @YamlPropertyIgnore
+    public void markAsDeleteBeforeApply() {
+        this.setApplierMode(MODE_VALUE_DELETE_BEFORE);
     }
 
     /**
