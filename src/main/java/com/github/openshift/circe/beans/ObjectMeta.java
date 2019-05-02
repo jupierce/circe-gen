@@ -1,6 +1,7 @@
 package com.github.openshift.circe.beans;
 
 import com.github.openshift.circe.yaml.YamlPropertyIgnore;
+import com.github.openshift.circe.yaml.YamlPropertyName;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +17,7 @@ public class ObjectMeta {
     private final String LABEL_NAME_APPLIER_MODE = "cr.applier/mode";
     // Force applier to delete resource before apply. This is useful for bugs in operators
     // when they do not detect subtle changes in resources and need to see it created.
-    public final String MODE_VALUE_DELETE_BEFORE = "delete";
+    private final String MODE_VALUE_DELETE_BEFORE = "delete";
 
     private final String name, namespace;
     private final Map<String, String> annotations = new HashMap<>();
@@ -56,6 +57,7 @@ public class ObjectMeta {
         this.annotations.put(key, value);
     }
 
+    @YamlPropertyName("annotations")
     public Map<String,String> getAnnotations() {
         if ( annotations.size() == 0 ) {
             return null;
@@ -63,16 +65,19 @@ public class ObjectMeta {
         return annotations;
     }
 
+    @YamlPropertyIgnore
     public void addLabel(String key, String value) {
         this.labels.put(key, value);
     }
 
+    @YamlPropertyName("labels")
     public Map<String,String> getLabels() {
         if ( labels.size() == 0 ) {
             return null;
         }
         return labels;
     }
+
 
     @YamlPropertyIgnore
     private void setApplierMode(String mode) {
