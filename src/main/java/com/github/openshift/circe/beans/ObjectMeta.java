@@ -8,16 +8,94 @@ import java.util.Map;
 
 public class ObjectMeta {
 
-    // These values MUST match applier.py
-    private final String LABEL_NAME_APPLIER_MARKER = "cr.applier/marker";
-    private final String MARKER_VALUE_FAKEDATA = "fake_data";
-    private final String MARKER_VALUE_DO_NOT_APPLY = "do_not_apply";
+    // These labels and values MUST match applier.py
 
-    // The values MUST match applier.py
-    private final String LABEL_NAME_APPLIER_MODE = "cr.applier/mode";
-    // Force applier to delete resource before apply. This is useful for bugs in operators
-    // when they do not detect subtle changes in resources and need to see it created.
-    private final String MODE_VALUE_DELETE_BEFORE = "delete";
+
+    /**
+     * This label can used by circe to instruct the applier to not actually apply
+     * a rendered resource. This is useful in the case of certificates which are probably
+     * not going to be re-rendered on each run. Marking in this manner prevents
+     * the applier from incorrectly detecting the certificate on the cluster as an orphan.
+     */
+    public enum ApplierMarker {
+        // Prevents applier from applying this rendering with extra queue to human that secret data is fake.
+        FAKE_DATA("fake_data"),
+
+        // Prevents applier from applying this rendering
+        DO_NOT_APPLY("do_not_apply"),
+
+        // The default behavior -- does not need to be set.
+        STANDARD_DATA("standard_data");
+
+        public static final String LABEL_NAME = "cr.applier/marker";
+        private String value;
+
+        ApplierMarker(String value) {
+            this.value = value;
+        }
+
+        public String getLabelValue() {
+            return value;
+        }
+    }
+
+    /**
+     * This label can used by circe to instruct the applier to delete a resource before
+     * applying an update. This may be useful if, for example, a bug in an operator
+     * is preventing it from reacting to a normal apply. Other modes may be
+     * possible in the future (e.g. replace).
+     */
+    public enum ApplierMode {
+        // Delete the resource before applying
+        DELETE("delete"),
+
+        // Follow normal behavior
+        DEFAULT("default");
+
+        public static final String LABEL_NAME = "cr.applier/mode";
+        private String value;
+
+        ApplierMode(String value) {
+            this.value = value;
+        }
+
+        public String getLabelValue() {
+            return value;
+        }
+
+    }
+
+    /**
+     * This label can used by circe to instruct the applier how to handle
+     * a resource when it is detected as an orphan. The default behavior is
+     * to warn so that a human can make a decision about whether a resource
+     * is safe to remove.
+     * There may be other times (e.g. on resources which we expect to come and
+     * go) where automatic deletion is safe/desirable.
+     */
+    public enum ApplierWhenOrphaned {
+        // The default behavior
+        WARN("warn"),
+
+        // Delete the orphans without warning
+        DELETE("delete"),
+
+        // Take no action (and do not warn) when this orphan is detected
+        IGNORE("ignore");
+
+        public static final String LABEL_NAME = "cr.applier/when-orphaned";
+        private String value;
+
+        ApplierWhenOrphaned(String value) {
+            this.value = value;
+        }
+
+        public String getLabelValue() {
+            return value;
+        }
+
+    }
+
 
     private final String name, namespace;
     private final Map<String, String> annotations = new HashMap<>();
@@ -79,55 +157,54 @@ public class ObjectMeta {
     }
 
 
-    @YamlPropertyIgnore
-    private void setApplierMode(String mode) {
-        addLabel(LABEL_NAME_APPLIER_MODE, mode);
-    }
-
     /**
      * Set a flag that tells applier to handle this resource differently. This is useful
      * to overcome bugs where operators do not correctly detect oc apply.
      * https://bugzilla.redhat.com/show_bug.cgi?id=1701410
      */
     @YamlPropertyIgnore
-    public void markAsDeleteBeforeApply() {
-        this.setApplierMode(MODE_VALUE_DELETE_BEFORE);
+    public void setApplierMode(ApplierMode mode) {
+        addLabel(ApplierMode.LABEL_NAME, mode.getLabelValue());
     }
 
+
     /**
-     * To avoid the detection of orphans, it is sometimes necessary to render resources,
+     * A marker is a signal to the applier that the rendered resource is somehow different
+     * than standard data. This is useful to avoid the detection of orphans.
+     *
+     * It is sometimes necessary to render resources,
      * but have the applier skip actually applying them. Consider the scenario of certificate
-     * secrets: you cannot generate them ever time the Render runs or you will hit rate limits.
+     * secrets: you cannot generate them every time the Render runs or you will hit rate limits.
      * However, if you return null for the associated secrets, the applier will detect the
      * existing cert secrets as orphans.
      *
-     * Instead, secrets can be generated with fake data, and this method can be invoked. It
+     * Instead, secrets can be generated with fake data, and the resource can be marked as fake data. This
      * will apply a label known by the applier which indicates the object is under management
      * but should not be applied on this run.
      *
      */
     @YamlPropertyIgnore
-    public void markAsDoNotApply() {
-        addLabel(LABEL_NAME_APPLIER_MARKER, MARKER_VALUE_DO_NOT_APPLY);
+    public void setApplierMarker(ApplierMarker marker) {
+        addLabel(ApplierMarker.LABEL_NAME, marker.getLabelValue());
     }
 
     /**
-     * Setting this label on secrets implies to the rendering engine that the secret
-     * within the is fake and it is safe to persist the secret to disk.
+     * Instruct the applier how to handle when the resource is orphaned. By default,
+     * a warning is raised, but you can also request that the resource be deleted
+     * or ignored.
+     * @param whenOrphaned
      */
     @YamlPropertyIgnore
-    public void markAsFakeData() {
-        addLabel(LABEL_NAME_APPLIER_MARKER, MARKER_VALUE_FAKEDATA);
+    public void setApplierWhenOrphaned(ApplierWhenOrphaned whenOrphaned) {
+        addLabel(ApplierWhenOrphaned.LABEL_NAME, whenOrphaned.getLabelValue());
     }
 
+    /**
+     * @return Returns whether this data is faked (and should not be applied)
+     */
     @YamlPropertyIgnore
     public boolean isFakeData() {
-        return MARKER_VALUE_FAKEDATA.equals(labels.get(LABEL_NAME_APPLIER_MARKER));
-    }
-
-    @YamlPropertyIgnore
-    public boolean isDoNotApply() {
-        return MARKER_VALUE_DO_NOT_APPLY.equals(labels.get(LABEL_NAME_APPLIER_MARKER));
+        return ApplierMarker.FAKE_DATA.getLabelValue().equals(labels.get(ApplierMarker.LABEL_NAME));
     }
 
 }
